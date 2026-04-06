@@ -1,0 +1,362 @@
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#fff;--bg2:#f7f7f5;--txt:#1a1a1a;--txt2:#666;--brd:rgba(0,0,0,0.11);--brd2:rgba(0,0,0,0.2);--r:8px;--rl:12px;--teal:#063A35;--t2:#1D9E75;--t3:#E1F5EE;--t4:#085041;--ora:#D85A30;--o2:#FAECE7;--o3:#4A1B0C;--amb:#EF9F27;--a2:#FAEEDA;--a3:#633806;--pur:#5B3CC4;--p2:#EEEDFE;--p3:#26215C;--adm:#0F6E56;--a4:#E1F5EE;--a5:#04342C;--kur:#185FA5;--k2:#E6F1FB;--k3:#042C53}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:transparent}
+.app{display:flex;height:620px;border:0.5px solid var(--brd);border-radius:var(--rl);overflow:hidden;background:var(--bg)}
+.sidebar{width:200px;min-width:200px;background:var(--teal);display:flex;flex-direction:column;overflow-y:auto;padding:14px 0}
+.logo{padding:0 14px 14px;border-bottom:0.5px solid rgba(255,255,255,0.1);margin-bottom:10px}
+.logo-t{font-size:13px;font-weight:500;color:#fff}
+.logo-s{font-size:10px;color:rgba(255,255,255,0.4);margin-top:2px}
+.nb{display:flex;align-items:center;gap:8px;padding:8px 14px;cursor:pointer;border:none;background:transparent;width:100%;text-align:left;border-left:3px solid transparent;transition:background .15s}
+.nb:hover{background:rgba(255,255,255,0.06)}
+.nb.act{background:rgba(255,255,255,0.1);border-left-color:var(--t2)}
+.nn{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:500;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);flex-shrink:0}
+.nb.act .nn{background:var(--t2);color:var(--teal)}
+.nl{font-size:11px;color:rgba(255,255,255,0.5);line-height:1.3}
+.nb.act .nl{color:#fff}
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.pbar{height:3px;background:var(--brd)}
+.pfill{height:100%;background:var(--t2);transition:width .3s}
+.topbar{padding:12px 18px;border-bottom:0.5px solid var(--brd);display:flex;align-items:center;justify-content:space-between;gap:8px}
+.bt{font-size:15px;font-weight:500;color:var(--txt)}
+.bb{font-size:11px;padding:3px 9px;border-radius:20px;font-weight:500;white-space:nowrap;flex-shrink:0}
+.bg{background:var(--t3);color:var(--t4)}
+.ba{background:var(--a2);color:var(--a3)}
+.bp2{background:var(--p2);color:var(--p3)}
+.bk{background:var(--k2);color:var(--k3)}
+.arrows{display:flex;gap:5px;flex-shrink:0}
+.ab{border:0.5px solid var(--brd2);background:var(--bg);border-radius:var(--r);padding:4px 11px;font-size:13px;cursor:pointer;color:var(--txt2);transition:all .15s}
+.ab:hover{background:var(--bg2)}
+.ab:disabled{opacity:.3;cursor:default}
+.cnt{flex:1;overflow-y:auto;padding:18px}
+.tip{background:var(--t3);border-left:3px solid var(--t2);border-radius:0 var(--r) var(--r) 0;padding:10px 13px;margin-bottom:13px;font-size:13px;color:var(--t4);line-height:1.6}
+.warn{background:var(--o2);border-left:3px solid var(--ora);border-radius:0 var(--r) var(--r) 0;padding:10px 13px;margin-bottom:13px;font-size:13px;color:var(--o3);line-height:1.6}
+.ambox{background:var(--a2);border-left:3px solid var(--amb);border-radius:0 var(--r) var(--r) 0;padding:10px 13px;margin-bottom:13px;font-size:13px;color:var(--a3);line-height:1.6}
+.purbox{background:var(--p2);border-left:3px solid var(--pur);border-radius:0 var(--r) var(--r) 0;padding:10px 13px;margin-bottom:13px;font-size:13px;color:var(--p3);line-height:1.6}
+.admbox{background:#E1F5EE;border-left:3px solid var(--adm);border-radius:0 var(--r) var(--r) 0;padding:10px 13px;margin-bottom:13px;font-size:13px;color:var(--a5);line-height:1.6}
+.kurbox{background:var(--k2);border-left:3px solid var(--kur);border-radius:0 var(--r) var(--r) 0;padding:10px 13px;margin-bottom:13px;font-size:13px;color:var(--k3);line-height:1.6}
+.sec{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.7px;color:var(--txt2);margin-bottom:8px;margin-top:16px}
+.sec:first-child{margin-top:0}
+.bw{display:flex;flex-direction:column;gap:7px;margin-bottom:12px}
+.br{display:flex;align-items:flex-start;gap:7px}
+.br.r{flex-direction:row-reverse}
+.av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:500;flex-shrink:0;line-height:1.2;text-align:center}
+.av-d{background:var(--pur);color:#fff}
+.av-a{background:var(--adm);color:#fff}
+.av-k{background:var(--kur);color:#fff}
+.av-p{background:var(--ora);color:#fff}
+.av-as{background:#888;color:#fff}
+.bub{max-width:84%;padding:9px 12px;border-radius:11px;font-size:13px;line-height:1.6;color:var(--txt)}
+.bd{background:var(--p2);border-radius:3px 11px 11px 11px}
+.ba2{background:#E1F5EE;border-radius:3px 11px 11px 11px}
+.bk2{background:var(--k2);border-radius:3px 11px 11px 11px}
+.bp{background:var(--bg2);border-radius:11px 3px 11px 11px;color:var(--txt2);font-style:italic}
+.spk{font-size:10px;font-weight:500;color:var(--txt2);margin-bottom:2px}
+.msg-chip{display:inline-flex;align-items:center;gap:6px;background:#25D366;color:#fff;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:500;margin:8px 0}
+.msg-chip-wa{background:#25D366}
+.msg-chip-int{background:var(--teal)}
+.msg-box{background:#f0f0f0;border-radius:var(--rl);padding:12px 14px;margin:8px 0;font-size:13px;color:var(--txt);line-height:1.6;border-left:3px solid #25D366}
+.msg-box-int{border-left-color:var(--teal);background:#f0faf5}
+.key-phrase{background:var(--teal);border-radius:var(--rl);padding:14px 16px;margin:10px 0}
+.kp-label{font-size:10px;font-weight:500;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:.7px;margin-bottom:6px}
+.kp-text{font-size:14px;color:#fff;line-height:1.6;font-weight:500}
+.checklist{display:flex;flex-direction:column;gap:0;border:0.5px solid var(--brd);border-radius:var(--rl);overflow:hidden;margin-bottom:12px}
+.cl-item{display:flex;align-items:flex-start;gap:10px;padding:10px 13px;border-bottom:0.5px solid var(--brd);cursor:pointer;transition:background .15s;user-select:none}
+.cl-item:last-child{border-bottom:none}
+.cl-item:hover{background:var(--bg2)}
+.cl-item.done{background:#f0faf5}
+.cl-box{width:18px;height:18px;border:1.5px solid var(--brd2);border-radius:4px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.cl-item.done .cl-box{background:var(--t2);border-color:var(--t2)}
+.cl-check{color:#fff;font-size:11px;display:none}
+.cl-item.done .cl-check{display:block}
+.cl-txt{font-size:13px;color:var(--txt);line-height:1.5}
+.cl-item.done .cl-txt{color:var(--txt2);text-decoration:line-through}
+.obj-list{display:flex;flex-direction:column;gap:8px}
+.obj-card{border:0.5px solid var(--brd);border-radius:var(--rl);overflow:hidden}
+.obj-hd{display:flex;align-items:center;justify-content:space-between;padding:11px 13px;cursor:pointer;background:var(--bg);transition:background .15s;gap:8px}
+.obj-hd:hover{background:var(--bg2)}
+.obj-q{font-size:13px;font-weight:500;color:var(--txt)}
+.obj-tag{font-size:11px;padding:2px 7px;border-radius:20px;flex-shrink:0}
+.to{background:var(--o2);color:#993C1D}
+.tp{background:var(--p2);color:var(--p3)}
+.tk{background:var(--k2);color:var(--k3)}
+.obj-chev{font-size:11px;color:var(--txt2);transition:transform .2s;flex-shrink:0}
+.obj-chev.open{transform:rotate(180deg)}
+.obj-body{padding:0 13px 13px;display:none}
+.obj-body.open{display:block}
+.obj-ans{font-size:13px;color:var(--txt);line-height:1.7;background:var(--t3);padding:10px 12px;border-radius:var(--r);margin-top:8px}
+.pay-card{border:2px solid var(--t2);border-radius:var(--rl);padding:14px;background:var(--t3);margin-top:10px}
+.pay-title{font-size:13px;font-weight:500;color:var(--t4);margin-bottom:10px}
+.pay-step{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:0.5px solid rgba(0,0,0,0.08)}
+.pay-step:last-child{border-bottom:none}
+.pay-num{width:22px;height:22px;border-radius:50%;background:var(--t2);color:#fff;font-size:11px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.pay-txt{font-size:13px;color:var(--txt);line-height:1.5}
+.flow{display:flex;flex-direction:column;gap:0}
+.flow-row{display:flex;gap:0;align-items:stretch}
+.flow-left{display:flex;flex-direction:column;align-items:center;width:32px;flex-shrink:0}
+.flow-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:14px}
+.flow-line{width:2px;flex:1;margin-top:0}
+.flow-body{flex:1;padding:10px 0 10px 12px;border-bottom:0.5px solid var(--brd)}
+.flow-row:last-child .flow-body{border-bottom:none}
+.flow-row:last-child .flow-line{display:none}
+.flow-who{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px}
+.flow-title{font-size:13px;font-weight:500;color:var(--txt);margin-bottom:3px}
+.flow-desc{font-size:12px;color:var(--txt2);line-height:1.5}
+.dot-adm{background:var(--adm)}
+.dot-kur{background:var(--kur)}
+.dot-doc{background:var(--pur)}
+.dot-ass{background:#888}
+.dot-all{background:var(--teal)}
+.line-adm{background:#9FE1CB}
+.line-kur{background:#B5D4F4}
+.line-doc{background:#AFA9EC}
+.line-ass{background:#ccc}
+.line-all{background:#9FE1CB}
+.who-adm{color:var(--adm)}
+.who-kur{color:var(--kur)}
+.who-doc{color:var(--pur)}
+.who-ass{color:#666}
+.who-all{color:var(--teal)}
+.dont-list{display:flex;flex-direction:column;gap:6px}
+.dont-item{display:flex;align-items:flex-start;gap:8px;padding:9px 12px;background:var(--o2);border-radius:var(--r);font-size:13px;color:var(--o3);line-height:1.5}
+.wa-bub{background:#dcf8c6;border-radius:3px 11px 11px 11px;padding:10px 13px;font-size:13px;line-height:1.7;color:#1a1a1a;border-left:3px solid #25D366;margin-bottom:8px}
+</style>
+
+<div class="app">
+  <div class="sidebar">
+    <div class="logo">
+      <div class="logo-t">Mirai Dent</div>
+      <div class="logo-s">КЭВ — скрипт консультации</div>
+    </div>
+    <div id="nav"></div>
+  </div>
+  <div class="main">
+    <div class="pbar"><div class="pfill" id="prog"></div></div>
+    <div class="topbar">
+      <div class="bt" id="btit"></div>
+      <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+        <span class="bb" id="bbadge"></span>
+        <div class="arrows">
+          <button class="ab" id="pbtn" onclick="nav(-1)">&#8592;</button>
+          <button class="ab" id="nbtn" onclick="nav(1)">&#8594;</button>
+        </div>
+      </div>
+    </div>
+    <div class="cnt" id="cnt"></div>
+  </div>
+</div>
+
+<script>
+const A=(s,t)=>`<div class="br"><div class="av av-a">Адм</div><div><div class="spk">${s}</div><div class="bub ba2">${t}</div></div></div>`;
+const K=(s,t)=>`<div class="br"><div class="av av-k">Кур</div><div><div class="spk">${s}</div><div class="bub bk2">${t}</div></div></div>`;
+const D=(s,t)=>`<div class="br"><div class="av av-d">Врач</div><div><div class="spk">${s}</div><div class="bub bd">${t}</div></div></div>`;
+const AS=(s,t)=>`<div class="br"><div class="av av-as">Асс</div><div><div class="spk">${s}</div><div class="bub" style="background:#f0f0f0;border-radius:3px 11px 11px 11px">${t}</div></div></div>`;
+const P=(t)=>`<div class="br r"><div class="av av-p">Пац</div><div><div class="spk" style="text-align:right">Пациент</div><div class="bub bp">${t}</div></div></div>`;
+const KP=(l,t)=>`<div class="key-phrase"><div class="kp-label">${l}</div><div class="kp-text">${t}</div></div>`;
+const CL=(items,id)=>`<div class="checklist">${items.map((t,i)=>`<div class="cl-item" id="${id}-${i}" onclick="tick('${id}-${i}')"><div class="cl-box"><span class="cl-check">✓</span></div><div class="cl-txt">${t}</div></div>`).join('')}</div>`;
+const MSG=(txt,int=false)=>`<div class="msg-box${int?' msg-box-int':''}">${int?'📲 Внутренняя группа:':'📲 WhatsApp пациенту:'}<br><b>${txt}</b></div>`;
+
+const FLOW=[
+  {who:"Администратор",cls:"adm",title:"Пациент приходит на ресепшн",desc:"Уточняет имя и время записи. Отправляет в зону ожидания. Пишет во внутреннюю группу."},
+  {who:"Куратор",cls:"kur",title:"Куратор выходит встречать пациента",desc:"Получил сообщение → выходит в зону ожидания → встречает, знакомится, провожает к рентген-кабинету."},
+  {who:"Ассистент",cls:"ass",title:"3D снимок в рентген-кабинете",desc:"Ассистент делает снимок по направлению врача. Куратор ждёт рядом или провожает пациента."},
+  {who:"Куратор",cls:"kur",title:"Провожает пациента в кабинет врача",desc:"После снимка куратор провожает пациента к врачу. Представляет врачу. Уходит."},
+  {who:"Врач",cls:"doc",title:"Осмотр полости рта",desc:"Врач осматривает, комментирует вслух. Разбирает снимок. Составляет план лечения."},
+  {who:"Врач",cls:"doc",title:"Консультация + план лечения",desc:"Объясняет диагноз по формуле «Сейчас → не лечить → последствия». Даёт одну рекомендацию. Письменный план на руки."},
+  {who:"Куратор",cls:"kur",title:"Куратор приглашается в кабинет",desc:"Врач пишет в группу. Куратор входит. Врач передаёт пациента обязательной фразой."},
+  {who:"Куратор",cls:"kur",title:"Закрытие на оплату",desc:"Куратор работает с возражениями по деньгам. Прямое закрытие. Оплата первого этапа на месте."},
+];
+
+const PH=[
+  {label:"Маршрут",badge:"bg",btxt:"Полная схема",title:"Маршрут пациента — реальный процесс",
+   html:`<div class="tip"><b>Цель КЭВ:</b> пациент говорит «да, начинаем» и вносит оплату за первый этап прямо на встрече.</div>
+   <div class="sec">Легенда ролей</div>
+   <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px">
+     ${[["var(--adm)","Администратор"],["var(--kur)","Куратор"],["var(--pur)","Врач"],["#888","Ассистент"]].map(([c,l])=>`<div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--txt2)"><div style="width:10px;height:10px;border-radius:50%;background:${c};flex-shrink:0"></div>${l}</div>`).join('')}
+   </div>
+   <div class="flow">
+     ${FLOW.map(({who,cls,title,desc},i,a)=>`
+       <div class="flow-row">
+         <div class="flow-left">
+           <div class="flow-dot dot-${cls}"></div>
+           ${i<a.length-1?`<div class="flow-line line-${cls}"></div>`:''}
+         </div>
+         <div class="flow-body">
+           <div class="flow-who who-${cls}">${who}</div>
+           <div class="flow-title">${title}</div>
+           <div class="flow-desc">${desc}</div>
+         </div>
+       </div>`).join('')}
+   </div>`
+  },
+  {label:"1. Администратор",badge:"bg",btxt:"Администратор",title:"Шаг 1 — Администратор встречает",
+   html:`<div class="admbox"><b>Задача администратора:</b> быстро и тепло оформить приход пациента, снять первичную тревогу и сразу уведомить куратора и врача.</div>
+   <div class="sec">Встреча у ресепшн</div>
+   <div class="bw">
+     ${A("Администратор","Добрый день! Как вас зовут?")}
+     ${P("[Имя пациента]")}
+     ${A("Администратор","[Имя], отлично! Вы записаны к доктору [Имя врача] на [время]. Присаживайтесь, пожалуйста, в зону ожидания — сейчас к вам подойдёт ваш куратор.")}
+   </div>
+   <div class="sec">Сообщение во внутреннюю группу</div>
+   <div class="admbox">Сразу после того как пациент сел — администратор пишет сообщение.</div>
+   ${MSG("Пациент: [Имя]<br>Врач: [Имя врача]<br>Куратор: [Имя куратора]<br>Пришёл ✅",true)}
+   <div class="sec">Чеклист администратора</div>
+   ${CL(["Уточнил имя и время записи","Отправил в зону ожидания с тёплой фразой о кураторе","Написал сообщение во внутреннюю группу"],"adm")}`
+  },
+  {label:"2. Куратор выходит",badge:"bk",btxt:"Куратор",title:"Шаг 2 — Куратор выходит встречать",
+   html:`<div class="kurbox"><b>Это идеальный сценарий:</b> куратор выходит встречать пациента в зону ожидания сразу после сообщения от администратора. Это создаёт ощущение VIP-обслуживания и с первой секунды строит доверие.</div>
+   <div class="ambox"><b>Почему это важно:</b> пациент, которого встретили лично и по имени ещё до кабинета — уже чувствует себя «своим». Это снижает тревогу и повышает конверсию на закрытии.</div>
+   <div class="sec">Куратор подходит в зону ожидания</div>
+   <div class="bw">
+     ${K("Куратор — знакомство","[Имя], добрый день! Я [Имя куратора], ваш куратор в клинике Mirai Dent. Буду сопровождать вас сегодня и отвечать на все вопросы. Рады, что вы к нам пришли!")}
+     ${P("Здравствуйте.")}
+     ${K("Куратор — снимает тревогу","Хочу сразу сказать: сегодня никаких процедур не будет. Только разговор с доктором, осмотр и снимок. Всё что доктор скажет — вы сами решаете, что делать дальше. Хорошо?")}
+     ${P("Хорошо.")}
+     ${K("Куратор — провожает к снимку","Отлично. Сначала мы пройдём в рентген-кабинет — сделаем 3D-снимок зубов. Это займёт буквально 2 минуты, и потом уже идём к доктору. Идёмте!")}
+   </div>
+   <div class="tip"><b>3D снимок ДО кабинета врача</b> — куратор объясняет ценность по пути: «Этот снимок обычно стоит 15–20 тысяч тенге. Для вас он входит в бесплатную консультацию.»</div>`
+  },
+  {label:"3. Снимок",badge:"bg",btxt:"Ассистент + куратор",title:"Шаг 3 — 3D снимок",
+   html:`<div class="admbox">Ассистент делает снимок. Куратор рядом — не молчит, использует эти 2–3 минуты для лёгкого разговора.</div>
+   <div class="sec">Пока ассистент настраивает аппарат</div>
+   <div class="bw">
+     ${K("Куратор — разговор во время паузы","[Имя], пока готовимся — скажите, вы впервые делаете 3D-снимок? [Ждём ответ] Этот снимок показывает всё изнутри — корни, костную ткань, нервы. То, что обычным взглядом не увидеть. Именно поэтому доктор сможет дать вам точный план, а не «примерно вот так».")}
+   </div>
+   <div class="sec">После снимка — провожает в кабинет врача</div>
+   <div class="bw">
+     ${K("Куратор — провожает","Отлично, готово! Теперь идём к доктору [Имя] — он уже ждёт вас. Я буду рядом, если понадоблюсь.")}
+   </div>
+   <div class="sec">Куратор представляет пациента врачу</div>
+   <div class="bw">
+     ${K("Куратор — передаёт врачу","Доктор [Имя], это [Имя пациента]. [Имя пациента], знакомьтесь — доктор [Имя], он проведёт вашу консультацию.")}
+   </div>
+   <div class="kurbox"><b>После представления куратор уходит.</b> Он не остаётся в кабинете. Ждёт сообщения от врача.</div>`
+  },
+  {label:"4. Врач — осмотр",badge:"bp2",btxt:"Врач (один)",title:"Шаг 4 — Осмотр и разбор снимка",
+   html:`<div class="purbox"><b>Принцип Mirai:</b> врач продаёт не услугу — врач продаёт уверенность. Пациент должен выйти с ответами на три вопроса: что с ним, что делать, почему именно так.</div>
+   <div class="sec">Установление контакта</div>
+   <div class="bw">
+     ${D("Врач — начало","[Имя], присаживайтесь. Снимок уже загружен — сейчас всё посмотрим. Расскажите сначала — что вас беспокоит? Что привело вас к нам?")}
+     ${P("[рассказывает]")}
+     ${D("Врач — углубляет","Как давно это началось? Как это влияет на вашу жизнь — есть что-то, чего вы избегаете из-за этого?")}
+     ${D("Врач — мечта","Если представить идеальный результат — как должны выглядеть и ощущаться ваши зубы? Что для вас самое важное?")}
+   </div>
+   <div class="sec">Осмотр полости рта — комментируем вслух</div>
+   <div class="bw">
+     ${D("Врач — осмотр","Давайте посмотрю. [Во время осмотра] Смотрю... вот здесь вижу [что]. Это объясняет то, о чём вы говорили. Хорошо, переходим к снимку.")}
+   </div>
+   <div class="sec">Разбор 3D снимка — формула «Сейчас → не лечить → последствия»</div>
+   <div class="bw">
+     ${D("Врач — показывает","Вот ваш снимок. Давайте вместе посмотрим — объясняю простым языком. Смотрите — вот здесь [показывает]. Сейчас здесь [что происходит]. Видите? Это именно то, о чём вы говорили — [связь с болью].")}
+     ${D("Врач — последствия","Важно понимать: если это не лечить, со временем [последствие]. Я обязан вас предупредить — откладывание усложняет лечение и увеличивает стоимость.")}
+     ${D("Врач — надежда","Хорошая новость — сейчас всё решаемо. И мы можем сделать это комфортно и поэтапно.")}
+   </div>
+   <div class="sec">Рекомендация — одна, чёткая</div>
+   <div class="bw">
+     ${D("Врач","[Имя], в вашем случае я однозначно рекомендую [метод]. Вот почему именно этот вариант: [1–2 предложения]. Вы говорили, что хотите [мечта пациента] — вот именно это мы и сделаем.")}
+     ${D("Врач — план на руки","Вот ваш письменный план лечения. Здесь всё: этапы, сроки, стоимость каждого шага. Никаких скрытых платежей.")}
+   </div>
+   <div class="sec">Чеклист врача перед вызовом куратора</div>
+   ${CL(["Пациент понял — что с ним","Пациент понял — что делать","Пациент понял — почему именно так","Дал одну рекомендацию, не список","Письменный план передан на руки"],"doc")}`
+  },
+  {label:"5. Передача куратору",badge:"bp2",btxt:"Врач → куратор",title:"Шаг 5 — Врач вызывает куратора",
+   html:`<div class="purbox"><b>Ключевой момент.</b> Врач завершает медицинскую часть и вызывает куратора сообщением. Куратор входит. Врач передаёт пациента обязательной фразой.</div>
+   <div class="sec">Врач пишет в группу</div>
+   ${MSG("Куратор, зайди пожалуйста в кабинет. Пациент [Имя] — готов.",true)}
+   <div class="sec">Куратор входит в кабинет</div>
+   <div class="bw">
+     ${D("Врач — передаёт","[Имя], со своей стороны я вам всё рассказал. Если появятся медицинские вопросы — я рядом. По всем организационным и финансовым вопросам с вами дальше поработает ваш куратор [Имя].")}
+     ${K("Куратор — подхватывает","[Имя], отлично! Доктор дал вам чёткий план — теперь давайте я расскажу, как это выглядит по шагам и что нужно сделать, чтобы начать. Присаживайтесь сюда.")}
+   </div>
+   ${KP("Обязательная фраза врача","«По всем организационным и финансовым вопросам с вами дальше поработает ваш куратор [Имя].»")}
+   <div class="tip"><b>После передачи врач уходит или остаётся молча.</b> Он не вмешивается в финансовый разговор — это территория куратора.</div>`
+  },
+  {label:"6. Возражения",badge:"ba",btxt:"Куратор",title:"Шаг 6 — Работа с возражениями",
+   html:`<div class="kurbox"><b>Все финансовые и временны́е возражения — куратор.</b> Медицинские вопросы — возвращаем к врачу. Никто не спорит и не торгуется.</div>
+   <div class="obj-list">
+     ${[
+       ["«Дорого / нет таких денег»","tk","Куратор","Понимаю — сумма серьёзная. Скажите, что именно кажется дорогим — весь план или первый этап? [Ждём] Смотрите — первый этап это [X] тенге. Плюс есть рассрочка — платите частями без переплаты. Давайте покажу как это выглядит по цифрам?"],
+       ["«Я подумаю / посоветуюсь»","tk","Куратор","Конечно. Скажите честно — что именно останавливает? Есть вопрос, на который доктор не ответил? [Выслушать] Снимок и план у вас на руках — вы всё видите своими глазами. Единственное что меняется, если ждать — сложность и стоимость. Когда примерно планируете принять решение?"],
+       ["«Хочу сравнить с другими»","tk","Куратор","Абсолютно правильно. Забирайте план — он у вас. При сравнении смотрите не только цену, но и что в неё входит: у нас 3D-снимок, письменный план и сопровождение куратора уже включены. Часто в других местах это оплачивается отдельно. Если появятся вопросы — звоните, отвечу честно."],
+       ["«Боюсь / был плохой опыт»","to","Куратор + врач","Куратор: Понимаю вас — этот страх очень распространён. Именно поэтому у нас есть куратор — я буду с вами на каждом этапе. [Если нужно — приглашает врача] Врач: Расскажите, что случилось тогда? [Слушает] У нас всё под анестезией, ни одно действие без вашего согласия. Первый шаг — самый лёгкий."],
+       ["«Почему так много этапов?»","tp","Куратор → врач","Куратор: Это хороший вопрос — давайте уточним у доктора прямо сейчас. [Приглашает врача] Врач: Я разбил план на этапы не чтобы затянуть — а чтобы каждый шаг давал устойчивый результат. Первый этап [срок] — уже после него почувствуете разницу."],
+     ].map(([q,cls,who,a],i)=>`<div class="obj-card"><div class="obj-hd" onclick="tog(${i})"><span class="obj-q">${q}</span><div style="display:flex;align-items:center;gap:5px;flex-shrink:0"><span class="obj-tag ${cls}">${who}</span><span class="obj-chev" id="chev${i}">&#9660;</span></div></div><div class="obj-body" id="ob${i}"><div class="obj-ans">${a}</div></div></div>`).join('')}
+   </div>
+   ${KP("Фраза о последствиях откладывания","«Доктор уже предупредил: откладывание усложняет лечение и увеличивает его стоимость. Давайте не дадим этому случиться.»")}`
+  },
+  {label:"7. Закрытие",badge:"ba",btxt:"Куратор",title:"Шаг 7 — Закрытие на оплату",
+   html:`<div class="warn"><b>Правило:</b> после «начинаем?» — молчание. Кто заговорит первым — тот уступит.</div>
+   <div class="sec">Предзакрытие</div>
+   <div class="bw">
+     ${K("Куратор","[Имя], по шкале от 1 до 10 — насколько вы готовы двигаться вперёд?")}
+     ${P("Ну, 7–8 наверное...")}
+     ${K("Куратор","А что мешает поставить 10? Что останавливает?")}
+   </div>
+   <div class="sec">Прямое закрытие</div>
+   <div class="bw">
+     ${K("Куратор","[Имя], у вас уже есть всё: снимок, план, понимание каждого шага. Начинаем?")}
+   </div>
+   <div class="tip">Молчание после «начинаем?» — нормально. Не заполняй паузу. Жди.</div>
+   <div class="pay-card">
+     <div class="pay-title">Если говорит «да» — оформляем сразу</div>
+     <div class="pay-step"><div class="pay-num">1</div><div class="pay-txt">«Отлично! Первый этап — [название]. Стоимость [X] тенге.»</div></div>
+     <div class="pay-step"><div class="pay-num">2</div><div class="pay-txt">«Записываю вас на [дату]. Предоплата [сумма] — идёт в счёт лечения.»</div></div>
+     <div class="pay-step"><div class="pay-num">3</div><div class="pay-txt">Оплата на месте. Квитанция. WhatsApp с подтверждением даты и адреса.</div></div>
+     <div class="pay-step"><div class="pay-num">4</div><div class="pay-txt">«[Имя], вы приняли отличное решение. Доктор [Имя] будет вас ждать [дата] в [время]. Я на связи по любым вопросам.»</div></div>
+   </div>
+   <div class="sec">Если говорит «подумаю» — фиксируем дату</div>
+   <div class="bw">
+     ${K("Куратор","[Имя], когда примерно примете решение — завтра, через три дня? [Ждём конкретику] Хорошо — я поставлю вас на [дату], место будет за вами до [срок]. Напомню вам накануне.")}
+   </div>
+   <div class="warn"><b>Никогда не говорить «если что — перенесём».</b> Это обесценивает запись. Вместо этого: «место за вами до [срок]» — создаёт ценность и срочность.</div>`
+  },
+  {label:"8. После встречи",badge:"bk",btxt:"Куратор",title:"Шаг 8 — Дожим после консультации",
+   html:`<div class="kurbox">Если пациент ушёл без оплаты — куратор ведёт его до решения. Правильные касания возвращают 40–60% «думающих».</div>
+   <div class="sec">В тот же день — в течение 2 часов</div>
+   <div class="wa-bub">✅ [Имя], спасибо, что пришли сегодня в Mirai Dent!<br><br>Доктор [Имя] подготовил для вас подробный план лечения — он у вас на руках.<br><br>Если появятся вопросы — пишите мне напрямую, я ваш куратор и отвечу сразу.<br><br>Ждём вас! 🦷<br>— [Имя куратора]</div>
+   <div class="sec">День 2–3 — звонок куратора</div>
+   <div class="bw">
+     ${K("Куратор","[Имя], добрый день! Это [Имя], ваш куратор из Mirai Dent. Остались ли вопросы по плану лечения? Когда вам удобно записаться на первый этап?")}
+   </div>
+   <div class="sec">День 7 — WhatsApp без обесценивания</div>
+   <div class="wa-bub">[Имя], добрый день!<br><br>Доктор [Имя] держит для вас время на <b>[дата]</b>. Всё в силе?<br><br>Если есть вопросы по плану — напишите, отвечу сразу.<br>— [Имя куратора]</div>
+   <div class="warn"><b>Нельзя:</b> «Если нужно перенести — просто напишите». Это обесценивает запись. Пишем только «всё в силе?» — без открытых ворот для отмены.</div>
+   <div class="sec">День 14 — личный звонок врача</div>
+   <div class="bw">
+     ${D("Врач","[Имя], добрый день. Это доктор [Имя] из Mirai Dent. Я помню вашу ситуацию — мы разбирали снимок. Хотел лично узнать: как вы себя чувствуете? Определились с решением? Если есть вопросы — готов ответить прямо сейчас.")}
+   </div>
+   <div class="purbox"><b>Почему звонок врача:</b> конвертирует в 3–4 раза лучше. Пациент чувствует: «меня помнят лично, а не просто продают».</div>`
+  },
+  {label:"Чего не делать",badge:"bp2",btxt:"Стоп-лист",title:"Стоп-лист — чего не делает никто",
+   html:`<div class="sec">Врач — никогда</div>
+   <div class="dont-list">
+     ${[["Не говорит «решайте сами»","Неуверенность врача → пациент уходит думать."],["Не обсуждает «можно подешевле»","Деньги и скидки — территория куратора."],["Не сомневается вслух","«Ну, попробуем...» — пациент слышит риск."],["Не говорит «можно и не делать»","Снимает ответственность — пациент выбирает «не делать»."],["Не даёт список вариантов","Выбор → «подумаю». Одна рекомендация → решение здесь."]].map(([t,d])=>`<div class="dont-item"><div style="font-size:14px;flex-shrink:0">✕</div><div><div style="font-weight:500;margin-bottom:2px">${t}</div><div style="font-size:12px;opacity:.85">${d}</div></div></div>`).join('')}
+   </div>
+   <div class="sec" style="margin-top:16px">Куратор — никогда</div>
+   <div class="dont-list">
+     ${[["Не говорит «если что перенесём»","Обесценивает запись — пациент не приходит."],["Не спорит с возражением","Только вопросы. Спор = потеря доверия."],["Не называет цену до вопроса","Ждёт, пока пациент сам не спросит или не дойдёт до закрытия."],["Не отпускает без конкретной даты","«Подумаю» без срока = потерянный пациент."],["Не молчит после «начинаем?»","Тишина работает на куратора — не заполняй её."]].map(([t,d])=>`<div class="dont-item"><div style="font-size:14px;flex-shrink:0">✕</div><div><div style="font-weight:500;margin-bottom:2px">${t}</div><div style="font-size:12px;opacity:.85">${d}</div></div></div>`).join('')}
+   </div>
+   <div class="sec" style="margin-top:16px">Контрольные вопросы куратора после встречи</div>
+   ${CL(["Пациент ушёл с оплатой ИЛИ с конкретной датой следующего шага","WhatsApp отправлен в течение 2 часов","Звонок запланирован на день 2–3","Предварительная запись стоит в CRM"],"ctrl")}`
+  },
+];
+
+let cur=0;
+function rNav(){document.getElementById('nav').innerHTML=PH.map((b,i)=>`<button class="nb ${i===cur?'act':''}" onclick="go(${i})"><div class="nn">${i}</div><div class="nl">${b.label}</div></button>`).join('')}
+function rPage(){
+  const b=PH[cur];
+  document.getElementById('btit').textContent=b.title;
+  const bb=document.getElementById('bbadge');
+  bb.textContent=b.btxt;bb.className='bb '+b.badge;
+  document.getElementById('cnt').innerHTML=b.html;
+  document.getElementById('pbtn').disabled=cur===0;
+  document.getElementById('nbtn').disabled=cur===PH.length-1;
+  document.getElementById('prog').style.width=(cur/(PH.length-1)*100)+'%';
+}
+function go(i){cur=i;rNav();rPage()}
+function nav(d){cur=Math.max(0,Math.min(PH.length-1,cur+d));rNav();rPage()}
+function tog(i){const b=document.getElementById('ob'+i),c=document.getElementById('chev'+i);const o=b.classList.toggle('open');c.classList.toggle('open',o)}
+function tick(id){document.getElementById(id).classList.toggle('done')}
+rNav();rPage();
+</script>
