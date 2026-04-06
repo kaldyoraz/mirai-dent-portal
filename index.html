@@ -981,7 +981,7 @@ const KV_PH=[
        ["«Хочу сравнить с другими»","tk","Куратор","Абсолютно правильно. Забирайте план — он у вас. При сравнении смотрите не только цену, но и что в неё входит: у нас 3D-снимок, письменный план и сопровождение куратора уже включены. Часто в других местах это оплачивается отдельно. Если появятся вопросы — звоните, отвечу честно."],
        ["«Боюсь / был плохой опыт»","to","Куратор + врач","Куратор: Понимаю вас — этот страх очень распространён. Именно поэтому у нас есть куратор — я буду с вами на каждом этапе. [Если нужно — приглашает врача] Врач: Расскажите, что случилось тогда? [Слушает] У нас всё под анестезией, ни одно действие без вашего согласия. Первый шаг — самый лёгкий."],
        ["«Почему так много этапов?»","tp","Куратор → врач","Куратор: Это хороший вопрос — давайте уточним у доктора прямо сейчас. [Приглашает врача] Врач: Я разбил план на этапы не чтобы затянуть — а чтобы каждый шаг давал устойчивый результат. Первый этап [срок] — уже после него почувствуете разницу."],
-     ].map(([q,cls,who,a],i)=>`<div class="obj-card"><div class="obj-hd" onclick="tog(${i})"><span class="obj-q">${q}</span><div style="display:flex;align-items:center;gap:5px;flex-shrink:0"><span class="obj-tag ${cls}">${who}</span><span class="obj-chev" id="kvChev${i}">&#9660;</span></div></div><div class="obj-body" id="kvOb${i}"><div class="obj-ans">${a}</div></div></div>`).join('')}
+     ].map(([q,cls,who,a],i)=>`<div class="obj-card"><div class="obj-hd" onclick="kvTog(${i})"><span class="obj-q">${q}</span><div style="display:flex;align-items:center;gap:5px;flex-shrink:0"><span class="obj-tag ${cls}">${who}</span><span class="obj-chev" id="kvChev${i}">&#9660;</span></div></div><div class="obj-body" id="kvOb${i}"><div class="obj-ans">${a}</div></div></div>`).join('')}
    </div>
    ${KP("Фраза о последствиях откладывания","«Доктор уже предупредил: откладывание усложняет лечение и увеличивает его стоимость. Давайте не дадим этому случиться.»")}`
   },
@@ -1043,7 +1043,7 @@ const KV_PH=[
 ];
 
 let kvCur=0;
-function kvRNav(){document.getElementById('kvNav').innerHTML=KV_PH.map((b,i)=>`<button class="nb ${i===kvCur?'act':''}" onclick="go(${i})"><div class="nn">${i}</div><div class="nl">${b.label}</div></button>`).join('')}
+function kvRNav(){document.getElementById('kvNav').innerHTML=KV_PH.map((b,i)=>`<button class="nb ${i===kvCur?'act':''}" onclick="kvGo(${i})"><div class="nn">${i}</div><div class="nl">${b.label}</div></button>`).join('')}
 function kvRPage(){
   const b=KV_PH[kvCur];
   document.getElementById('kvBtit').textContent=b.title;
