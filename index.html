@@ -979,11 +979,11 @@ function kvRPage(){
   bb.textContent=b.btxt;bb.className='bb '+b.badge;
   document.getElementById('kvCnt').innerHTML=b.html;
   document.getElementById('kvPBtn').disabled=kvCur===0;
-  document.getElementById('kvNBtn').disabled=cur===KV_PH.length-1;
-  document.getElementById('kvProg').style.width=(cur/(KV_PH.length-1)*100)+'%';
+  document.getElementById('kvNBtn').disabled=kvCur===KV_PH.length-1;
+  document.getElementById('kvProg').style.width=(kvCur/(KV_PH.length-1)*100)+'%';
 }
 function kvGo(i){kvCur=i;kvRNav();kvRPage()}
-function kvNavFn(d){cur=Math.max(0,Math.min(KV_PH.length-1,kvCur+d));rNav();rPage()}
+function kvNavFn(d){kvCur=Math.max(0,Math.min(KV_PH.length-1,kvCur+d));kvRNav();kvRPage()}
 function kvTog(i){const b=document.getElementById('kvOb'+i),c=document.getElementById('kvChev'+i);const o=b.classList.toggle('open');c.classList.toggle('open',o)}
 function kvTick(id){document.getElementById(id).classList.toggle('done')}
 kvRNav();kvRPage();
