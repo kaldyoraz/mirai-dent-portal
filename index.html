@@ -1,0 +1,875 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mirai Dent — Портал менеджеров</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0b1f3a;
+    --navy2: #122947;
+    --teal: #0f8a6c;
+    --teal-light: #e0f5ef;
+    --teal-mid: #1aad88;
+    --accent: #f59e2e;
+    --accent-light: #fff8ec;
+    --text: #1a2a3a;
+    --text-muted: #5a6b7a;
+    --border: #e0e8f0;
+    --bg: #f4f7fb;
+    --white: #ffffff;
+    --danger: #e84646;
+    --danger-light: #fef0f0;
+    --info-light: #e8f2ff;
+    --info: #1a62c4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--text); }
+
+  .app { display: flex; height: 100vh; overflow: hidden; }
+
+  /* SIDEBAR */
+  .sidebar {
+    width: 280px; min-width: 280px; background: var(--navy);
+    display: flex; flex-direction: column; overflow-y: auto;
+    box-shadow: 4px 0 24px rgba(0,0,0,0.15);
+  }
+  .sidebar-logo { padding: 28px 24px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .logo-tag { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--teal-mid); font-weight: 700; margin-bottom: 6px; }
+  .logo-title { font-family: 'Playfair Display', serif; font-size: 20px; color: #fff; line-height: 1.3; }
+  .sidebar-nav { padding: 16px 0; flex: 1; }
+  .nav-section-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.35); padding: 12px 24px 6px; font-weight: 600; }
+  .nav-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 24px; cursor: pointer;
+    transition: background 0.2s; border-left: 3px solid transparent;
+    text-decoration: none;
+  }
+  .nav-item:hover { background: rgba(255,255,255,0.06); }
+  .nav-item.active { background: rgba(15,138,108,0.18); border-left-color: var(--teal-mid); }
+  .nav-item.script-item { border-left-color: #EF9F27 !important; }
+  .nav-item.script-item.active { background: rgba(239,159,39,0.18); }
+  .nav-icon { width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; background: rgba(255,255,255,0.07); }
+  .nav-item.active .nav-icon { background: rgba(26,173,136,0.25); }
+  .nav-item.script-item .nav-icon { background: rgba(239,159,39,0.18); }
+  .nav-label { color: rgba(255,255,255,0.7); font-size: 13.5px; font-weight: 500; line-height: 1.3; }
+  .nav-item.active .nav-label { color: #fff; }
+  .nav-sub { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+  .new-dot { width: 7px; height: 7px; border-radius: 50%; background: #EF9F27; flex-shrink: 0; margin-left: auto; }
+  .sidebar-footer { padding: 16px 24px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px; color: rgba(255,255,255,0.3); }
+
+  /* MAIN */
+  .main { flex: 1; overflow-y: auto; background: var(--bg); }
+  .page { display: none; min-height: 100%; }
+  .page.active { display: block; }
+
+  /* PAGE HEADER */
+  .page-header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+    padding: 48px 56px 40px; position: relative; overflow: hidden;
+  }
+  .page-header::before { content: ''; position: absolute; right: -40px; top: -40px; width: 240px; height: 240px; border-radius: 50%; background: rgba(15,138,108,0.12); }
+  .page-header::after { content: ''; position: absolute; right: 80px; bottom: -60px; width: 160px; height: 160px; border-radius: 50%; background: rgba(245,158,46,0.07); }
+  .page-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(26,173,136,0.2); color: var(--teal-mid); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 12px; border-radius: 20px; margin-bottom: 14px; }
+  .page-title { font-family: 'Playfair Display', serif; font-size: 32px; color: #fff; margin-bottom: 10px; line-height: 1.2; }
+  .page-desc { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 560px; line-height: 1.6; }
+
+  .content { padding: 40px 56px 60px; }
+
+  /* CARDS */
+  .card { background: var(--white); border-radius: 16px; border: 1px solid var(--border); padding: 28px 32px; margin-bottom: 24px; }
+  .card-title { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+  .card-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; background: var(--teal-light); }
+
+  /* GRID */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+
+  /* STAT CARDS */
+  .stat-card { background: var(--white); border-radius: 14px; border: 1px solid var(--border); padding: 22px 24px; }
+  .stat-label { font-size: 12px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .stat-value { font-size: 28px; font-weight: 800; color: var(--navy); margin-bottom: 4px; }
+  .stat-sub { font-size: 12px; color: var(--text-muted); }
+  .stat-card.teal { border-top: 3px solid var(--teal); }
+  .stat-card.amber { border-top: 3px solid var(--accent); }
+  .stat-card.danger { border-top: 3px solid var(--danger); }
+
+  /* RULE LIST */
+  .rule-list { list-style: none; }
+  .rule-item { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--border); }
+  .rule-item:last-child { border-bottom: none; }
+  .rule-num { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; background: var(--navy); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; margin-top: 2px; }
+  .rule-num.teal { background: var(--teal); }
+  .rule-num.amber { background: var(--accent); color: var(--navy); }
+  .rule-num.danger { background: var(--danger); }
+  .rule-text { font-size: 14.5px; line-height: 1.65; color: var(--text); }
+  .rule-text strong { font-weight: 700; color: var(--navy); }
+
+  /* FUNNEL */
+  .funnel { display: flex; flex-direction: column; gap: 8px; }
+  .funnel-step { display: flex; align-items: center; gap: 16px; background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 14px 20px; }
+  .funnel-step-num { width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0; background: var(--navy2); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; }
+  .funnel-step-info { flex: 1; }
+  .funnel-step-name { font-size: 14px; font-weight: 700; color: var(--text); }
+  .funnel-step-desc { font-size: 12px; color: var(--text-muted); margin-top: 3px; line-height: 1.4; }
+  .funnel-step-badge { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
+  .badge-green { background: #e0f7f0; color: #0b7a5e; }
+  .badge-amber { background: var(--accent-light); color: #a0650d; }
+  .badge-red { background: var(--danger-light); color: #c03030; }
+  .badge-blue { background: var(--info-light); color: var(--info); }
+  .badge-gray { background: #f0f0f0; color: #606060; }
+  .funnel-arrow { text-align: center; color: var(--border); font-size: 18px; line-height: 1; margin: -4px 0; }
+
+  /* ALERT */
+  .alert { border-radius: 12px; padding: 16px 20px; margin-bottom: 16px; font-size: 14px; line-height: 1.65; display: flex; gap: 14px; align-items: flex-start; }
+  .alert-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+  .alert.warning { background: var(--accent-light); border-left: 4px solid var(--accent); }
+  .alert.danger { background: var(--danger-light); border-left: 4px solid var(--danger); }
+  .alert.success { background: var(--teal-light); border-left: 4px solid var(--teal); }
+  .alert.info { background: var(--info-light); border-left: 4px solid var(--info); }
+  .alert-title { font-weight: 700; margin-bottom: 4px; color: var(--text); }
+
+  /* TABLE */
+  .data-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .data-table th { background: var(--navy); color: #fff; padding: 11px 16px; text-align: left; font-weight: 600; font-size: 12px; letter-spacing: 0.5px; }
+  .data-table th:first-child { border-radius: 8px 0 0 0; }
+  .data-table th:last-child { border-radius: 0 8px 0 0; }
+  .data-table td { padding: 11px 16px; border-bottom: 1px solid var(--border); color: var(--text); }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:hover td { background: #f9fafc; }
+  .data-table td:first-child { font-weight: 600; }
+
+  /* STAGE BLOCKS */
+  .stage-block { border-radius: 14px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border); }
+  .stage-header { padding: 16px 24px; background: var(--navy); display: flex; align-items: center; gap: 12px; }
+  .stage-header-text { color: #fff; font-weight: 700; font-size: 15px; }
+  .stage-header-sub { color: rgba(255,255,255,0.5); font-size: 12px; margin-top: 2px; }
+  .stage-body { padding: 20px 24px; background: var(--white); }
+  .stage-body p { font-size: 14px; line-height: 1.7; color: var(--text); margin-bottom: 10px; }
+
+  /* TAG */
+  .tag { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; margin: 2px; }
+  .tag-teal { background: var(--teal-light); color: #0b6b53; }
+  .tag-amber { background: var(--accent-light); color: #8a5500; }
+  .tag-navy { background: #e8edf5; color: var(--navy); }
+
+  /* SECTION TITLE */
+  .section-title { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--navy); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--teal-light); display: flex; align-items: center; gap: 10px; }
+
+  /* HIGHLIGHT BOX */
+  .highlight-box { background: var(--navy); color: #fff; border-radius: 14px; padding: 24px 28px; margin-bottom: 20px; }
+  .highlight-box h3 { font-size: 16px; margin-bottom: 10px; color: var(--teal-mid); }
+  .highlight-box p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.8); }
+  .highlight-box ul { padding-left: 18px; }
+  .highlight-box li { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.8); margin-bottom: 4px; }
+
+  /* STEPS */
+  .step-item { display: flex; gap: 20px; margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+  .step-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .step-circle { width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; background: var(--teal); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 15px; }
+  .step-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; color: var(--navy); }
+  .step-body { font-size: 14px; line-height: 1.7; color: var(--text); }
+
+  /* ===== SCRIPT WIDGET ===== */
+  .sw-wrap { padding: 32px 40px 60px; }
+  .sw-app { display: flex; height: 640px; border: 0.5px solid rgba(0,0,0,0.12); border-radius: 12px; overflow: hidden; background: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+  .sw-nav { width: 210px; min-width: 210px; background: #063A35; display: flex; flex-direction: column; overflow-y: auto; padding: 16px 0; }
+  .sw-nav-logo { padding: 0 16px 14px; border-bottom: 0.5px solid rgba(255,255,255,0.1); margin-bottom: 10px; }
+  .sw-nav-logo-title { font-size: 14px; font-weight: 500; color: #fff; }
+  .sw-nav-logo-sub { font-size: 11px; color: rgba(255,255,255,0.45); margin-top: 2px; }
+  .sw-nav-btn { display: flex; align-items: center; gap: 9px; padding: 8px 14px; cursor: pointer; border: none; background: transparent; width: 100%; text-align: left; transition: background 0.15s; border-left: 3px solid transparent; }
+  .sw-nav-btn:hover { background: rgba(255,255,255,0.06); }
+  .sw-nav-btn.active { background: rgba(255,255,255,0.1); border-left-color: #5DCAA5; }
+  .sw-nav-btn.sw-new { border-left-color: #EF9F27 !important; }
+  .sw-nav-btn.sw-new.active { background: rgba(239,159,39,0.15); }
+  .sw-num { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.55); flex-shrink: 0; }
+  .sw-nav-btn.active .sw-num { background: #5DCAA5; color: #063A35; }
+  .sw-nav-btn.sw-new.active .sw-num { background: #EF9F27; color: #fff; }
+  .sw-lbl { font-size: 11.5px; color: rgba(255,255,255,0.55); line-height: 1.3; }
+  .sw-nav-btn.active .sw-lbl { color: #fff; }
+  .sw-new-dot { width: 6px; height: 6px; border-radius: 50%; background: #EF9F27; flex-shrink: 0; margin-left: auto; }
+  .sw-main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+  .sw-prog-bar { height: 3px; background: rgba(0,0,0,0.1); }
+  .sw-prog-fill { height: 100%; background: #1D9E75; transition: width 0.3s; }
+  .sw-topbar { padding: 12px 18px; border-bottom: 0.5px solid rgba(0,0,0,0.12); display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .sw-block-title { font-size: 15px; font-weight: 500; color: #1a1a1a; }
+  .sw-badge { font-size: 11px; padding: 3px 9px; border-radius: 20px; background: #E1F5EE; color: #0F6E56; font-weight: 500; white-space: nowrap; flex-shrink: 0; }
+  .sw-badge.orange { background: #FAEEDA; color: #854F0B; }
+  .sw-arrows { display: flex; gap: 5px; flex-shrink: 0; }
+  .sw-arr { border: 0.5px solid rgba(0,0,0,0.22); background: #fff; border-radius: 8px; padding: 4px 11px; font-size: 13px; cursor: pointer; color: #666; transition: all 0.15s; }
+  .sw-arr:hover { background: #f7f7f5; }
+  .sw-arr:disabled { opacity: 0.3; cursor: default; }
+  .sw-content { flex: 1; overflow-y: auto; padding: 18px; }
+  .sw .tip-b { background: #E1F5EE; border-left: 3px solid #1D9E75; border-radius: 0 8px 8px 0; padding: 10px 13px; margin-bottom: 14px; font-size: 13px; color: #085041; line-height: 1.6; }
+  .sw .warn-b { background: #FAECE7; border-left: 3px solid #D85A30; border-radius: 0 8px 8px 0; padding: 10px 13px; margin-bottom: 14px; font-size: 13px; color: #4A1B0C; line-height: 1.6; }
+  .sw .amber-b { background: #FAEEDA; border-left: 3px solid #EF9F27; border-radius: 0 8px 8px 0; padding: 10px 13px; margin-bottom: 14px; font-size: 13px; color: #633806; line-height: 1.6; }
+  .sw .sec { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.7px; color: #666; margin-bottom: 8px; margin-top: 16px; }
+  .sw .sec:first-child { margin-top: 0; }
+  .sw .bw { display: flex; flex-direction: column; gap: 7px; margin-bottom: 12px; }
+  .sw .brow { display: flex; align-items: flex-start; gap: 7px; }
+  .sw .brow.r { flex-direction: row-reverse; }
+  .sw .av { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; flex-shrink: 0; }
+  .sw .av-m { background: #1D9E75; color: #fff; }
+  .sw .av-c { background: #D85A30; color: #fff; }
+  .sw .bub { max-width: 82%; padding: 9px 12px; border-radius: 11px; font-size: 13px; line-height: 1.6; color: #1a1a1a; }
+  .sw .bm { background: #E1F5EE; border-radius: 3px 11px 11px 11px; }
+  .sw .bc { background: #f7f7f5; border-radius: 11px 3px 11px 11px; color: #666; font-style: italic; }
+  .sw .spk { font-size: 10px; font-weight: 500; color: #666; margin-bottom: 2px; }
+  .sw .pain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-top: 8px; }
+  .sw .pain-card { border: 0.5px solid rgba(0,0,0,0.12); border-radius: 8px; padding: 9px 11px; background: #f7f7f5; }
+  .sw .pain-num { font-size: 10px; font-weight: 500; color: #1D9E75; margin-bottom: 3px; }
+  .sw .pain-text { font-size: 12px; color: #1a1a1a; line-height: 1.5; }
+  .sw .obj-card { border: 0.5px solid rgba(0,0,0,0.12); border-radius: 12px; overflow: hidden; margin-bottom: 8px; }
+  .sw .obj-hd { display: flex; align-items: center; justify-content: space-between; padding: 11px 13px; cursor: pointer; background: #fff; transition: background 0.15s; gap: 8px; }
+  .sw .obj-hd:hover { background: #f7f7f5; }
+  .sw .obj-q { font-size: 13px; font-weight: 500; color: #1a1a1a; }
+  .sw .obj-tag { font-size: 11px; background: #FAECE7; color: #993C1D; padding: 2px 7px; border-radius: 20px; flex-shrink: 0; }
+  .sw .obj-chev { font-size: 11px; color: #666; transition: transform 0.2s; flex-shrink: 0; }
+  .sw .obj-chev.open { transform: rotate(180deg); }
+  .sw .obj-body { padding: 0 13px 13px; display: none; }
+  .sw .obj-body.open { display: block; }
+  .sw .obj-ans { font-size: 13px; color: #1a1a1a; line-height: 1.7; background: #E1F5EE; padding: 10px 12px; border-radius: 8px; margin-top: 8px; }
+  .sw .ci { font-size: 12px; line-height: 1.6; padding: 3px 0; border-bottom: 0.5px solid rgba(0,0,0,0.06); color: #1a1a1a; display: flex; align-items: flex-start; gap: 6px; }
+  .sw .ci:last-child { border-bottom: none; }
+  .sw .dot { width: 5px; height: 5px; border-radius: 50%; margin-top: 7px; flex-shrink: 0; }
+  .sw .dot-g { background: #1D9E75; }
+  .sw .dot-r { background: #D85A30; }
+  .sw .touch-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .sw .touch-table th { background: #063A35; color: rgba(255,255,255,0.8); padding: 7px 9px; text-align: left; font-weight: 500; font-size: 11px; }
+  .sw .touch-table td { padding: 8px 9px; border-bottom: 0.5px solid rgba(0,0,0,0.08); vertical-align: top; color: #1a1a1a; line-height: 1.5; }
+  .sw .touch-table tr:hover td { background: #f7f7f5; }
+  .sw .tag-c { background: #FAECE7; color: #993C1D; border-radius: 20px; padding: 2px 7px; font-size: 10px; font-weight: 500; white-space: nowrap; }
+  .sw .tag-w { background: #E1F5EE; color: #0F6E56; border-radius: 20px; padding: 2px 7px; font-size: 10px; font-weight: 500; white-space: nowrap; }
+  .sw .ups-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+  .sw .ups-card { border: 0.5px solid rgba(0,0,0,0.12); border-radius: 12px; padding: 13px; background: #f7f7f5; }
+  .sw .ups-lbl { font-size: 11px; font-weight: 500; color: #1D9E75; margin-bottom: 6px; }
+  .sw .ups-title { font-size: 13px; font-weight: 500; color: #1a1a1a; margin-bottom: 5px; }
+  .sw .ups-text { font-size: 12px; color: #666; line-height: 1.6; }
+  .sw .cheat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .sw .cc { border-radius: 12px; padding: 13px; }
+  .sw .cc-do { background: #E1F5EE; border: 0.5px solid #9FE1CB; }
+  .sw .cc-dont { background: #FAECE7; border: 0.5px solid #F5C4B3; }
+  .sw .cc-title { font-size: 12px; font-weight: 500; margin-bottom: 8px; }
+  .sw .cc-do .cc-title { color: #085041; }
+  .sw .cc-dont .cc-title { color: #4A1B0C; }
+  .sw .new-badge { display: inline-block; font-size: 10px; background: #EF9F27; color: #fff; padding: 1px 6px; border-radius: 4px; font-weight: 500; margin-left: 6px; vertical-align: middle; }
+  .sw .steps-grid { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+  .sw .step-card { border: 0.5px solid rgba(0,0,0,0.12); border-radius: 12px; overflow: hidden; }
+  .sw .step-hd { display: flex; align-items: center; gap: 10px; padding: 11px 13px; background: #f7f7f5; }
+  .sw .step-n { width: 24px; height: 24px; border-radius: 50%; background: #1D9E75; color: #fff; font-size: 11px; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .sw .step-t { font-size: 13px; font-weight: 500; color: #1a1a1a; }
+  .sw .step-body { padding: 12px 13px; }
+  .sw .wa-bub { background: #dcf8c6; border-radius: 3px 11px 11px 11px; padding: 10px 13px; font-size: 13px; line-height: 1.7; color: #1a1a1a; border-left: 3px solid #25D366; }
+
+  @media (max-width: 900px) {
+    .app { flex-direction: column; }
+    .sidebar { width: 100%; min-width: 0; height: auto; }
+    .page-header { padding: 32px 24px 28px; }
+    .content { padding: 24px 24px 48px; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .page-title { font-size: 24px; }
+    .main { overflow-x: hidden; }
+    .sidebar-nav { display: flex; flex-wrap: wrap; padding: 8px; }
+    .nav-item { flex-direction: column; align-items: center; gap: 4px; padding: 10px 12px; border-left: none; border-bottom: 3px solid transparent; }
+    .nav-item.active { border-left: none; border-bottom-color: var(--teal-mid); }
+    .nav-label { font-size: 11px; text-align: center; }
+    .nav-sub { display: none; }
+    .nav-section-label { display: none; }
+    .sw-app { flex-direction: column; height: auto; }
+    .sw-nav { width: 100%; min-width: 0; flex-direction: row; flex-wrap: wrap; padding: 8px; }
+    .sw-nav-logo { display: none; }
+    .sw-nav-btn { flex-direction: column; gap: 3px; padding: 8px 10px; border-left: none; border-bottom: 3px solid transparent; flex: 1; min-width: 60px; }
+    .sw-nav-btn.active { border-left: none; border-bottom-color: #5DCAA5; }
+    .sw-lbl { font-size: 10px; text-align: center; }
+    .sw-new-dot { display: none; }
+    .sw-main { height: 500px; }
+    .sw .cheat-grid, .sw .ups-row, .sw .pain-grid { grid-template-columns: 1fr; }
+    .sw-wrap { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-tag">⚡ Стоматология</div>
+      <div class="logo-title">Mirai Dent<br>Портал менеджеров</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Инструменты</div>
+      <div class="nav-item script-item active" onclick="showPage('script', this)">
+        <div class="nav-icon">📞</div>
+        <div>
+          <div class="nav-label">Скрипт входящего звонка</div>
+          <div class="nav-sub">12 блоков · Интерактивный</div>
+        </div>
+        <div class="new-dot"></div>
+      </div>
+      <div class="nav-section-label">Модули обучения</div>
+      <div class="nav-item" onclick="showPage('crm', this)">
+        <div class="nav-icon">📊</div>
+        <div>
+          <div class="nav-label">Работа в АмоCRM</div>
+          <div class="nav-sub">Воронка, лиды, этапы</div>
+        </div>
+      </div>
+      <div class="nav-item" onclick="showPage('therapy', this)">
+        <div class="nav-icon">🦷</div>
+        <div>
+          <div class="nav-label">Обучение по терапии</div>
+          <div class="nav-sub">Гигиена, кариес, каналы</div>
+        </div>
+      </div>
+      <div class="nav-item" onclick="showPage('surgery', this)">
+        <div class="nav-icon">🔧</div>
+        <div>
+          <div class="nav-label">Обучение по хирургии</div>
+          <div class="nav-sub">Удаления, имплантация</div>
+        </div>
+      </div>
+      <div class="nav-item" onclick="showPage('children', this)">
+        <div class="nav-icon">👶</div>
+        <div>
+          <div class="nav-label">Детская терапия</div>
+          <div class="nav-sub">Молочные зубы, севоран</div>
+        </div>
+      </div>
+      <div class="nav-item" onclick="showPage('admin', this)">
+        <div class="nav-icon">📋</div>
+        <div>
+          <div class="nav-label">Просьбы администраторов</div>
+          <div class="nav-sub">Ключевые правила</div>
+        </div>
+      </div>
+    </nav>
+    <div class="sidebar-footer">Внутренний портал · Для служебного использования</div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- ============ PAGE: SCRIPT ============ -->
+    <div class="page active" id="page-script">
+      <div class="page-header" style="background:linear-gradient(135deg,#063A35 0%,#0a5a50 100%)">
+        <div class="page-badge" style="background:rgba(239,159,39,0.25);color:#EF9F27">📞 Инструмент</div>
+        <div class="page-title">Скрипт входящего звонка</div>
+        <div class="page-desc">Пошаговый интерактивный скрипт — от настроя до закрытия и доходимости. 12 блоков.</div>
+      </div>
+      <div class="sw-wrap">
+        <div class="sw-app">
+          <div class="sw-nav" id="swNav"></div>
+          <div class="sw-main">
+            <div class="sw-prog-bar"><div class="sw-prog-fill" id="swProg"></div></div>
+            <div class="sw-topbar">
+              <div class="sw-block-title" id="swTitle"></div>
+              <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+                <span class="sw-badge" id="swBadge"></span>
+                <div class="sw-arrows">
+                  <button class="sw-arr" id="swPBtn" onclick="swNav(-1)">←</button>
+                  <button class="sw-arr" id="swNBtn" onclick="swNav(1)">→</button>
+                </div>
+              </div>
+            </div>
+            <div class="sw-content sw" id="swContent"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ PAGE: CRM ============ -->
+    <div class="page" id="page-crm">
+      <div class="page-header">
+        <div class="page-badge">📊 Модуль 1</div>
+        <div class="page-title">Работа в АмоCRM</div>
+        <div class="page-desc">Правила ведения сделок, этапы воронки, сроки работы с лидами и правила передачи клиентов.</div>
+      </div>
+      <div class="content">
+        <div class="alert warning">
+          <div class="alert-icon">⚠️</div>
+          <div><div class="alert-title">Важнейшее правило</div><strong>Этапы «Новая заявка» и «Callback» вы не трогаете</strong> — сюда звонится автоматически. Если вы напишете на WhatsApp раньше callback, и callback ответит другой менеджер — сделка считается его, даже если вы уже пообщались.</div>
+        </div>
+
+        <div class="section-title">🔄 Этапы воронки продаж</div>
+        <div class="funnel">
+          <div class="funnel-step"><div class="funnel-step-num">1</div><div class="funnel-step-info"><div class="funnel-step-name">Новая заявка</div><div class="funnel-step-desc">Входящий лид. Не трогать — автодозвон callback</div></div><span class="funnel-step-badge badge-gray">Автоматически</span></div>
+          <div class="funnel-arrow">↓</div>
+          <div class="funnel-step"><div class="funnel-step-num">2</div><div class="funnel-step-info"><div class="funnel-step-name">Callback / Нет ответа</div><div class="funnel-step-desc">Система звонит по очереди. Если нет WhatsApp — ничего не делаем</div></div><span class="funnel-step-badge badge-amber">Не трогать!</span></div>
+          <div class="funnel-arrow">↓</div>
+          <div class="funnel-step"><div class="funnel-step-num">3</div><div class="funnel-step-info"><div class="funnel-step-name">Ответственный назначен</div><div class="funnel-step-desc">Установлен контакт с клиентом. Провести квалификацию</div></div><span class="funnel-step-badge badge-blue">≤ 7 дней</span></div>
+          <div class="funnel-arrow">↓</div>
+          <div class="funnel-step"><div class="funnel-step-num">4</div><div class="funnel-step-info"><div class="funnel-step-name">Квалификация пройдена</div><div class="funnel-step-desc">Обязательный этап! Нужен для аналитики и рассылок Facebook</div></div><span class="funnel-step-badge badge-blue">≤ 7 дней на запись</span></div>
+          <div class="funnel-arrow">↓</div>
+          <div class="funnel-step"><div class="funnel-step-num">5</div><div class="funnel-step-info"><div class="funnel-step-name">Первичный приём назначен</div><div class="funnel-step-desc">Клиент записан. Держать не более 10 дней или 3 переносов</div></div><span class="funnel-step-badge badge-amber">≤ 10 дней</span></div>
+          <div class="funnel-arrow">↓</div>
+          <div class="funnel-step"><div class="funnel-step-num">6</div><div class="funnel-step-info"><div class="funnel-step-name">Первичный приём не состоялся</div><div class="funnel-step-desc">3 раза не пришёл — закрываем сделку</div></div><span class="funnel-step-badge badge-red">Закрыть!</span></div>
+          <div class="funnel-arrow">↓</div>
+          <div class="funnel-step"><div class="funnel-step-num">7</div><div class="funnel-step-info"><div class="funnel-step-name">Хоть какая-то оплата получена</div><div class="funnel-step-desc">Пациент пришёл на приём. 14 дней, чтобы получить оплату. Предоплата тоже считается!</div></div><span class="funnel-step-badge badge-amber">≤ 14 дней</span></div>
+          <div class="funnel-arrow">↓</div>
+          <div class="funnel-step"><div class="funnel-step-num">8</div><div class="funnel-step-info"><div class="funnel-step-name">Полная оплата получена — Успешно реализован</div><div class="funnel-step-desc">Автоматически создаётся дубль в воронке «Куратор сопровождения»</div></div><span class="funnel-step-badge badge-green">Успех!</span></div>
+        </div>
+
+        <div class="section-title" style="margin-top:36px">⏱ Ключевые сроки</div>
+        <div class="grid-3">
+          <div class="stat-card teal"><div class="stat-label">Назначение встречи</div><div class="stat-value">7</div><div class="stat-sub">дней максимум в этапах «Ответственный назначен» и «Квал. пройдена»</div></div>
+          <div class="stat-card amber"><div class="stat-label">Приход на консультацию</div><div class="stat-value">10</div><div class="stat-sub">дней или 3 переноса — после этого закрываем</div></div>
+          <div class="stat-card danger"><div class="stat-label">Получить оплату</div><div class="stat-value">14</div><div class="stat-sub">дней с момента первичного приёма, иначе уходит в рассылки</div></div>
+        </div>
+
+        <div class="section-title" style="margin-top:36px">🤝 Правила рекомендаций и передачи</div>
+        <div class="card">
+          <div class="alert danger" style="margin-bottom:20px">
+            <div class="alert-icon">🚫</div>
+            <div><div class="alert-title">Нарушение — потеря всех оплат</div>Если клиент сказал «пришёл по рекомендации» или «раньше лечился у вас» — вы <strong>обязаны</strong> передать сделку старому куратору. Если скрыли и потом выяснилось — все ваши оплаты по этому клиенту перейдут тому куратору.</div>
+          </div>
+          <ul class="rule-list">
+            <li class="rule-item"><div class="rule-num danger">!</div><div class="rule-text">Клиент говорит: «Ранее лечился у вас» или «Моим куратором была Гульжан / Антай / ...» — <strong>сразу передайте сделку этому куратору</strong>.</div></li>
+            <li class="rule-item"><div class="rule-num danger">!</div><div class="rule-text">Клиент говорит: «Пришёл по рекомендации Ерлана» — спросите ФИО и узнайте куратора Ерлана — <strong>передайте ему</strong>.</div></li>
+            <li class="rule-item"><div class="rule-num">✓</div><div class="rule-text">После окончания плана лечения пациент открепляется от куратора. Следующий лид создаётся как новая сделка — <strong>но если клиент просит старого куратора, передайте</strong>.</div></li>
+          </ul>
+        </div>
+
+        <div class="section-title" style="margin-top:36px">🎯 Перехват «потерянных» лидов</div>
+        <div class="card">
+          <p style="font-size:14px;line-height:1.7;margin-bottom:12px">Вы можете забирать лиды из callback, если у них нет <strong>качественного контакта более 7 дней</strong>. Качественный контакт — это разговор по телефону.</p>
+          <div class="alert info"><div class="alert-icon">💡</div><div>Используйте фильтр: <strong>«Сделки без задач» → «Дата изменения — сначала старые»</strong>. Если последний разговор был более 7 дней назад — можно забирать. Но если видите, что коллега реально работает с клиентом — передайте.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ PAGE: THERAPY ============ -->
+    <div class="page" id="page-therapy">
+      <div class="page-header">
+        <div class="page-badge">🦷 Модуль 2</div>
+        <div class="page-title">Обучение по терапии</div>
+        <div class="page-desc">Что и зачем мы лечим. Аргументы для пациентов по каждому виду лечения.</div>
+      </div>
+      <div class="content">
+        <div class="highlight-box"><h3>Цель терапии</h3><p>Сохранить свои зубы. Ничего лишнего не добавляем — то, что есть у пациента, мы сохраняем. Наша задача — объяснить пациенту <em>зачем</em> лечить зубы и что будет, если не лечить.</p></div>
+
+        <div class="section-title">🧹 Профессиональная гигиена (чистка)</div>
+        <div class="card">
+          <div class="card-title"><div class="card-icon">✨</div>Зачем нужна профессиональная чистка</div>
+          <ul class="rule-list">
+            <li class="rule-item"><div class="rule-num teal">1</div><div class="rule-text">Пациент, как бы хорошо ни чистил зубы, <strong>не может самостоятельно убрать зубной камень</strong>. Камень образуется из налёта — достаточно пары дней без чистки.</div></li>
+            <li class="rule-item"><div class="rule-num teal">2</div><div class="rule-text"><strong>Рекомендации:</strong> с хорошей гигиеной — <em>раз в год</em>. С коронками, имплантами, брекетами — <em>раз в полгода</em> обязательно.</div></li>
+            <li class="rule-item"><div class="rule-num teal">3</div><div class="rule-text">Это самая радостная процедура. <strong>Любой пациент — потенциальный клиент на чистку</strong>, даже если у него «всё в порядке».</div></li>
+          </ul>
+          <div class="alert danger" style="margin-top:16px"><div class="alert-icon">🦠</div><div><div class="alert-title">Последствия плохой гигиены — аргументы для пациента</div>Воспаление дёсны → оголение и расшатывание зуба → кариес → киста → в итоге удаление и имплант. Также: неприятный запах изо рта. <strong>Пациент может годами не замечать проблему</strong>.</div></div>
+        </div>
+
+        <div class="section-title" style="margin-top:32px">🔴 Кариес и его стадии</div>
+        <div class="card">
+          <div class="alert info" style="margin-bottom:20px"><div class="alert-icon">🔬</div><div><strong>Главный аргумент для пациента:</strong> «Чем раньше вылечим — тем проще и дешевле». Часто слышим: «У меня уже 10 лет маленький кариес». Объясните, что он просто <em>не болит</em>, но разрушается.</div></div>
+          <table class="data-table">
+            <thead><tr><th>Стадия</th><th>Что происходит</th><th>Симптом</th><th>Лечение</th></tr></thead>
+            <tbody>
+              <tr><td>Пятно (начальный)</td><td>Деминерализация эмали</td><td>Белое/тёмное пятно, не болит</td><td>Реминерализация, пломба</td></tr>
+              <tr><td>Поверхностный кариес</td><td>Разрушена только эмаль</td><td>Чёрная точка, иногда чувствительность</td><td>Пломба</td></tr>
+              <tr><td>Средний кариес</td><td>Разрушены эмаль и дентин</td><td>Боль от сладкого/кислого</td><td>Пломба</td></tr>
+              <tr><td>Глубокий кариес</td><td>Дентин почти у нерва</td><td>Боль, реакция на горячее/холодное</td><td>Пломба или канал (90% — канал через 7 лет)</td></tr>
+              <tr><td>Пульпит</td><td>Воспаление нерва</td><td>Сильная боль, ночная особенно ночью</td><td>Лечение каналов</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="section-title" style="margin-top:32px">💊 Качество пломбы — почему держатся 7+ лет</div>
+        <div class="card">
+          <p style="font-size:14px;line-height:1.7;margin-bottom:16px">Это частый вопрос пациентов. Чтобы пломба держалась 7+ лет нужно соблюсти 4 условия:</p>
+          <div class="step-item"><div class="step-circle">1</div><div><div class="step-title">Полная очистка кариеса под микроскопом</div><div class="step-body">На глаз определить границы кариеса невозможно. Если поставить пломбу на остаток кариеса — она выпадет.</div></div></div>
+          <div class="step-item"><div class="step-circle">2</div><div><div class="step-title">Изоляция от слюны (коффердам)</div><div class="step-body">Если слюна попадёт под пломбу — клей не схватится. Пломба на слюне — это «наклеить на воду».</div></div></div>
+          <div class="step-item"><div class="step-circle">3</div><div><div class="step-title">Адгезия к эмали (бонд)</div><div class="step-body">На эмаль клеится 100%, на дентин — около 70%. Чем больше площадь на эмали — тем крепче.</div></div></div>
+          <div class="step-item"><div class="step-circle">4</div><div><div class="step-title">Финальная полировка до блеска</div><div class="step-body">Без полировки поверхность шероховатая — налёт накапливается и пломба держится 2 года максимум.</div></div></div>
+          <div class="alert info" style="margin-top:8px"><div class="alert-icon">⏱️</div><div>Срок пломбы — <strong>5–7 лет</strong>. Через 7 лет меняем профилактически, даже если не болит — материал «стареет» и уменьшается, под ним может начаться кариес.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ PAGE: SURGERY ============ -->
+    <div class="page" id="page-surgery">
+      <div class="page-header">
+        <div class="page-badge">🔧 Модуль 3</div>
+        <div class="page-title">Обучение по хирургии</div>
+        <div class="page-desc">Виды удалений, имплантация, противопоказания и объяснения для пациентов.</div>
+      </div>
+      <div class="content">
+        <div class="highlight-box"><h3>Ключевой аргумент для пациента</h3><p>Если молочный зуб или временный зуб удалён раньше времени — сразу начинается <strong>усадка кости</strong>. Импланты требуют достаточного объёма кости. Поэтому важно <strong>не затягивать</strong> с имплантацией после удаления.</p></div>
+
+        <div class="section-title">🦷 Виды удалений</div>
+        <div class="grid-2">
+          <div class="stage-block"><div class="stage-header"><div><div class="stage-header-text">Простое удаление</div><div class="stage-header-sub">Стандартная процедура</div></div></div><div class="stage-body"><p>Зуб прорезался, расположен правильно в зубном ряду, корни без особенностей. Удаление щипцами/элеватором.</p></div></div>
+          <div class="stage-block"><div class="stage-header" style="background:#1a3a5c"><div><div class="stage-header-text">Сложное удаление</div><div class="stage-header-sub">Атипичное / с разрезом</div></div></div><div class="stage-body"><p><strong>Ретинированный зуб</strong> — полностью или частично скрыт в кости.<br><strong>Дистопированный зуб</strong> — неправильное положение в дуге.<br>Часто это восьмёрки. Требуют распила, удаления по частям.</p></div></div>
+        </div>
+
+        <div class="section-title" style="margin-top:32px">🦷 Противопоказания к имплантации</div>
+        <div class="grid-2">
+          <div class="card"><div class="card-title" style="color:var(--danger)"><div class="card-icon" style="background:#fde8e8">🚫</div>Абсолютные (нельзя никогда)</div><ul class="rule-list"><li class="rule-item"><div class="rule-num danger">✗</div><div class="rule-text">Заболевания крови, нарушение свёртываемости</div></li><li class="rule-item"><div class="rule-num danger">✗</div><div class="rule-text">Онкология (в период химио/лучевой терапии)</div></li><li class="rule-item"><div class="rule-num danger">✗</div><div class="rule-text">Иммунодефицит</div></li></ul></div>
+          <div class="card"><div class="card-title" style="color:#a06000"><div class="card-icon">⚠️</div>Относительные (с условиями)</div><ul class="rule-list"><li class="rule-item"><div class="rule-num amber">!</div><div class="rule-text"><strong>Диабет:</strong> до 8 — норм, 8–10 — риск, выше 10 — 50/50, выше 17 — нельзя</div></li><li class="rule-item"><div class="rule-num amber">!</div><div class="rule-text">Курение — ухудшает приживление</div></li><li class="rule-item"><div class="rule-num amber">!</div><div class="rule-text">После онкологии — через 1.5–2 года с разрешения онколога</div></li><li class="rule-item"><div class="rule-num amber">!</div><div class="rule-text">Подростковый возраст — кость не сформирована</div></li></ul></div>
+        </div>
+
+        <div class="section-title" style="margin-top:32px">⏳ Процесс приживления импланта</div>
+        <div class="card">
+          <div class="step-item"><div class="step-circle" style="background:var(--accent);color:var(--navy)">1</div><div><div class="step-title">Установка и первичная фиксация</div><div class="step-body">Имплант вкручивается и за счёт плотности кости просто удерживается. Это не приживление — просто механическое удержание.</div></div></div>
+          <div class="step-item"><div class="step-circle" style="background:var(--accent);color:var(--navy)">2</div><div><div class="step-title">1 неделя — «отторжение»</div><div class="step-body">Организм распознаёт инородное тело. Сила удержания падает до 25–30%. Вокруг появляются клетки, которые образуют «костный мозоль».</div></div></div>
+          <div class="step-item"><div class="step-circle" style="background:var(--teal)">3</div><div><div class="step-title">6 недель — биологическое приживление</div><div class="step-body">Костный мозоль интегрируется с имплантом. Через 6 недель имплант считается первично прижившимся.</div></div></div>
+          <div class="step-item"><div class="step-circle" style="background:var(--teal)">4</div><div><div class="step-title">3–6 месяцев — постоянная коронка</div><div class="step-body">При D1–D2 и хорошем торке можно ставить временную коронку сразу. При D3–D4 — только после полного приживления.</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ PAGE: CHILDREN ============ -->
+    <div class="page" id="page-children">
+      <div class="page-header">
+        <div class="page-badge">👶 Модуль 4</div>
+        <div class="page-title">Детская терапия</div>
+        <div class="page-desc">Особенности лечения молочных зубов, работа с родителями, коронки и седация севораном.</div>
+      </div>
+      <div class="content">
+        <div class="highlight-box"><h3>Главный принцип</h3><p>Цель — <strong>сохранить молочный зуб до его естественной смены</strong>. Каждый зуб стоит на своём месте и создаёт основу для правильного развития челюсти. Раннее удаление → усадка кости → проблемы с постоянным зубом.</p></div>
+
+        <div class="section-title">🦷 Мифы и факты о молочных зубах</div>
+        <div class="card">
+          <table class="data-table">
+            <thead><tr><th>Миф родителей</th><th>Как объяснить</th></tr></thead>
+            <tbody>
+              <tr><td>«Он же скоро выпадет, зачем лечить?»</td><td>Воспаление у корня молочного зуба напрямую влияет на <strong>зачаток постоянного</strong> — он может прорезаться с дефектами эмали (белые/жёлтые пятна)</td></tr>
+              <tr><td>«У молочных зубов нет корней»</td><td>Молочный зуб точно такой же, как взрослый: <strong>имеет корни и нервы</strong>. Они просто рассасываются к смене зуба</td></tr>
+              <tr><td>«Маленькое чёрное пятно — не страшно»</td><td>На рентгене часто видно скрытое воспаление внутри — зуб выглядит целым снаружи, а изнутри уже разрушен</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="section-title" style="margin-top:32px">😷 Лечение под севораном</div>
+        <div class="alert info" style="margin-bottom:20px"><div class="alert-icon">ℹ️</div><div><div class="alert-title">Что такое севоран — объяснение для родителей</div>Севоран — ингаляционный газ. Действует только пока вдыхается. <strong>Полностью выходит из организма в течение дня</strong> (до вечера). Это не общий наркоз в классическом понимании — это седация через маску.</div></div>
+        <div class="grid-2">
+          <div class="card"><div class="card-title"><div class="card-icon">✅</div>Показания к севорану</div><ul class="rule-list"><li class="rule-item"><div class="rule-num teal">✓</div><div class="rule-text">Дети, которых невозможно лечить обычным способом (очень тревожные, не дают открыть рот)</div></li><li class="rule-item"><div class="rule-num teal">✓</div><div class="rule-text">Много зубов требует лечения одновременно</div></li><li class="rule-item"><div class="rule-num teal">✓</div><div class="rule-text">Выраженный рвотный рефлекс, панические реакции</div></li><li class="rule-item"><div class="rule-num teal">✓</div><div class="rule-text">Нейроотличные дети (аутизм и др.)</div></li></ul></div>
+          <div class="card"><div class="card-title"><div class="card-icon">📝</div>Что нужно знать о подготовке</div><ul class="rule-list"><li class="rule-item"><div class="rule-num amber">1</div><div class="rule-text">Хорошие анализы, без проблем — условие для проведения</div></li><li class="rule-item"><div class="rule-num amber">2</div><div class="rule-text">После процедуры: ребёнок вялый, капризный — <strong>можно дать ибупрофен однократно</strong> (при удалениях/коронках)</div></li><li class="rule-item"><div class="rule-num amber">3</div><div class="rule-text">Обязательный осмотр через 3 и 6 месяцев после севорана — контроль состояния</div></li></ul></div>
+        </div>
+        <div class="alert warning"><div class="alert-icon">💬</div><div><div class="alert-title">Как работать с родителями, которые боятся севорана</div>«Севоран — это газ, который действует только пока ребёнок его вдыхает. Как только убираем маску — он начинает выходить из организма. До вечера полностью выходит. Это намного безопаснее, чем давать ребёнку таблетки-транквилизаторы (которые применяют в Европе).»</div></div>
+
+        <div class="section-title" style="margin-top:32px">👑 Коронки на молочные зубы</div>
+        <div class="card">
+          <ul class="rule-list">
+            <li class="rule-item"><div class="rule-num teal">1</div><div class="rule-text">Зуб <strong>сильно разрушен</strong> — пломба не удержится. До смены зуба 2–3 года, ребёнок жуёт твёрдое — даже качественная пломба выпадет.</div></li>
+            <li class="rule-item"><div class="rule-num teal">2</div><div class="rule-text">После удаления нерва — в зубе большая полость. Пломба не подходит. <strong>Коронка — единственное верное решение.</strong></div></li>
+            <li class="rule-item"><div class="rule-num teal">3</div><div class="rule-text">Коронки бывают: <span class="tag tag-teal">Металлические</span> <span class="tag tag-navy">на жевательные</span> и <span class="tag tag-amber">Циркониевые</span> <span class="tag tag-navy">на передние (эстетика)</span></div></li>
+          </ul>
+          <div class="alert success" style="margin-top:16px"><div class="alert-icon">😁</div><div>Лайфхак: «У тебя теперь <strong>бриллиантовые зубы</strong>! Можешь хвастаться перед друзьями». Дети воспринимают металлические коронки позитивно.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ PAGE: ADMIN ============ -->
+    <div class="page" id="page-admin">
+      <div class="page-header">
+        <div class="page-badge">📋 Модуль 5</div>
+        <div class="page-title">Просьбы администраторов</div>
+        <div class="page-desc">7 ключевых правил, которые помогают работе всей команды. Обязательны к соблюдению.</div>
+      </div>
+      <div class="content">
+        <div class="alert warning" style="margin-bottom:28px"><div class="alert-icon">📣</div><div>Эти правила сформулированы администраторами клиники. Их нарушение создаёт сбои в работе ассистентов, врачей и отчётности.</div></div>
+
+        <div class="card">
+          <ul class="rule-list">
+            <li class="rule-item"><div class="rule-num" style="background:var(--teal)">1</div><div class="rule-text"><strong>При записи на имплантацию</strong> — всегда указывайте тип в комментарии: <span class="tag tag-teal">All-on-4</span> <span class="tag tag-teal">All-on-6</span> <span class="tag tag-teal">Единичная</span> <span class="tag tag-teal">Снятие слепка</span> — чтобы ассистент заранее подготовил кабинет.</div></li>
+            <li class="rule-item"><div class="rule-num" style="background:var(--teal)">2</div><div class="rule-text"><strong>Перед записью нового пациента</strong> — всегда уточняйте: был ли он раньше у нас. <em>Проверяйте по номеру телефона в базе</em>. Научитесь объединять карточки пациентов.</div></li>
+            <li class="rule-item"><div class="rule-num danger">3</div><div class="rule-text"><strong>В Меню задним числом</strong> не меняйте скидки и не убирайте услуги — это ломает отчёты у руководства.</div></li>
+            <li class="rule-item"><div class="rule-num danger">4</div><div class="rule-text"><strong>Вопрос скидок и акций</strong> — не обсуждайте с пациентом на рецепции. Лучше пройти в отдельный кабинет. Не должно быть слышно другим.</div></li>
+            <li class="rule-item"><div class="rule-num" style="background:var(--accent);color:var(--navy)">5</div><div class="rule-text"><strong>Страховка:</strong><ul style="margin-top:8px;padding-left:16px;font-size:14px;line-height:1.8"><li>Если пациент приходит на консультацию — <strong>в тот же день не ставим на резерв</strong>, если лечение планируется на другой день</li><li>Название страховой компании озвучивается <strong>только пациенту</strong> (нам не говорят)</li><li>Резерв ставится и документ заполняется <strong>всегда до лечения</strong></li></ul></div></li>
+            <li class="rule-item"><div class="rule-num" style="background:var(--accent);color:var(--navy)">6</div><div class="rule-text"><strong>Смена графика врача</strong> — заранее информируйте <em>Индиру</em>. Она распределяет ассистентов и кабинеты. Без предупреждения — кабинет может быть не готов.</div></li>
+            <li class="rule-item"><div class="rule-num teal">7</div><div class="rule-text"><strong>В Меню в категориях</strong> обязательно отображайте: <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px"><span class="tag tag-navy">🤝 Имя куратора</span><span class="tag tag-navy">🩺 Болезни пациента</span><span class="tag tag-navy">🛡️ Страховка</span></div></div></li>
+          </ul>
+        </div>
+
+        <div class="section-title" style="margin-top:36px">🗒 Быстрая шпаргалка: кто и что</div>
+        <div class="card">
+          <table class="data-table">
+            <thead><tr><th>Ситуация</th><th>Что делать</th></tr></thead>
+            <tbody>
+              <tr><td>Новая запись на имплант</td><td>Написать тип в комментарий (All-on-4, единичная и т.д.)</td></tr>
+              <tr><td>Пациент «первичный»</td><td>Проверить по номеру телефона в базе перед записью</td></tr>
+              <tr><td>Пациент спрашивает про скидку</td><td>Пригласить в кабинет, не на рецепции</td></tr>
+              <tr><td>Страховой пациент на консультации</td><td>Не ставить резерв в тот же день (если лечение завтра+)</td></tr>
+              <tr><td>Врач меняет расписание</td><td>Сразу сообщить Индире</td></tr>
+              <tr><td>Возврат средств пациенту</td><td>Фиксировать в «Расход» в CRM</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+// ===== PAGE NAVIGATION =====
+function showPage(name, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  el.classList.add('active');
+  document.querySelector('.main').scrollTop = 0;
+}
+
+// ===== SCRIPT WIDGET =====
+const SW_BLOCKS = [
+  {
+    label: 'Настрой',
+    badge: 'До звонка',
+    title: 'Настрой перед звонком',
+    html: `<div class="warn-b">Это не читается клиенту. Внутренний ритуал менеджера перед каждым звонком.</div>
+    <div class="sec">5 шагов перед трубкой</div>
+    ${['Оторвись от стула, сделай 5 глубоких вдохов','Улыбнись — улыбка слышна по телефону','Скажи себе: «Я помогаю человеку решить проблему со здоровьем»','Вспомни лучший случай, когда ты записал клиента — он пришёл и был доволен','Открой CRM, будь готов вносить данные сразу'].map(t=>`<div class="ci"><div class="dot dot-g"></div>${t}</div>`).join('')}
+    <div class="tip-b" style="margin-top:14px"><b>Ключевое убеждение:</b> Бесплатная консультация с 3D-снимком — реальная ценность стоимостью 20 000 тг+. Мы не просим денег, мы даём пользу. Ты помогаешь, а не продаёшь.</div>`
+  },
+  {
+    label: 'Контакт',
+    badge: '30 сек',
+    title: 'Установление контакта',
+    html: `<div class="tip-b">Первые 15–30 секунд. Голос — спокойный и тёплый.</div>
+    <div class="sec">Скрипт</div>
+    <div class="bw">
+      <div class="brow"><div class="av av-m">М</div><div><div class="spk">Менеджер</div><div class="bub bm">Добрый день! Клиника Mirai Dent, меня зовут [Имя]. Удобно говорить?</div></div></div>
+      <div class="brow r"><div class="av av-c">К</div><div><div class="spk" style="text-align:right">Клиент</div><div class="bub bc">Да, здравствуйте. / Да, слушаю.</div></div></div>
+      <div class="brow"><div class="av av-m">М</div><div><div class="spk">Менеджер</div><div class="bub bm">Отлично, [Имя клиента]! Вы обратились к нам по поводу [уточнить из заявки — зубной боли / имплантов / брекетов / отбеливания]. Всё верно?</div></div></div>
+    </div>
+    <div class="sec">Фрейминг</div>
+    <div class="tip-b">Если знаешь откуда пришёл клиент: <b>«Нас вам порекомендовал [имя]»</b> или <b>«Вы нашли нас через Instagram / 2GIS»</b> — мгновенно повышает доверие.</div>`
+  },
+  {
+    label: 'Программирование',
+    badge: 'Ключевой',
+    title: 'Программирование',
+    html: `<div class="tip-b">Объясняем клиенту структуру разговора. Он расслабляется и готов отвечать.</div>
+    <div class="sec">Скрипт</div>
+    <div class="bw">
+      <div class="brow"><div class="av av-m">М</div><div><div class="spk">Менеджер</div><div class="bub bm">Давайте поступим так: я задам вам буквально 3–4 вопроса, чтобы понять вашу ситуацию. Займёт не больше 3 минут. А потом расскажу, как мы можем помочь. Хорошо?</div></div></div>
+      <div class="brow r"><div class="av av-c">К</div><div><div class="spk" style="text-align:right">Клиент</div><div class="bub bc">Да, хорошо.</div></div></div>
+    </div>
+    <div class="warn-b"><b>Почему работает:</b> Клиент сам разрешил задавать вопросы — больше не воспринимает их как допрос. Снимает 80% сопротивления.</div>`
+  },
+  {
+    label: 'Квалификация',
+    badge: '4 вопроса',
+    title: 'Квалификация (сбор фактов)',
+    html: `<div class="tip-b">Слушаем — не перебиваем. Вносим ответы в CRM прямо во время разговора.</div>
+    ${[['Потребность','Расскажите, пожалуйста, что именно вас беспокоит с зубами? Что привело вас к нам?'],['История','Как давно это началось? Вы уже обращались куда-то по этому поводу?'],['Срочность','Для вас это срочный вопрос, или вы пока присматриваетесь к вариантам?'],['Ожидания','Что для вас самое важное — чтобы не больно, быстро, эстетично, или что-то ещё?']].map(([l,q],i)=>`<div class="sec">Вопрос ${i+1} — ${l}</div><div class="bw"><div class="brow"><div class="av av-m">М</div><div><div class="spk">Менеджер</div><div class="bub bm">${q}</div></div></div></div>`).join('')}`
+  },
+  {
+    label: 'Боль',
+    badge: 'Ключевой',
+    title: 'Выявление боли',
+    html: `<div class="warn-b"><b>Важно:</b> Потребность = «болит зуб». Боль = «не могу нормально есть, стесняюсь улыбаться». Ищем боль — не симптом.</div>
+    <div class="sec">Углубляющие вопросы</div>
+    <div class="bw">
+      ${['А это как-то влияет на вашу жизнь? Есть что-то, чего вы избегаете из-за зубов — улыбаться на фото, есть любимую еду?','Вы сказали, что это уже [срок]. На это время что-то пробовали сделать с этим?','А если представить, что через полгода ничего не изменится — как вам с этим?'].map(t=>`<div class="brow"><div class="av av-m">М</div><div><div class="spk">Менеджер</div><div class="bub bm">${t}</div></div></div>`).join('')}
+    </div>
+    <div class="sec">7 типичных болей пациентов</div>
+    <div class="pain-grid">${['Стесняться улыбаться — пустой рот на фото','Хроническая боль — не могут нормально есть','Плохой опыт у стоматологов — тянут годами','Боятся неожиданно большого счёта','Потеряли зуб — стесняются пробела','Запах изо рта — влияет на общение и работу','Не понимают что нужно — боятся диагноза'].map((t,i)=>`<div class="pain-card"><div class="pain-num">#${i+1}</div><div class="pain-text">${t}</div></div>`).join('')}</div>`
+  },
+  {
+    label: 'Усиление боли',
+    badge: 'More Pain',
+    title: 'Усиление боли',
+    html: `<div class="tip-b"><b>Цель:</b> «Откладывать дальше тяжелее, чем решить сейчас». Не давим — задаём умные вопросы.</div>
+    <div class="sec">Скрипт</div>
+    <div class="bw">
+      <div class="brow"><div class="av av-m">М</div><div><div class="spk">Менеджер</div><div class="bub bm">Вы сказали, что это уже [срок]. Если не секрет — а почему именно сейчас решили обратиться? Что изменилось?</div></div></div>
+      <div class="brow r"><div class="av av-c">К</div><div><div class="spk" style="text-align:right">Клиент</div><div class="bub bc">[ответ клиента]</div></div></div>
+      <div class="brow"><div class="av av-m">М</div><div><div class="spk">Менеджер</div><div class="bub bm">А если ещё немного отложить — что, по-вашему, может случиться с зубом за это время?</div></div></div>
+      <div class="brow"><div class="av av-m">М</div><div><div class="spk">Менеджер</div><div class="bub bm">[Имя], есть ли что-то, что мешает решить этот вопрос прямо сейчас?</div></div></div>
+    </div>
+    <div class="warn-b"><b>Страх боли:</b> «У нас все процедуры только с анестезией.»<br><b>Страх цены:</b> Не называй сумму — переводи на бесплатную консультацию.</div>`
+  },
+  {
+    label: 'Надежда',
+    badge: 'Hope',
+    title: 'Надежда — переход к решению',
+    html: `<div class="tip-b">Показываем выход. Здесь впервые упоминаем консультацию.</div>
+    <div class="sec">Скрипт</div>
+    <div class="bw">
+      <div class="brow"><div class="av av-m">М</div><div><div class="spk">Менеджер</div><div class="bub bm">Хорошая новость — то, что вы описываете, это решаемо. У нас есть пациенты с похожей ситуацией, которые уже прошли лечение и улыбаются без стеснения.</div></div></div>
+      <div class="brow"><div class="av av-m">М</div><div><div class="spk">Менеджер</div><div class="bub bm">Именно для таких случаев у нас есть формат — бесплатная первичная консультация. Хочу рассказать, как это работает. Можно?</div></div></div>
+      <div class="brow r"><div class="av av-c">К</div><div><div class="spk" style="text-align:right">Клиент</div><div class="bub bc">Да, расскажите.</div></div></div>
+    </div>`
+  },
+  {
+    label: 'Презентация',
+    badge: 'Оффер',
+    title: 'Презентация оффера',
+    html: `<div class="tip-b"><b>Формула:</b> Свойство → Выгода → Выгода выгоды.</div>
+    <div class="sec">Скрипт — три блока</div>
+    <div class="bw">
+      <div class="brow"><div class="av av-m">М</div><div><div class="spk">Блок 1 — 3D-снимок</div><div class="bub bm">Мы делаем бесплатный 3D-снимок зубов — врач видит ситуацию изнутри, то, что не видно невооружённым глазом. Снимок обычно стоит 15–20 тысяч тенге, для первичных пациентов — абсолютно бесплатно.</div></div></div>
+      <div class="brow"><div class="av av-m">М</div><div><div class="spk">Блок 2 — план лечения</div><div class="bub bm">По итогам снимка врач составляет полный письменный план: что нужно сделать, в какой последовательности, сколько займёт. Никаких сюрпризов на кассе.</div></div></div>
+      <div class="brow"><div class="av av-m">М</div><div><div class="spk">Блок 3 — решение за вами</div><div class="bub bm">Врач объясняет всё пошагово. И только после этого вы принимаете решение — начинать лечение или нет. Никакого давления. Это честно, правда?</div></div></div>
+      <div class="brow r"><div class="av av-c">К</div><div><div class="spk" style="text-align:right">Клиент</div><div class="bub bc">Да, звучит хорошо.</div></div></div>
+    </div>`
+  },
+  {
+    label: 'Предзакрытие',
+    badge: 'Проверка',
+    title: 'Предзакрытие',
+    html: `<div class="tip-b">Проверяем готовность. Выявляем скрытые возражения до финального вопроса.</div>
+    <div class="sec">Скрипт</div>
+    <div class="bw">
+      <div class="brow"><div class="av av-m">М</div><div><div class="spk">Менеджер</div><div class="bub bm">[Имя], по шкале от 1 до 10 — насколько то, что я рассказал, подходит под вашу ситуацию?</div></div></div>
+      <div class="brow r"><div class="av av-c">К</div><div><div class="spk" style="text-align:right">Клиент</div><div class="bub bc">Ну, наверное 7–8...</div></div></div>
+      <div class="brow"><div class="av av-m">М</div><div><div class="spk">Менеджер</div><div class="bub bm">А что мешает поставить 10? Что вас останавливает?</div></div></div>
+    </div>
+    <div class="warn-b">Называет возражение → блок «Возражения». Говорит «всё ок» → сразу к закрытию.</div>
+    <div class="bw"><div class="brow"><div class="av av-m">М</div><div><div class="spk">Страховка перед закрытием</div><div class="bub bm">Консультация полностью бесплатная. Вы ничем не обязаны. Просто придёте, увидите реальную картину — и с чёткими данными примете решение. Разумно?</div></div></div></div>`
+  },
+  {
+    label: 'Закрытие',
+    badge: 'Цель',
+    title: 'Закрытие — запись на консультацию',
+    html: `<div class="warn-b"><b>Правило:</b> Прямое закрытие. Не «ну как вам?», а чёткий вопрос: когда вам удобно?</div>
+    <div class="sec">Скрипт</div>
+    <div class="bw">
+      <div class="brow"><div class="av av-m">М</div><div><div class="spk">Менеджер</div><div class="bub bm">Отлично, [Имя]! Тогда давайте запишем вас. Вам удобнее в первой половине дня или во второй?</div></div></div>
+      <div class="brow r"><div class="av av-c">К</div><div><div class="spk" style="text-align:right">Клиент</div><div class="bub bc">Во второй. / Утром.</div></div></div>
+      <div class="brow"><div class="av av-m">М</div><div><div class="spk">Менеджер</div><div class="bub bm">Смотрю... [пауза] Есть [дата] в [время] — подойдёт?</div></div></div>
+      <div class="brow r"><div class="av av-c">К</div><div><div class="spk" style="text-align:right">Клиент</div><div class="bub bc">Да, подходит.</div></div></div>
+    </div>
+    <div class="sec">Язык резервирования <span class="new-badge">НОВЫЙ</span></div>
+    <div class="amber-b"><b>Проблема:</b> «Запишитесь, если что — перенесём» = обесценивает визит. Клиент слышит: «это ни к чему не обязывает».</div>
+    <div class="bw">
+      <div class="brow"><div class="av av-m">М</div><div><div class="spk">Язык резервирования</div><div class="bub bm">Отлично! Я резервирую для вас время врача и 3D-аппарат. Это отдельный слот, который мы закрываем под вас — никому другому в это время мы не предложим. Вы точно сможете прийти в [время]?</div></div></div>
+      <div class="brow"><div class="av av-m">М</div><div><div class="spk">Микро-обязательство</div><div class="bub bm">[Имя], на 100% подтверждаете? Потому что я сейчас ставлю вас в расписание — врач будет готовиться к вашему случаю заранее.</div></div></div>
+    </div>
+    <div class="tip-b"><b>После звонка:</b> 1) CRM: имя, номер, дата, источник, суть. 2) WhatsApp — сообщение в течение 5 минут (см. следующий блок).</div>`
+  },
+  {
+    label: 'После записи',
+    badge: 'Новый блок',
+    badgeOrange: true,
+    isNew: true,
+    title: 'После записи — доходимость',
+    html: `<div class="amber-b"><b>Почему не приходят:</b> Запись без ценности = обещание без обязательств. Три инструмента меняют это.</div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-hd"><div class="step-n">1</div><div class="step-t">WhatsApp сразу после звонка — в течение 5 минут</div></div>
+        <div class="step-body">
+          <div style="font-size:12px;color:#666;margin-bottom:8px">Переводит запись из «сказал по телефону» в реальное событие с деталями.</div>
+          <div class="wa-bub">✅ [Имя], вы записаны на бесплатную консультацию<br><b>[дата] в [время]</b><br><br>Врач [Имя врача] уже готовит время под вас.<br>Вам сделают 3D-снимок зубов (стоимостью 20 000 тг) — <b>бесплатно</b>, и составят полный план лечения.<br><br>📍 Адрес: [адрес клиники]<br>Ждём вас!</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-hd"><div class="step-n">2</div><div class="step-t">Звонок-подтверждение за день — правильный скрипт</div></div>
+        <div class="step-body">
+          <div class="warn-b">Нельзя спрашивать: «Вы придёте?» — клиент говорит «да» автоматически, даже если не собирается.</div>
+          <div class="bw">
+            <div class="brow"><div class="av av-m">М</div><div><div class="spk">Менеджер</div><div class="bub bm">[Имя], добрый день! Напоминаем — завтра в [время] у вас консультация с врачом. Он уже посмотрел ваш запрос и готов разобрать вашу ситуацию. 3D-аппарат зарезервирован под вас. Всё в силе?</div></div></div>
+          </div>
+          <div class="tip-b" style="margin-top:0">Не «вы придёте?», а <b>«всё в силе?»</b> — предполагает, что человек уже решил прийти. Если перенос — сразу фиксируем новое время, не отпускаем без даты.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-hd"><div class="step-n">3</div><div class="step-t">Установка для менеджеров — корень проблемы</div></div>
+        <div class="step-body">
+          <div class="amber-b"><b>Корень проблемы:</b> Менеджер сам не верит в ценность визита. Думает: «придут — хорошо, нет — ладно». Это слышно в голосе и словах.</div>
+          <div style="font-size:13px;color:#1a1a1a;line-height:1.7">Донести до каждого: <b>бесплатный 3D-снимок + план лечения</b> — это реальный продукт стоимостью <b>20–30 000 тг</b>, который клиника дарит. Клиент, который не пришёл, потерял деньги — просто не осознают этого.<br><br>Задача менеджера при записи — сделать так, чтобы <b>осознал до окончания звонка</b>.</div>
+        </div>
+      </div>
+    </div>`
+  },
+  {
+    label: 'Возражения',
+    badge: '5 сценариев',
+    title: 'Отработка возражений',
+    html: `<div class="tip-b"><b>Алгоритм:</b> Присоединение → Уточнение → Аргумент → Выгода → Проверка → Закрытие</div>
+    ${[
+      ['«Дорого. Сколько стоит лечение?»','Понимаю, вопрос цены очень важен. Именно поэтому мы и сделали бесплатную консультацию — врач изучит ситуацию, сделает 3D-снимок и составит точный план с реальными цифрами. Без осмотра любая цена — это догадка. Давайте сначала разберёмся — потом решите, подходит ли предложение. Записать вас?'],
+      ['«Я подумаю / перезвоню позже»','Конечно. Скажите честно — что именно останавливает? [Выслушать] Консультация бесплатная, вы ничем не рискуете. А зубы имеют свойство не ждать. Давайте запишем — в любой момент можно перенести.'],
+      ['«Боюсь боли / стоматологов»','Это очень понятный страх. Именно поэтому все процедуры у нас только с анестезией — вы ничего не почувствуете. Многие говорят: «Я боялся зуб». Первый шаг — просто прийти на консультацию. Никаких процедур в этот день. Запишем?'],
+      ['«Уже хожу в другую клинику»','Отлично. Скажите, а там делали 3D-снимок и давали полный письменный план лечения? [Ждём] Наша консультация — детальная диагностика бесплатно. Даже если останетесь у своего врача — получите второе мнение. Это разумно, правда?'],
+      ['«Нет времени»','Понимаю. Именно поэтому работаем в том числе в вечерние часы. Консультация — 30–45 минут. Какой день наиболее реален — даже если через неделю-две? Давайте поставим дату прямо сейчас.'],
+    ].map(([q,a],i)=>`
+      <div class="obj-card">
+        <div class="obj-hd" onclick="swTog(${i})">
+          <span class="obj-q">${q}</span>
+          <div style="display:flex;align-items:center;gap:5px;flex-shrink:0">
+            <span class="obj-tag">возражение</span>
+            <span class="obj-chev" id="swChev${i}">▼</span>
+          </div>
+        </div>
+        <div class="obj-body" id="swOb${i}"><div class="obj-ans">${a}</div></div>
+      </div>`).join('')}`
+  },
+  {
+    label: 'Апрейл',
+    badge: 'После записи',
+    title: 'Апрейл — после подтверждения',
+    html: `<div class="tip-b"><b>Правило:</b> Апрейл — только после того, как клиент уже записался и подтвердил.</div>
+    <div class="ups-row">
+      <div class="ups-card"><div class="ups-lbl">Вариант 1 — Семейная запись</div><div class="ups-title">Записать близких в тот же день</div><div class="ups-text">«[Имя], раз уж записались — можно записать кого-то из близких в тот же день. Тоже на бесплатную консультацию. Лишней поездки не будет. Есть кто-то, кому актуально?»</div></div>
+      <div class="ups-card"><div class="ups-lbl">Вариант 2 — Профчистка</div><div class="ups-title">Профессиональная чистка</div><div class="ups-text">«Кстати, у нас акция на профессиональную чистку — делают перед лечением, чтобы врач видел чистую картину. Можно совместить с консультацией. Добавим?»</div></div>
+    </div>`
+  },
+  {
+    label: 'Точки касания',
+    badge: '8 шагов',
+    title: 'Точки касания для думающих',
+    html: `<div class="tip-b"><b>Принцип:</b> 5–8 точек касания до финального решения. Не сдаваться после первого «нет».</div>
+    <table class="touch-table">
+      <thead><tr><th>День</th><th>Действие</th><th>Тип</th></tr></thead>
+      <tbody>
+        ${[['0','WA: «Спасибо за звонок! Консультация бесплатная, включает 3D-снимок» + адрес','w'],['1–2','Звонок: «Вы думали над записью? Есть место завтра / в пятницу»','c'],['5','WA: полезный контент — «5 признаков, что зуб нельзя откладывать»','w'],['7','Звонок со спецпредложением с дедлайном','c'],['14','WA: история пациента (анонимно) до/после','w'],['21','Звонок старшего администратора от имени главного врача','c'],['30','WA: «Для вас сохранили спецпредложение — скидка X%»','c'],['60','Финальный звонок: «Звоним в последний раз»','c']].map(([d,a,t])=>`<tr><td style="font-weight:500;white-space:nowrap;color:#666">${d}</td><td>${a}</td><td><span class="${t==='c'?'tag-c':'tag-w'}">${t==='c'?'Закрывающий':'Прогревающий'}</span></td></tr>`).join('')}
+      </tbody>
+    </table>`
+  },
+  {
+    label: 'Шпаргалка',
+    badge: 'Распечатать',
+    title: 'Экспресс-шпаргалка',
+    html: `<div class="cheat-grid">
+      <div class="cc cc-do"><div class="cc-title">Делай всегда</div>
+        ${['Улыбайся — слышно по телефону','Называй клиента по имени','Спрашивай про боль — не только про зуб','Используй язык резервирования при записи','Фиксируй микро-обязательство: «на 100% подтверждаете?»','Отправляй WA в течение 5 минут после записи','Звони за день: «всё в силе?» — не «вы придёте?»','Делай апрейл после каждой записи'].map(t=>`<div class="ci"><div class="dot dot-g"></div>${t}</div>`).join('')}
+      </div>
+      <div class="cc cc-dont"><div class="cc-title">Никогда</div>
+        ${['Не говори «запишитесь, если что — перенесём»','Не называй цену без консультации','Не спорь — всегда соглашайся','Не перебивай — дай говорить','Не закрывай размыто — «ну когда-нибудь»','Не спрашивай «вы придёте?» — только «всё в силе?»','Не игнорируй «думающих» — касайся','Не сдавайся на первом «нет»'].map(t=>`<div class="ci"><div class="dot dot-r"></div>${t}</div>`).join('')}
+      </div>
+    </div>
+    <div class="tip-b" style="margin-top:14px"><b>Главный принцип:</b> Мы не продаём лечение по телефону. Мы продаём одно — бесплатный визит, где клиент узнает правду о своей ситуации и сам примет решение. Это честно. Это работает.</div>`
+  }
+];
+
+let swCur = 0;
+
+function swRenderNav() {
+  document.getElementById('swNav').innerHTML = SW_BLOCKS.map((b, i) => `
+    <button class="sw-nav-btn ${i === swCur ? 'active' : ''} ${b.isNew ? 'sw-new' : ''}" onclick="swGo(${i})">
+      <div class="sw-num">${i}</div>
+      <div class="sw-lbl">${b.label}</div>
+      ${b.isNew ? '<div class="sw-new-dot"></div>' : ''}
+    </button>`).join('');
+}
+
+function swRenderPage() {
+  const b = SW_BLOCKS[swCur];
+  document.getElementById('swTitle').textContent = b.title;
+  const badge = document.getElementById('swBadge');
+  badge.textContent = b.badge;
+  badge.className = 'sw-badge' + (b.badgeOrange ? ' orange' : '');
+  document.getElementById('swContent').innerHTML = b.html;
+  document.getElementById('swPBtn').disabled = swCur === 0;
+  document.getElementById('swNBtn').disabled = swCur === SW_BLOCKS.length - 1;
+  document.getElementById('swProg').style.width = (swCur / (SW_BLOCKS.length - 1) * 100) + '%';
+}
+
+function swGo(i) { swCur = i; swRenderNav(); swRenderPage(); }
+function swNav(d) { swCur = Math.max(0, Math.min(SW_BLOCKS.length - 1, swCur + d)); swRenderNav(); swRenderPage(); }
+function swTog(i) {
+  const b = document.getElementById('swOb' + i), c = document.getElementById('swChev' + i);
+  const o = b.classList.toggle('open'); c.classList.toggle('open', o);
+}
+
+swRenderNav(); swRenderPage();
+</script>
+</body>
+</html>
+
