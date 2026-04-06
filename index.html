@@ -174,38 +174,27 @@
   .step-body { font-size: 14px; line-height: 1.7; color: var(--text); }
 
 
-  /* ===== KEV WIDGET ===== */
-  .kv-wrap { padding: 32px 40px 60px; }
-.kv-wrap *, .kv-wrap *::before, .kv-wrap *::after {box-sizing:border-box;margin:0;padding:0}
-:root {--bg:#fff;--bg2:#f7f7f5;--txt:#1a1a1a;--txt2:#666;--brd:rgba(0,0,0,0.11);--brd2:rgba(0,0,0,0.2);--r:8px;--rl:12px;--teal:#063A35;--t2:#1D9E75;--t3:#E1F5EE;--t4:#085041;--ora:#D85A30;--o2:#FAECE7;--o3:#4A1B0C;--amb:#EF9F27;--a2:#FAEEDA;--a3:#633806;--pur:#5B3CC4;--p2:#EEEDFE;--p3:#26215C;--adm:#0F6E56;--a4:#E1F5EE;--a5:#04342C;--kur:#185FA5;--k2:#E6F1FB;--k3:#042C53}
-body {font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:transparent}
-.kv-wrap .app {display:flex;height:620px;border:0.5px solid var(--brd);border-radius:var(--rl);overflow:hidden;background:var(--bg)}
-.kv-wrap .sidebar {width:200px;min-width:200px;background:var(--teal);display:flex;flex-direction:column;overflow-y:auto;padding:14px 0}
-.kv-wrap .logo {padding:0 14px 14px;border-bottom:0.5px solid rgba(255,255,255,0.1);margin-bottom:10px}
-.kv-wrap .logo-t {font-size:13px;font-weight:500;color:#fff}
-.kv-wrap .logo-s {font-size:10px;color:rgba(255,255,255,0.4);margin-top:2px}
-.kv-wrap .nb {display:flex;align-items:center;gap:8px;padding:8px 14px;cursor:pointer;border:none;background:transparent;width:100%;text-align:left;border-left:3px solid transparent;transition:background .15s}
-.kv-wrap .nb:hover {background:rgba(255,255,255,0.06)}
-.kv-wrap .nb.act {background:rgba(255,255,255,0.1);border-left-color:var(--t2)}
-.kv-wrap .nn {width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:500;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);flex-shrink:0}
-.kv-wrap .nb.act .nn {background:var(--t2);color:var(--teal)}
-.kv-wrap .nl {font-size:11px;color:rgba(255,255,255,0.5);line-height:1.3}
-.kv-wrap .nb.act .nl {color:#fff}
-.kv-wrap .main {flex:1;display:flex;flex-direction:column;overflow:hidden}
-.kv-wrap .pbar {height:3px;background:var(--brd)}
-.kv-wrap .pfill {height:100%;background:var(--t2);transition:width .3s}
-.kv-wrap .topbar {padding:12px 18px;border-bottom:0.5px solid var(--brd);display:flex;align-items:center;justify-content:space-between;gap:8px}
-.kv-wrap .bt {font-size:15px;font-weight:500;color:var(--txt)}
-.kv-wrap .bb {font-size:11px;padding:3px 9px;border-radius:20px;font-weight:500;white-space:nowrap;flex-shrink:0}
-.kv-wrap .bg {background:var(--t3);color:var(--t4)}
-.kv-wrap .ba {background:var(--a2);color:var(--a3)}
-.kv-wrap .bp2 {background:var(--p2);color:var(--p3)}
-.kv-wrap .bk {background:var(--k2);color:var(--k3)}
-.kv-wrap .arrows {display:flex;gap:5px;flex-shrink:0}
-.kv-wrap .ab {border:0.5px solid var(--brd2);background:var(--bg);border-radius:var(--r);padding:4px 11px;font-size:13px;cursor:pointer;color:var(--txt2);transition:all .15s}
-.kv-wrap .ab:hover {background:var(--bg2)}
-.kv-wrap .ab:disabled {opacity:.3;cursor:default}
-.kv-wrap .cnt {flex:1;overflow-y:auto;padding:18px}
+  /* ===== TOOL PAGES — единый дизайн ===== */
+  .tool-wrap { padding: 28px 56px 60px; }
+  .tool-tabs-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; }
+  .tool-tab { padding: 7px 18px; border: 1.5px solid var(--border); border-radius: 30px; cursor: pointer; background: var(--white); font-family: 'Manrope', sans-serif; font-size: 12.5px; font-weight: 500; color: var(--text-muted); transition: all 0.15s; white-space: nowrap; line-height: 1; }
+  .tool-tab:hover { border-color: var(--teal-mid); color: var(--teal); background: var(--teal-light); }
+  .tool-tab.act { background: var(--navy); border-color: var(--navy); color: #fff; font-weight: 600; }
+  .tool-topbar { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .tool-tit { font-size: 16px; font-weight: 700; color: var(--navy); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tool-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .tool-badge { font-size: 11px; padding: 4px 12px; border-radius: 20px; background: var(--teal-light); color: var(--teal); font-weight: 600; white-space: nowrap; }
+  .tool-badge.orange { background: var(--accent-light); color: #a06010; }
+  .tool-badge.purple { background: #EEEDFE; color: #26215C; }
+  .tool-badge.blue { background: var(--info-light); color: var(--info); }
+  .tool-arr { border: 1.5px solid var(--border); background: var(--white); border-radius: 8px; padding: 5px 13px; font-size: 14px; cursor: pointer; color: var(--text-muted); transition: all 0.15s; font-family: 'Manrope', sans-serif; line-height: 1; }
+  .tool-arr:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .tool-arr:disabled { opacity: 0.3; cursor: default; }
+  .tool-prog { height: 3px; background: var(--border); border-radius: 2px; margin-bottom: 20px; }
+  .tool-prog-fill { height: 100%; background: var(--teal-mid); border-radius: 2px; transition: width 0.3s; }
+  .tool-cnt { background: var(--white); border-radius: 16px; border: 1px solid var(--border); padding: 28px 32px; }
+
+  /* ===== KEV CONTENT ===== */
 .kv-wrap .tip {background:var(--teal-light);border-left:3px solid var(--teal-mid);border-radius:0 8px 8px 0;padding:10px 13px;margin-bottom:13px;font-size:13px;color:#04342C;line-height:1.6}
 .kv-wrap .warn {background:var(--danger-light);border-left:3px solid var(--danger);border-radius:0 8px 8px 0;padding:10px 13px;margin-bottom:13px;font-size:13px;color:#4A1B0C;line-height:1.6}
 .kv-wrap .ambox {background:var(--accent-light);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:10px 13px;margin-bottom:13px;font-size:13px;color:#633806;line-height:1.6}
@@ -462,7 +451,7 @@ body {font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgro
         <div class="tool-tabs-row" id="swNav"></div>
         <div class="tool-topbar">
           <div class="tool-tit" id="swTitle"></div>
-          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+          <div class="tool-right">
             <span class="tool-badge" id="swBadge"></span>
             <button class="tool-arr" id="swPBtn" onclick="swNav(-1)">←</button>
             <button class="tool-arr" id="swNBtn" onclick="swNav(1)">→</button>
@@ -484,7 +473,7 @@ body {font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgro
         <div class="tool-tabs-row" id="kvNav"></div>
         <div class="tool-topbar">
           <div class="tool-tit" id="kvBtit"></div>
-          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+          <div class="tool-right">
             <span class="tool-badge" id="kvBadge"></span>
             <button class="tool-arr" id="kvPBtn" onclick="kvNavFn(-1)">←</button>
             <button class="tool-arr" id="kvNBtn" onclick="kvNavFn(1)">→</button>
@@ -983,7 +972,7 @@ const KV_PH=[
 ];
 
 let kvCur=0;
-function kvRNav(){document.getElementById('kvNav').innerHTML=KV_PH.map((b,i)=>`<button class="tool-tab ${i===kvCur?'act':''}" onclick="kvGo(${i})"><span class="tool-tab-num">${i}</span><span>${b.label}</span></button>`).join('')}
+function kvRNav(){document.getElementById('kvNav').innerHTML=KV_PH.map((b,i)=>`<button class="tool-tab ${i===kvCur?'act':''}" onclick="kvGo(${i})">${b.label}</button>`).join('')}
 function kvRPage(){
   const b=KV_PH[kvCur];
   document.getElementById('kvBtit').textContent=b.title;
@@ -1236,7 +1225,7 @@ const SW_BLOCKS = [
 let swCur = 0;
 
 function swRenderNav() {
-  document.getElementById('swNav').innerHTML = SW_BLOCKS.map((b, i) => `<button class="tool-tab ${i === swCur ? 'act' : ''}" onclick="swGo(${i})"><span class="tool-tab-num">${i}</span><span>${b.label}</span></button>`).join('');
+  document.getElementById('swNav').innerHTML = SW_BLOCKS.map((b, i) => `<button class="tool-tab ${i === swCur ? 'act' : ''}" onclick="swGo(${i})">${b.label}</button>`).join('');
 }
 
 function swRenderPage() {
