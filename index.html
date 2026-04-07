@@ -488,60 +488,242 @@
     <!-- ============ PAGE: CRM ============ -->
     <div class="page" id="page-crm">
       <div class="page-header">
-        <div class="page-badge">📊 Модуль 1</div>
+        <div class="page-badge">📊 Работа менеджера</div>
         <div class="page-title">Работа в АмоCRM</div>
-        <div class="page-desc">Правила ведения сделок, этапы воронки, сроки работы с лидами и правила передачи клиентов.</div>
+        <div class="page-desc">Регламент Mirai Dental Clinic. Воронки продаж, этапы, сроки, правила передачи клиентов.</div>
       </div>
       <div class="content">
-        <div class="alert warning">
-          <div class="alert-icon">⚠️</div>
-          <div><div class="alert-title">Важнейшее правило</div><strong>Этапы «Новая заявка» и «Callback» вы не трогаете</strong> — сюда звонится автоматически. Если вы напишете на WhatsApp раньше callback, и callback ответит другой менеджер — сделка считается его, даже если вы уже пообщались.</div>
-        </div>
 
-        <div class="section-title">🔄 Этапы воронки продаж</div>
-        <div class="funnel">
-          <div class="funnel-step"><div class="funnel-step-num">1</div><div class="funnel-step-info"><div class="funnel-step-name">Новая заявка</div><div class="funnel-step-desc">Входящий лид. Не трогать — автодозвон callback</div></div><span class="funnel-step-badge badge-gray">Автоматически</span></div>
-          <div class="funnel-arrow">↓</div>
-          <div class="funnel-step"><div class="funnel-step-num">2</div><div class="funnel-step-info"><div class="funnel-step-name">Callback / Нет ответа</div><div class="funnel-step-desc">Система звонит по очереди. Если нет WhatsApp — ничего не делаем</div></div><span class="funnel-step-badge badge-amber">Не трогать!</span></div>
-          <div class="funnel-arrow">↓</div>
-          <div class="funnel-step"><div class="funnel-step-num">3</div><div class="funnel-step-info"><div class="funnel-step-name">Ответственный назначен</div><div class="funnel-step-desc">Установлен контакт с клиентом. Провести квалификацию</div></div><span class="funnel-step-badge badge-blue">≤ 7 дней</span></div>
-          <div class="funnel-arrow">↓</div>
-          <div class="funnel-step"><div class="funnel-step-num">4</div><div class="funnel-step-info"><div class="funnel-step-name">Квалификация пройдена</div><div class="funnel-step-desc">Обязательный этап! Нужен для аналитики и рассылок Facebook</div></div><span class="funnel-step-badge badge-blue">≤ 7 дней на запись</span></div>
-          <div class="funnel-arrow">↓</div>
-          <div class="funnel-step"><div class="funnel-step-num">5</div><div class="funnel-step-info"><div class="funnel-step-name">Первичный приём назначен</div><div class="funnel-step-desc">Клиент записан. Держать не более 10 дней или 3 переносов</div></div><span class="funnel-step-badge badge-amber">≤ 10 дней</span></div>
-          <div class="funnel-arrow">↓</div>
-          <div class="funnel-step"><div class="funnel-step-num">6</div><div class="funnel-step-info"><div class="funnel-step-name">Первичный приём не состоялся</div><div class="funnel-step-desc">3 раза не пришёл — закрываем сделку</div></div><span class="funnel-step-badge badge-red">Закрыть!</span></div>
-          <div class="funnel-arrow">↓</div>
-          <div class="funnel-step"><div class="funnel-step-num">7</div><div class="funnel-step-info"><div class="funnel-step-name">Хоть какая-то оплата получена</div><div class="funnel-step-desc">Пациент пришёл на приём. 14 дней, чтобы получить оплату. Предоплата тоже считается!</div></div><span class="funnel-step-badge badge-amber">≤ 14 дней</span></div>
-          <div class="funnel-arrow">↓</div>
-          <div class="funnel-step"><div class="funnel-step-num">8</div><div class="funnel-step-info"><div class="funnel-step-name">Полная оплата получена — Успешно реализован</div><div class="funnel-step-desc">Автоматически создаётся дубль в воронке «Куратор сопровождения»</div></div><span class="funnel-step-badge badge-green">Успех!</span></div>
-        </div>
-
-        <div class="section-title" style="margin-top:36px">⏱ Ключевые сроки</div>
-        <div class="grid-3">
-          <div class="stat-card teal"><div class="stat-label">Назначение встречи</div><div class="stat-value">7</div><div class="stat-sub">дней максимум в этапах «Ответственный назначен» и «Квал. пройдена»</div></div>
-          <div class="stat-card amber"><div class="stat-label">Приход на консультацию</div><div class="stat-value">10</div><div class="stat-sub">дней или 3 переноса — после этого закрываем</div></div>
-          <div class="stat-card danger"><div class="stat-label">Получить оплату</div><div class="stat-value">14</div><div class="stat-sub">дней с момента первичного приёма, иначе уходит в рассылки</div></div>
-        </div>
-
-        <div class="section-title" style="margin-top:36px">🤝 Правила рекомендаций и передачи</div>
+        <!-- ВОРОНКА 1: ПЕРВИЧНЫЕ ПРОДАЖИ -->
+        <div class="section-title">🔄 1. Воронка: Первичные продажи</div>
         <div class="card">
-          <div class="alert danger" style="margin-bottom:20px">
-            <div class="alert-icon">🚫</div>
-            <div><div class="alert-title">Нарушение — потеря всех оплат</div>Если клиент сказал «пришёл по рекомендации» или «раньше лечился у вас» — вы <strong>обязаны</strong> передать сделку старому куратору. Если скрыли и потом выяснилось — все ваши оплаты по этому клиенту перейдут тому куратору.</div>
+          <table class="data-table">
+            <thead><tr><th>№</th><th>Этап</th><th>Цвет</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Новая Заявка</td><td><span style="color:#4a90d9">синий</span></td></tr>
+              <tr><td>2</td><td>Callback</td><td><span style="color:#9b59b6">фиолетовый</span></td></tr>
+              <tr><td>3</td><td>Нет ответа</td><td><span style="color:#e74c3c">красный</span></td></tr>
+              <tr><td>4</td><td>Ответственный назначен</td><td><span style="color:#27ae60">зелёный</span></td></tr>
+              <tr><td>5</td><td>Квалификация пройдена</td><td><span style="color:#5dade2">голубой</span></td></tr>
+              <tr><td>6</td><td>Первичный прием назначен</td><td><span style="color:#d4ac0d">светло-жёлтый</span></td></tr>
+              <tr><td>7</td><td>Первичный прием не состоялся</td><td><span style="color:#d4ac0d">жёлтый</span></td></tr>
+              <tr><td>8</td><td>Первичный прием состоялся</td><td><span style="color:#d4ac0d">светло-жёлтый</span></td></tr>
+              <tr><td>9</td><td>Направлен на Анализ</td><td><span style="color:#e59866">персиковый</span></td></tr>
+              <tr><td>10</td><td>Записан на лечение</td><td><span style="color:#e67e22">оранжевый</span></td></tr>
+              <tr><td>11</td><td>Лечение не состоялось</td><td><span style="color:#f1948a">розовый</span></td></tr>
+              <tr><td>12</td><td>Хоть какая-то оплата получена</td><td><span style="color:#82e0aa">светло-зелёный</span></td></tr>
+              <tr><td>13</td><td>Успешно реализовано</td><td><span style="color:#27ae60">зелёный</span></td></tr>
+              <tr><td>14</td><td>Закрыто и не реализовано</td><td><span style="color:#aaa">серый</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 1.1 -->
+        <div class="section-title" style="margin-top:28px">🚫 1.1 Этапы «Новая заявка» и «Callback»</div>
+        <div class="card">
+          <div class="alert danger" style="margin-bottom:16px">
+            <div class="alert-icon">⚠️</div>
+            <div><strong>Не трогать вообще</strong> — на эти этапы звонит система автоматически (Callback). Писать на WhatsApp самостоятельно на этих этапах <strong>запрещено.</strong></div>
           </div>
           <ul class="rule-list">
-            <li class="rule-item"><div class="rule-num danger">!</div><div class="rule-text">Клиент говорит: «Ранее лечился у вас» или «Моим куратором была Гульжан / Антай / ...» — <strong>сразу передайте сделку этому куратору</strong>.</div></li>
-            <li class="rule-item"><div class="rule-num danger">!</div><div class="rule-text">Клиент говорит: «Пришёл по рекомендации Ерлана» — спросите ФИО и узнайте куратора Ерлана — <strong>передайте ему</strong>.</div></li>
-            <li class="rule-item"><div class="rule-num">✓</div><div class="rule-text">После окончания плана лечения пациент открепляется от куратора. Следующий лид создаётся как новая сделка — <strong>но если клиент просит старого куратора, передайте</strong>.</div></li>
+            <li class="rule-item"><div class="rule-num danger">!</div><div class="rule-text">Если менеджер написал на WhatsApp вне очереди, а Callback дозвонился другому — <strong>сделка уходит тому, кто ответил на Callback</strong>, даже если первый уже общался.</div></li>
+            <li class="rule-item"><div class="rule-num danger">!</div><div class="rule-text">Личные WhatsApp-сообщения <strong>не считаются</strong> за первый контакт.</div></li>
+            <li class="rule-item"><div class="rule-num amber">!</div><div class="rule-text">Исключение: Callback сломался — только с одобрения РОПа.</div></li>
+          </ul>
+          <div class="highlight-box" style="margin-top:12px">
+            <strong>Новый лид создаётся только если</strong> этого клиента нет ни в одном активном этапе.<br>
+            <span style="font-size:13px;color:#aab">Активный этап = всё, кроме «Успешно реализован» и «Закрыто не реализован».</span>
+          </div>
+        </div>
+
+        <!-- 1.2 -->
+        <div class="section-title" style="margin-top:28px">📵 1.2 Этап «Нет ответа»</div>
+        <div class="card">
+          <ul class="rule-list">
+            <li class="rule-item"><div class="rule-num teal">→</div><div class="rule-text">Автоматически отправляется сообщение клиенту: «Мы не смогли до вас дозвониться» (только при первом попадании на этот этап).</div></li>
+            <li class="rule-item"><div class="rule-num teal">→</div><div class="rule-text">Если сообщение не доходит — <strong>ничего не делаем.</strong> У клиента либо нет WhatsApp, либо закрыт доступ.</div></li>
+            <li class="rule-item"><div class="rule-num teal">→</div><div class="rule-text">Если клиент <strong>ответил на сообщение</strong> → сделка переходит на «Ответственный назначен» тому менеджеру, кто <strong>последним пытался установить контакт.</strong></div></li>
           </ul>
         </div>
 
-        <div class="section-title" style="margin-top:36px">🎯 Перехват «потерянных» лидов</div>
+        <!-- 1.3 -->
+        <div class="section-title" style="margin-top:28px">🤝 1.3 Этап «Ответственный назначен»</div>
         <div class="card">
-          <p style="font-size:14px;line-height:1.7;margin-bottom:12px">Вы можете забирать лиды из callback, если у них нет <strong>качественного контакта более 7 дней</strong>. Качественный контакт — это разговор по телефону.</p>
-          <div class="alert info"><div class="alert-icon">💡</div><div>Используйте фильтр: <strong>«Сделки без задач» → «Дата изменения — сначала старые»</strong>. Если последний разговор был более 7 дней назад — можно забирать. Но если видите, что коллега реально работает с клиентом — передайте.</div></div>
+          <ul class="rule-list">
+            <li class="rule-item"><div class="rule-num teal">→</div><div class="rule-text">Этап активируется, когда менеджер <strong>установил контакт</strong> с клиентом.</div></li>
+            <li class="rule-item"><div class="rule-num teal">→</div><div class="rule-text">Если клиент подходит → сразу переводить в «Квалификация пройдена» во время беседы.</div></li>
+            <li class="rule-item"><div class="rule-num teal">→</div><div class="rule-text">Если клиент не подходит → закрыть как «Квал не прошёл, закрыт».</div></li>
+            <li class="rule-item"><div class="rule-num amber">!</div><div class="rule-text">Лиды с закрытым квалом: рассылки им <strong>не отправляются</strong>, работа с ними не ведётся.</div></li>
+          </ul>
+          <div class="card-title" style="margin-top:16px"><div class="card-icon">🔁</div>Обязательная передача сделки</div>
+          <table class="data-table" style="margin-top:8px">
+            <thead><tr><th>Ситуация</th><th>Действие</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Повторный пациент</strong> — «Я раньше лечился у вас, моим куратором был Х»</td><td>Обязательно передать старому куратору</td></tr>
+              <tr><td><strong>Рекомендация</strong> — «Пришёл по рекомендации» / «мама / муж лечился у вас»</td><td>Спросить ФИО и передать куратору того пациента</td></tr>
+            </tbody>
+          </table>
+          <div class="alert danger" style="margin-top:12px">
+            <div class="alert-icon">🚫</div>
+            <div><strong>Санкция за «скрысивание» чужого пациента:</strong> вся проделанная работа аннулируется, все оплаты переходят к правильному куратору, в статистике фиксируется как «возврат».</div>
+          </div>
         </div>
+
+        <!-- 1.4 -->
+        <div class="section-title" style="margin-top:28px">✅ 1.4 Этап «Квалификация пройдена»</div>
+        <div class="card">
+          <p style="font-size:14px;line-height:1.7;margin-bottom:12px"><strong>Обязательный этап</strong> — нужен для обратной связи в Facebook и аналитики.</p>
+          <div class="alert danger">
+            <div class="alert-icon">⚠️</div>
+            <div>Если перекинуть горячего клиента в «Первичный приём назначен», <strong>минуя квалификацию</strong> — рассылки до него не дойдут <strong>никогда.</strong></div>
+          </div>
+        </div>
+
+        <!-- 1.5 -->
+        <div class="section-title" style="margin-top:28px">📅 1.5 Этап «Первичный приём назначен»</div>
+        <div class="card">
+          <div class="card-title"><div class="card-icon">📨</div>Автоматическое сообщение</div>
+          <p style="font-size:14px;line-height:1.7;margin:8px 0 12px">При переводе сделки на этот этап клиенту <strong>автоматически отправляется сообщение</strong> с датой и временем приёма. Для корректной отправки заполнить:</p>
+          <ul class="rule-list" style="margin-bottom:16px">
+            <li class="rule-item"><div class="rule-num teal">1</div><div class="rule-text">Поле <strong>«Дата и время ПП»</strong> — точное время встречи</div></li>
+            <li class="rule-item"><div class="rule-num teal">2</div><div class="rule-text"><strong>Имя пациента</strong> в AmoCRM — используется в тексте сообщения</div></li>
+            <li class="rule-item"><div class="rule-num teal">3</div><div class="rule-text"><strong>Язык пациента</strong> — сообщение отправляется на языке клиента (рус / каз)</div></li>
+          </ul>
+          <div class="card-title"><div class="card-icon">🔘</div>Кнопки «Приду» и «Не смогу»</div>
+          <table class="data-table" style="margin-top:8px">
+            <thead><tr><th>Ответ клиента</th><th>Что происходит</th></tr></thead>
+            <tbody>
+              <tr><td>«Приду»</td><td>Клиенту отправляется ссылка с адресом клиники</td></tr>
+              <tr><td>«Не смогу»</td><td>Ставится задача менеджеру — перезаписать в течение <strong>1 часа</strong></td></tr>
+            </tbody>
+          </table>
+          <div class="card-title" style="margin-top:16px"><div class="card-icon">❌</div>Если пациент не пришёл</div>
+          <ul class="rule-list" style="margin-top:8px">
+            <li class="rule-item"><div class="rule-num amber">1</div><div class="rule-text">Перевести сделку на «Первичный приём не состоялся»</div></li>
+            <li class="rule-item"><div class="rule-num amber">2</div><div class="rule-text">Договориться о новой дате</div></li>
+            <li class="rule-item"><div class="rule-num amber">3</div><div class="rule-text"><strong>Обязательно поменять дату и время ПП</strong> и перевести обратно на «Первичный приём назначен» → клиенту снова автоматически уйдёт сообщение с новой датой</div></li>
+          </ul>
+        </div>
+
+        <!-- 1.6 -->
+        <div class="section-title" style="margin-top:28px">💰 1.6 После получения оплаты</div>
+        <div class="card">
+          <ul class="rule-list">
+            <li class="rule-item"><div class="rule-num teal">1</div><div class="rule-text">Сделка переходит в <strong>«Хоть какая-то оплата получена»</strong></div></li>
+            <li class="rule-item"><div class="rule-num teal">2</div><div class="rule-text">Автоматически (через ~5 минут) уходит в <strong>«Успешно реализовано»</strong></div></li>
+            <li class="rule-item"><div class="rule-num teal">3</div><div class="rule-text">Одновременно создаётся <strong>дубль в воронке «Куратор сопровождения»</strong> — за исключением сделок, где в поле «Процедура» указано «Снимок»</div></li>
+          </ul>
+          <div class="alert danger" style="margin-top:12px">
+            <div class="alert-icon">⚠️</div>
+            <div>Если пропустить этот этап — дубль не создаётся, <strong>сделка теряется.</strong></div>
+          </div>
+        </div>
+
+        <!-- 1.7 -->
+        <div class="section-title" style="margin-top:28px">📋 1.7 Бюджет и план лечения в CRM</div>
+        <div class="card">
+          <ul class="rule-list">
+            <li class="rule-item"><div class="rule-num teal">→</div><div class="rule-text">В поле <strong>«Бюджет»</strong> вписывается <strong>полная сумма плана лечения</strong></div></li>
+            <li class="rule-item"><div class="rule-num teal">→</div><div class="rule-text">Все оплаты разбиваются поэтапно с датами (200К → 100К → ...) — <strong>без галочки в поле «Статус».</strong> Галочку ставить только когда оплата реально прошла</div></li>
+            <li class="rule-item"><div class="rule-num teal">→</div><div class="rule-text">Нужно для отображения <strong>ожиданий по поступлениям</strong></div></li>
+            <li class="rule-item"><div class="rule-num teal">→</div><div class="rule-text">План куратора формируется исходя из <strong>реальных ожиданий</strong> по пациентам, а не из субъективной оценки</div></li>
+          </ul>
+        </div>
+
+        <!-- Правило 7 дней -->
+        <div class="section-title" style="margin-top:28px">⏱ Правило 7 дней без качественного контакта</div>
+        <div class="card">
+          <ul class="rule-list">
+            <li class="rule-item"><div class="rule-num amber">!</div><div class="rule-text">Если на любом активном этапе нет качественного контакта более <strong>7 дней</strong> → сделка переходит в Callback</div></li>
+            <li class="rule-item"><div class="rule-num amber">!</div><div class="rule-text">Другие менеджеры <strong>могут забирать</strong> такие сделки</div></li>
+            <li class="rule-item"><div class="rule-num teal">→</div><div class="rule-text"><strong>Качественный контакт = разговор</strong> (не недозвон, не сообщение без ответа)</div></li>
+            <li class="rule-item"><div class="rule-num teal">→</div><div class="rule-text">Если задача просрочена более недели — тоже можно забирать</div></li>
+            <li class="rule-item"><div class="rule-num teal">→</div><div class="rule-text">Если видно, что менеджер реально общался — <strong>передать, не забирать</strong></div></li>
+          </ul>
+        </div>
+
+        <!-- Сроки -->
+        <div class="section-title" style="margin-top:28px">📊 Сроки на этапах (первичные продажи)</div>
+        <div class="grid-3" style="margin-bottom:16px">
+          <div class="stat-card teal"><div class="stat-label">Ответственный назначен + Квал пройдена</div><div class="stat-value">7</div><div class="stat-sub">дней на назначение встречи → иначе закрытие</div></div>
+          <div class="stat-card amber"><div class="stat-label">Первичный приём назначен / не состоялся</div><div class="stat-value">10</div><div class="stat-sub">дней или 3 слёта подряд → закрытие</div></div>
+          <div class="stat-card danger"><div class="stat-label">После первичного приёма</div><div class="stat-value">14</div><div class="stat-sub">дней на получение оплаты. Предоплата тоже считается</div></div>
+        </div>
+
+        <!-- Клиент на далёкую дату -->
+        <div class="card">
+          <div class="card-title"><div class="card-icon">📆</div>Клиент на далёкую дату (исключение)</div>
+          <p style="font-size:14px;line-height:1.7;margin:8px 0 12px">Мы <strong>не бронируем лиды на год и два вперёд</strong> — цель: быстро разбирать лиды. Да-да, нет-нет.</p>
+          <p style="font-size:14px;line-height:1.7;margin-bottom:8px">Если клиент говорит, что начнёт позже — сделку нужно <strong>закрыть</strong>:</p>
+          <ul class="rule-list">
+            <li class="rule-item"><div class="rule-num teal">1</div><div class="rule-text">Поле <strong>«Причина отказа»</strong> → выбрать «Позже начну»</div></li>
+            <li class="rule-item"><div class="rule-num teal">2</div><div class="rule-text">Поле <strong>«Позже когда»</strong> → указать конкретную дату</div></li>
+            <li class="rule-item"><div class="rule-num teal">3</div><div class="rule-text">В указанный день сделка <strong>автоматически перейдёт</strong> на «Ответственный назначен» ответственному менеджеру</div></li>
+          </ul>
+        </div>
+
+        <!-- ВОРОНКА 2: КУРАТОР СОПРОВОЖДЕНИЕ -->
+        <div class="section-title" style="margin-top:36px">🔄 2. Воронка: Куратор сопровождение</div>
+        <div class="card">
+          <table class="data-table">
+            <thead><tr><th>№</th><th>Этап</th><th>Цвет</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Перешёл с этапа перв. продажи</td><td><span style="color:#5dade2">голубой</span></td></tr>
+              <tr><td>2</td><td>Принял в работу</td><td><span style="color:#d4ac0d">светло-жёлтый</span></td></tr>
+              <tr><td>3</td><td>Записан на лечение после оплаты</td><td><span style="color:#d4ac0d">светло-жёлтый</span></td></tr>
+              <tr><td>4</td><td>Проходит этап allon4/6</td><td><span style="color:#d4ac0d">жёлтый</span></td></tr>
+              <tr><td>5</td><td>Проходит терапевтический этап</td><td><span style="color:#d4ac0d">светло-жёлтый</span></td></tr>
+              <tr><td>6</td><td>Проходит хирургический этап / имплантация</td><td><span style="color:#d4ac0d">жёлтый</span></td></tr>
+              <tr><td>7</td><td>Проходит ортопедический этап</td><td><span style="color:#e59866">светло-оранжевый</span></td></tr>
+              <tr><td>8</td><td>Проходит ортодонтический этап</td><td><span style="color:#e67e22">оранжевый</span></td></tr>
+              <tr><td>9</td><td>Проходит лечение у детского врача</td><td><span style="color:#e67e22">оранжевый</span></td></tr>
+              <tr><td>10</td><td>Завершён весь план лечения</td><td><span style="color:#82e0aa">светло-зелёный</span></td></tr>
+              <tr><td>11</td><td>Успешно реализовано</td><td><span style="color:#27ae60">зелёный</span></td></tr>
+              <tr><td>12</td><td>Закрыто и не реализовано</td><td><span style="color:#aaa">серый</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 2.1 -->
+        <div class="section-title" style="margin-top:28px">👤 2.1 Правила работы куратора</div>
+        <div class="card">
+          <ul class="rule-list">
+            <li class="rule-item"><div class="rule-num teal">→</div><div class="rule-text">Всё дальнейшее лечение ведётся в этой воронке</div></li>
+            <li class="rule-item"><div class="rule-num teal">→</div><div class="rule-text"><strong>Оплаты вбиваются только в «Успешно реализовано»</strong> (в карточке первичной воронки). В карточке куратора сопровождения в платежах должно быть <strong>ноль</strong></div></li>
+            <li class="rule-item"><div class="rule-num amber">!</div><div class="rule-text">После перехода из первичных продаж куратор должен <strong>в течение 1 часа</strong>: принять пациента в работу, расписать все этапы лечения, указать текущий и следующий этап, поставить дату следующего визита и задачу</div></li>
+            <li class="rule-item"><div class="rule-num danger">!</div><div class="rule-text">Если не принят в работу за 1 час → <strong>слетает в общий котёл</strong></div></li>
+            <li class="rule-item"><div class="rule-num teal">→</div><div class="rule-text">Все сделки должны быть <strong>с задачами</strong> — пациент не должен сам звонить и спрашивать. <strong>Куратор звонит первым</strong></div></li>
+          </ul>
+        </div>
+
+        <!-- 2.2 -->
+        <div class="section-title" style="margin-top:28px">✅ 2.2 Завершение плана лечения</div>
+        <div class="card">
+          <ul class="rule-list">
+            <li class="rule-item"><div class="rule-num teal">→</div><div class="rule-text">Пациент завершил план → закрывается как «Завершён весь план лечения» → создаётся дубль в <strong>«Фермерстве»</strong></div></li>
+            <li class="rule-item"><div class="rule-num teal">→</div><div class="rule-text">После завершения пациент <strong>открепляется от куратора</strong> (не закрепляется пожизненно)</div></li>
+            <li class="rule-item"><div class="rule-num teal">→</div><div class="rule-text">Последующие лиды от этого пациента → <strong>новые сделки</strong></div></li>
+          </ul>
+        </div>
+
+        <!-- ПАМЯТКА -->
+        <div class="section-title" style="margin-top:36px">🚫 Памятка: что нельзя делать</div>
+        <div class="card">
+          <table class="data-table">
+            <thead><tr><th>Нельзя</th><th>Почему</th></tr></thead>
+            <tbody>
+              <tr><td>Писать в WhatsApp на этапах «Новая заявка» и «Callback»</td><td>Нарушение очереди, сделка уйдёт другому</td></tr>
+              <tr><td>Пропускать этап «Квалификация пройдена»</td><td>Клиент выпадет из рассылок навсегда</td></tr>
+              <tr><td>Держать лиды без движения больше 7 дней</td><td>Можно потерять сделку</td></tr>
+              <tr><td>Не принимать в работу куратора за 1 час</td><td>Слетит в общий котёл</td></tr>
+              <tr><td>Скрывать рекомендации и повторных пациентов</td><td>Аннуляция всех оплат</td></tr>
+              <tr><td>Вбивать оплаты в карточку куратора сопровождения</td><td>Там должен быть 0</td></tr>
+              <tr><td>Бронировать лидов на год вперёд</td><td>Противоречит принципу текучки</td></tr>
+              <tr><td>Ставить галочку «Статус» в оплатах до реального поступления</td><td>Засчитается как уже полученная оплата</td></tr>
+            </tbody>
+          </table>
+        </div>
+
       </div>
     </div>
 
