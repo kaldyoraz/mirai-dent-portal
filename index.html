@@ -391,6 +391,13 @@
         </div>
       </div>
       <div class="nav-section-label">Стоматология</div>
+      <div class="nav-item" onclick="showPage('ortho', this)">
+        <div class="nav-icon">🦷</div>
+        <div>
+          <div class="nav-label">Обучение по ортопедии</div>
+          <div class="nav-sub">Коронки, виниры, мосты, протезы</div>
+        </div>
+      </div>
       <div class="nav-item" onclick="showPage('therapy', this)">
         <div class="nav-icon">🦷</div>
         <div>
@@ -730,6 +737,371 @@
             </tbody>
           </table>
         </div>
+
+      </div>
+    </div>
+
+    <!-- ============ PAGE: ORTHO ============ -->
+    <div class="page" id="page-ortho">
+      <div class="page-header">
+        <div class="page-badge">🦷 Модуль</div>
+        <h1 class="page-title">Обучение по ортопедии</h1>
+        <p class="page-subtitle" style="color:rgba(255,255,255,0.7)">Коронки, виниры, вкладки, мосты, протезы — виды конструкций и как объяснить пациенту</p>
+      </div>
+      <div class="content">
+
+      <!-- 1. Что такое ортопедия -->
+      <div class="card">
+        <h2 class="section-title">1. Что такое ортопедия</h2>
+        <p><strong>Ортопедия</strong> — раздел стоматологии, который <strong>восстанавливает</strong> разрушенные или отсутствующие зубы с помощью конструкций. Цель — вернуть жевательную функцию и эстетику.</p>
+        <div class="highlight-box" style="margin-top:16px">
+          <span class="highlight-icon">🔗</span>
+          <strong>Место в цепочке:</strong> Терапевт лечит кариес/каналы → ортопед ставит конструкцию (коронку, вкладку, мост) → результат зафиксирован надолго.
+        </div>
+        <p style="margin-top:14px"><strong>5 направлений стоматологии:</strong></p>
+        <ul class="rule-list">
+          <li class="rule-item"><strong>Терапия</strong> — лечение кариеса, пульпита, каналов</li>
+          <li class="rule-item"><strong>Ортопедия</strong> — коронки, виниры, вкладки, мосты, протезы</li>
+          <li class="rule-item"><strong>Ортодонтия</strong> — исправление прикуса (брекеты, элайнеры)</li>
+          <li class="rule-item"><strong>Хирургия</strong> — удаления, имплантация, синус-лифт</li>
+          <li class="rule-item"><strong>Детская</strong> — лечение молочных зубов, севоран</li>
+        </ul>
+      </div>
+
+      <!-- 2. Виды ортопедических конструкций -->
+      <div class="card">
+        <h2 class="section-title">2. Виды ортопедических конструкций</h2>
+        <div style="overflow-x:auto">
+          <table class="data-table">
+            <thead><tr><th>Конструкция</th><th>Когда применяется</th><th>Материал</th><th>Срок</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Вкладка</strong></td><td>Кариес / полость (альтернатива пломбе)</td><td>Керамика</td><td>Больше пломбы</td></tr>
+              <tr><td><strong>Винир</strong></td><td>Эстетика передних зубов (цвет, форма, сколы)</td><td>Керамика</td><td>Долгосрочно</td></tr>
+              <tr><td><strong>Коронка</strong></td><td>Зуб разрушен > 50%, после удаления нерва</td><td>Цирконий / металлокерамика</td><td>15+ лет</td></tr>
+              <tr><td><strong>Мост</strong></td><td>Отсутствует 1–2 зуба, нет желания на имплант</td><td>Цирконий / металлокерамика</td><td>10–15 лет</td></tr>
+              <tr><td><strong>Съёмный протез</strong></td><td>Нет многих или всех зубов</td><td>Пластмасса / нейлон / бюгель</td><td>Несколько лет</td></tr>
+              <tr><td><strong>На имплантах</strong></td><td>Любой дефект зубного ряда</td><td>Цирконий / металлокерамика</td><td>Долгосрочно</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 3. Вкладки -->
+      <div class="card">
+        <h2 class="section-title">3. Вкладки</h2>
+        <p><strong>Вкладка</strong> — керамическая замена пломбе. Вместо пластмассового пломбировочного материала — точная керамическая вставка, которая приклеивается на зуб.</p>
+        <div class="highlight-box" style="margin-top:12px">
+          <span class="highlight-icon">💡</span>
+          <strong>Аналогия для пациента:</strong> «Дома у вас есть пластиковая посуда и керамическая. Что прочнее и дольше служит? Вот именно. Вкладка — это как керамическая посуда вместо пластиковой пломбы.»
+        </div>
+        <p style="margin-top:14px"><strong>Когда вкладка, а не пломба:</strong></p>
+        <ul class="rule-list">
+          <li class="rule-item">Большая полость после кариеса</li>
+          <li class="rule-item">Пломба в этом месте держится плохо или быстро выпадает</li>
+          <li class="rule-item">Жевательные зубы с высокой нагрузкой</li>
+        </ul>
+        <div class="alert" style="background:var(--info-light);border-left:4px solid var(--info);padding:12px 16px;border-radius:8px;margin-top:12px">
+          ℹ️ <strong>После лечения каналов</strong> — в идеале сначала <strong>вкладка</strong> (закрывает вход в канал керамикой), затем коронка. Это надёжнее пластмассовой «заглушки».
+        </div>
+      </div>
+
+      <!-- 4. Виниры -->
+      <div class="card">
+        <h2 class="section-title">4. Виниры</h2>
+        <p><strong>Винир</strong> — тонкая керамическая накладка на переднюю поверхность зуба (0,3–0,5 мм). Закрывает дефекты цвета, формы, клиновидные дефекты, сколы.</p>
+        <div class="grid-2" style="margin-top:14px">
+          <div>
+            <p><strong>Важно знать:</strong></p>
+            <ul class="rule-list">
+              <li class="rule-item"><strong>Обточка обязательна</strong> — без неё винир не сядет плотно, будут ступеньки</li>
+              <li class="rule-item">Обтачивают очень мало — доли миллиметра, нерв не затрагивается</li>
+              <li class="rule-item"><strong>Без удаления нерва</strong> — если врач работает в норме</li>
+            </ul>
+          </div>
+          <div>
+            <p><strong>Процесс:</strong></p>
+            <div class="rule-list">
+              <div class="rule-item"><span class="rule-num">1</span> Обточка зубов</div>
+              <div class="rule-item"><span class="rule-num">2</span> Временная конструкция</div>
+              <div class="rule-item"><span class="rule-num">3</span> Постоянные виниры — фиксируются на цемент</div>
+            </div>
+          </div>
+        </div>
+        <div class="alert" style="background:#fff3cd;border-left:4px solid #ffc107;padding:12px 16px;border-radius:8px;margin-top:12px">
+          ⚠️ <strong>После брекетов — виниры обязательны (для пациентов 30+).</strong> Бугры зубов возвращают зубы в исходное положение. Виниры и вкладки фиксируют результат. Пациентам от 30 лет нужно закладывать <strong>5–6 млн тг</strong> на завершение.
+        </div>
+      </div>
+
+      <!-- 5. Коронки -->
+      <div class="card">
+        <h2 class="section-title">5. Коронки</h2>
+        <p><strong>Когда нужна коронка:</strong></p>
+        <ul class="rule-list">
+          <li class="rule-item">Зуб разрушен более чем на <strong>50%</strong> — пломба не спасёт</li>
+          <li class="rule-item">После <strong>удаления нерва</strong> — зуб мёртвый, хрупкий, коронка защищает от перелома</li>
+          <li class="rule-item">Пломба на мёртвом зубе не даёт прочности</li>
+        </ul>
+
+        <div class="grid-2" style="margin-top:20px">
+          <div class="card" style="border:2px solid var(--teal);margin-bottom:0">
+            <h3 style="color:var(--teal);margin-bottom:12px">🏆 Циркониевая (рекомендуемая)</h3>
+            <ul class="rule-list">
+              <li class="rule-item">Изготавливается <strong>компьютером</strong> (CAD/CAM) — точность посадки максимальная</li>
+              <li class="rule-item">Биосовместима — десна «прилегает» хорошо</li>
+              <li class="rule-item">Гипоаллергенна (нет металла)</li>
+              <li class="rule-item">Эстетика — похожа на натуральный зуб</li>
+            </ul>
+          </div>
+          <div class="card" style="border:2px solid var(--border);margin-bottom:0">
+            <h3 style="color:var(--text-muted);margin-bottom:12px">⚙️ Металлокерамическая</h3>
+            <ul class="rule-list">
+              <li class="rule-item">Внутри — металл, снаружи — керамика</li>
+              <li class="rule-item">Делается <strong>вручную</strong> — выше риск неточной посадки</li>
+              <li class="rule-item">Металл может давать отторжение десны, сероватый ободок</li>
+              <li class="rule-item">Дешевле циркония. Проверенная, но уступает</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top:16px">
+          <span class="highlight-icon">👨‍⚕️</span>
+          <strong>Рекомендация врача:</strong> «Всегда предлагайте цирконий. Если пациент категорически ограничен в бюджете — металлокерамика как компромисс. Но предупредите о минусах.»
+        </div>
+
+        <p style="margin-top:14px"><strong>Цирконий + титановая балка</strong> — применяется в мостах большой протяжённости, чтобы конструкция не треснула. Балка окрашивается под золото, чтобы не просвечивала серостью под десной.</p>
+
+        <div class="grid-2" style="margin-top:14px">
+          <div>
+            <p><strong>Как держится коронка:</strong></p>
+            <p>Цемент стеклоиономерный — если посажена правильно, снять невозможно без распиливания. <strong>Щелей быть не должно</strong> — если есть щель, это ошибка (слюна → разрушение → запах).</p>
+          </div>
+          <div>
+            <p><strong>Гарантия:</strong></p>
+            <p>Врач даёт гарантию <strong>1 год</strong>. После — всё зависит от пациента: гигиена, питание, бруксизм. При поломке без вины пациента — скидка 50% на переделку.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. Мосты -->
+      <div class="card">
+        <h2 class="section-title">6. Мосты</h2>
+        <p><strong>Мост</strong> — несъёмная конструкция, которая «перекидывается» через место отсутствующего зуба, опираясь на соседние зубы.</p>
+        
+        <div class="grid-2" style="margin-top:14px">
+          <div>
+            <p><strong>Когда делают мост:</strong></p>
+            <ul class="rule-list">
+              <li class="rule-item">Отсутствует <strong>1–2 зуба</strong></li>
+              <li class="rule-item">Пациент <strong>не хочет</strong> имплантацию</li>
+              <li class="rule-item">Пациент <strong>не хочет</strong> съёмный протез</li>
+            </ul>
+          </div>
+          <div>
+            <p><strong>Правила мостовидного протеза:</strong></p>
+            <ul class="rule-list">
+              <li class="rule-item">Всегда <strong>два опорных зуба</strong> (один с каждой стороны)</li>
+              <li class="rule-item">Промежуток — максимум <strong>2–3 зуба</strong></li>
+              <li class="rule-item">Опорные зубы должны быть <strong>в хорошем состоянии</strong></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="alert" style="background:var(--danger-light);border-left:4px solid var(--danger);padding:12px 16px;border-radius:8px;margin-top:14px">
+          ⚠️ <strong>Минус моста — жертва соседними зубами.</strong> Опорные зубы обтачиваются на 1,5–2 мм и покрываются коронками. Если зубы были здоровые — мы их «убиваем» ради моста. Поэтому <strong>имплант предпочтительнее</strong>.
+        </div>
+
+        <h3 style="margin-top:20px;margin-bottom:12px">Имплант vs Мост — что предлагать</h3>
+        <div style="overflow-x:auto">
+          <table class="data-table">
+            <thead><tr><th></th><th>Имплант</th><th>Мост</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Соседние зубы</strong></td><td>Не трогаем</td><td>Обтачиваем, удаляем нервы</td></tr>
+              <tr><td><strong>Срок лечения</strong></td><td>3–6 месяцев</td><td>2 недели</td></tr>
+              <tr><td><strong>Долговечность</strong></td><td>Выше</td><td>Ниже</td></tr>
+              <tr><td><strong>Стоимость</strong></td><td>Дороже</td><td>Дешевле</td></tr>
+              <tr><td><strong>Гигиена</strong></td><td>Ирригатор</td><td>Ирригатор</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="highlight-box" style="margin-top:14px">
+          <span class="highlight-icon">💬</span>
+          <strong>Скрипт при страхе имплантации:</strong> «Имплант — это лучший вариант, потому что соседние зубы остаются нетронутыми. Но если вы против операции, мы можем сделать мост — это быстро, без хирургии. Минус: придётся обточить два здоровых зуба.»
+        </div>
+
+        <div class="alert" style="background:var(--info-light);border-left:4px solid var(--info);padding:12px 16px;border-radius:8px;margin-top:12px">
+          ℹ️ <strong>Ирригатор после моста — обязательно.</strong> Под промежуточной частью моста нельзя пройти нитью и щёткой. Только ирригатор вымывает остатки пищи под давлением воды. То же касается имплантов, All-on, виниров.
+        </div>
+      </div>
+
+      <!-- 7. Съёмные протезы -->
+      <div class="card">
+        <h2 class="section-title">7. Съёмные протезы</h2>
+        <p>Применяются когда зубов нет совсем или их очень мало.</p>
+
+        <div style="overflow-x:auto;margin-top:14px">
+          <table class="data-table">
+            <thead><tr><th>Тип</th><th>Описание</th><th>Особенности</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Полный съёмный</strong></td><td>При полном отсутствии зубов</td><td>Держится за счёт вакуума (присоска к десне)</td></tr>
+              <tr><td><strong>Частичный съёмный</strong></td><td>Несколько зубов отсутствует</td><td>Крепится на оставшихся зубах</td></tr>
+              <tr><td><strong>На кламерах</strong></td><td>Металлические крючки на зубах</td><td>Бюджетный, заметен</td></tr>
+              <tr><td><strong>Бюгельный</strong></td><td>Металлическая дуга + акрил</td><td>Прочнее, комфортнее кламерного</td></tr>
+              <tr><td><strong>Нейлоновый (биодентопласт)</strong></td><td>Гибкий, без металла</td><td>Эстетичный, мягкий, ~250 тыс. тг</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="grid-2" style="margin-top:16px">
+          <div>
+            <p><strong>Особенности полного съёмного:</strong></p>
+            <ul class="rule-list">
+              <li class="rule-item">Верхний держится хорошо — вакуум за счёт нёба</li>
+              <li class="rule-item">Нижний — <strong>50/50</strong>: кости ушла, подвижная десна, уздечка мешают</li>
+              <li class="rule-item">Выпадение нижнего — не брак врача, это анатомия</li>
+            </ul>
+          </div>
+          <div>
+            <p><strong>Иерархия решений по цене:</strong></p>
+            <div class="rule-list">
+              <div class="rule-item"><span class="rule-num">1</span> Съёмный протез (пластмасса) — бюджет</div>
+              <div class="rule-item"><span class="rule-num">2</span> Мост — средний</div>
+              <div class="rule-item"><span class="rule-num">3</span> Имплант + коронка — оптимальный</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. Конструкции на имплантах -->
+      <div class="card">
+        <h2 class="section-title">8. Конструкции на имплантах</h2>
+        <p>После приживления имплант + коронка = полноценный зуб. Подробно — в конспекте по хирургии.</p>
+        <p style="margin-top:12px"><strong>Дополнительно по ортопедической части:</strong></p>
+        <ul class="rule-list">
+          <li class="rule-item"><strong>Абатмент</strong> (переходник имплант → коронка) бывает прямой и угловой (мультиюнит) — при наклонном импланте</li>
+          <li class="rule-item">Фиксация коронки: <strong>цементная</strong> (снять нельзя) или <strong>винтовая</strong> (откручивается, но может расслабиться)</li>
+          <li class="rule-item">Винтовую фиксацию нужно <strong>проверять и подтягивать</strong> каждые 3–6 месяцев</li>
+          <li class="rule-item">После All-on-4/6 — аналогичный контроль, пациент обязательно приходит на осмотры</li>
+        </ul>
+      </div>
+
+      <!-- 9. Ортодонтия: связь с ортопедией -->
+      <div class="card">
+        <h2 class="section-title">9. Ортодонтия: связь с ортопедией</h2>
+        <p><strong>Ортодонтия</strong> — исправление прикуса брекетами или элайнерами.</p>
+        
+        <h3 style="margin-top:14px;margin-bottom:10px">Важное ограничение по возрасту</h3>
+        <div class="grid-3" style="margin-bottom:0">
+          <div class="stat-card teal">
+            <div class="stat-label">До 25 лет</div>
+            <div class="stat-value" style="font-size:18px">Идеально</div>
+            <div class="stat-sub">Кости активно перестраивается</div>
+          </div>
+          <div class="stat-card amber">
+            <div class="stat-label">До 30 лет</div>
+            <div class="stat-value" style="font-size:18px">Допустимо</div>
+            <div class="stat-sub">Ещё возможно</div>
+          </div>
+          <div class="stat-card danger">
+            <div class="stat-label">После 30 лет</div>
+            <div class="stat-value" style="font-size:18px">С оговорками</div>
+            <div class="stat-sub">Без виниров результат уйдёт</div>
+          </div>
+        </div>
+
+        <div class="alert" style="background:#fff3cd;border-left:4px solid #ffc107;padding:12px 16px;border-radius:8px;margin-top:16px">
+          ⚠️ <strong>После 30:</strong> кости не регенерирует, бугры зубов тянут обратно. После брекетов + ретейнера зубы всё равно пойдут обратно. Без вкладок/виниров результат не закрепить. Честно объясните: <strong>«Брекеты выровняют. Но чтобы зафиксировать, нужны виниры/вкладки — это ещё ~5–6 млн тг.»</strong>
+        </div>
+      </div>
+
+      <!-- 10. Гигиена после конструкций -->
+      <div class="card">
+        <h2 class="section-title">10. Гигиена после ортопедических конструкций</h2>
+        <p><strong>Ирригатор — обязателен</strong> после установки:</p>
+        <div class="grid-2" style="margin-top:12px">
+          <div>
+            <ul class="rule-list">
+              <li class="rule-item">Мостов</li>
+              <li class="rule-item">All-on-4/6</li>
+              <li class="rule-item">Имплантов</li>
+              <li class="rule-item">Виниров</li>
+            </ul>
+          </div>
+          <div>
+            <div class="highlight-box">
+              <span class="highlight-icon">🚿</span>
+              Щисткой и нитью нельзя достать в промывную зону под мостом и вокруг имплантов. Ирригатор вымывает остатки пищи и бактерии под давлением воды.
+            </div>
+          </div>
+        </div>
+        <p style="margin-top:12px"><strong>Профчистка</strong> — раз в 6 месяцев при наличии коронок, имплантов, мостов.</p>
+      </div>
+
+      <!-- 11. Работа с пациентом -->
+      <div class="card">
+        <h2 class="section-title">11. Работа с пациентом на консультации</h2>
+        <div class="highlight-box">
+          <span class="highlight-icon">❓</span>
+          <strong>Первый вопрос всегда:</strong> «Что вы хотите от лечения? Что для вас важно?»
+        </div>
+        <p style="margin-top:14px">Дайте <strong>несколько вариантов</strong> по цене: бюджетный (протез/металлокерамика), средний (мост), оптимальный (имплант + цирконий). «Полный рот» — от 3 до 6 млн тг.</p>
+
+        <h3 style="margin-top:16px;margin-bottom:10px">Почему пациенты откладывают — и что отвечать</h3>
+        <div style="overflow-x:auto">
+          <table class="data-table">
+            <thead><tr><th>Причина</th><th>Ответ</th></tr></thead>
+            <tbody>
+              <tr><td>«Не болит, потерплю»</td><td>«Разрушенный зуб не восстановится сам. Чем позже — тем сложнее и дороже»</td></tr>
+              <tr><td>«Боюсь имплантации»</td><td>«Тогда рассмотрим мост — без операции, за 2 недели. Но придётся обточить соседние зубы»</td></tr>
+              <tr><td>«Дорого»</td><td>Предложить рассрочку или более бюджетный вариант (металлокерамика вместо циркония)</td></tr>
+              <tr><td>«Потом, некогда»</td><td>«Пока есть кость — имплант поставим быстро. Кость уходит, и тогда сначала наращивание +6 месяцев»</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Ключевые фразы -->
+      <div class="card" style="border:2px solid var(--teal)">
+        <h2 class="section-title">💬 Ключевые фразы для менеджеров</h2>
+
+        <div style="display:grid;gap:12px;margin-top:12px">
+          <div style="background:var(--teal-light);padding:16px;border-radius:12px">
+            <strong>Вкладка вместо пломбы:</strong>
+            <p style="margin-top:6px;font-style:italic">«Вкладка — это как керамическая посуда вместо пластиковой. Служит дольше, держится крепче. Особенно актуально для жевательных зубов.»</p>
+          </div>
+          <div style="background:var(--teal-light);padding:16px;border-radius:12px">
+            <strong>Коронка после лечения каналов:</strong>
+            <p style="margin-top:6px;font-style:italic">«После удаления нерва зуб становится хрупким. Пломба его не защитит. Коронка — это как шапка, которая берёт нагрузку на себя и защищает зуб на 15+ лет.»</p>
+          </div>
+          <div style="background:var(--teal-light);padding:16px;border-radius:12px">
+            <strong>Мост vs имплант:</strong>
+            <p style="margin-top:6px;font-style:italic">«Мост — быстро, 2 недели, без операции. Но придётся обточить два соседних живых зуба. Имплант — ждать 3–6 месяцев, но соседние зубы не трогаем. Что вам важнее?»</p>
+          </div>
+          <div style="background:var(--teal-light);padding:16px;border-radius:12px">
+            <strong>Цирконий vs металлокерамика:</strong>
+            <p style="margin-top:6px;font-style:italic">«Цирконий дороже, но точнее прилегает, биосовместим, нет металла — десна лучше реагирует. Металлокерамика — проверенный вариант, дешевле, но делается вручную и может давать сероватый ободок.»</p>
+          </div>
+          <div style="background:var(--teal-light);padding:16px;border-radius:12px">
+            <strong>Нейлоновый протез:</strong>
+            <p style="margin-top:6px;font-style:italic">«Гибкий, без металлических крючков, выглядит эстетично. Хороший вариант как более комфортная и красивая альтернатива обычному пластмассовому протезу.»</p>
+          </div>
+          <div style="background:var(--teal-light);padding:16px;border-radius:12px">
+            <strong>Ирригатор:</strong>
+            <p style="margin-top:6px;font-style:italic">«После установки конструкции нитью и щёткой туда не добраться. Ирригатор — как душ для зубов: вымывает всё под давлением воды. Это не опция, это обязательно.»</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- YouTube видео -->
+      <div class="card" style="padding:0;overflow:hidden">
+        <div style="position:relative;padding-bottom:56.25%;height:0">
+          <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"
+            src="https://www.youtube.com/embed/43l0A1ILNwA?si=7YtU0rXNmotLNYZn"
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
 
       </div>
     </div>
