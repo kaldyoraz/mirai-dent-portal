@@ -338,20 +338,106 @@
   .sw .step-body { padding: 12px 13px; }
   .sw .wa-bub { background: #dcf8c6; border-radius: 3px 11px 11px 11px; padding: 10px 13px; font-size: 13px; line-height: 1.7; color: #1a1a1a; border-left: 3px solid #25D366; }
 
-  @media (max-width: 900px) {
+  /* Hamburger button — скрыт на десктопе */
+  .hamburger { display: none; }
+
+  /* Overlay — скрыт на десктопе */
+  .sidebar-overlay { display: none; }
+
+  /* Таблицы — горизонтальный скролл на мобилке */
+  .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  /* ============ MOBILE ============ */
+  @media (max-width: 768px) {
+    /* Hamburger кнопка */
+    .hamburger {
+      display: flex; align-items: center; justify-content: center;
+      position: fixed; top: 12px; left: 12px; z-index: 1001;
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--navy); color: #fff; border: none;
+      font-size: 22px; cursor: pointer; box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+
+    /* Sidebar = drawer */
+    .sidebar {
+      position: fixed; top: 0; left: -300px; width: 280px; min-width: 280px;
+      height: 100vh; z-index: 1000; transition: left 0.3s ease;
+      overflow-y: auto;
+    }
+    .sidebar.open { left: 0; }
+
+    /* Overlay за sidebar */
+    .sidebar-overlay {
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5); z-index: 999;
+    }
+    .sidebar-overlay.show { display: block; }
+
+    /* Sidebar nav — вертикальный как на десктопе */
+    .sidebar-nav { display: flex; flex-direction: column; flex-wrap: nowrap; padding: 16px 0; }
+    .nav-item { flex-direction: row; align-items: center; gap: 12px; padding: 12px 24px; border-left: 3px solid transparent; border-bottom: none; }
+    .nav-item.active { border-left-color: var(--teal-mid); border-bottom: none; }
+    .nav-label { font-size: 13.5px; text-align: left; }
+    .nav-sub { display: block; }
+    .nav-section-label { display: block; }
+
+    /* Main content */
     .app { flex-direction: column; }
-    .sidebar { width: 100%; min-width: 0; height: auto; }
-    .page-header { padding: 32px 24px 28px; }
-    .content { padding: 24px 24px 48px; }
-    .grid-2, .grid-3 { grid-template-columns: 1fr; }
-    .page-title { font-size: 24px; }
-    .main { overflow-x: hidden; }
-    .sidebar-nav { display: flex; flex-wrap: wrap; padding: 8px; }
-    .nav-item { flex-direction: column; align-items: center; gap: 4px; padding: 10px 12px; border-left: none; border-bottom: 3px solid transparent; }
-    .nav-item.active { border-left: none; border-bottom-color: var(--teal-mid); }
-    .nav-label { font-size: 11px; text-align: center; }
-    .nav-sub { display: none; }
-    .nav-section-label { display: none; }
+    .main { overflow-x: hidden; padding-top: 0; }
+    * { max-width: 100%; box-sizing: border-box; }
+
+    /* Page header */
+    .page-header { padding: 64px 20px 28px; }
+    .page-title { font-size: 22px; }
+    .page-badge { font-size: 10px; }
+
+    /* Content */
+    .content { padding: 20px 16px 48px; }
+
+    /* Cards */
+    .card { padding: 20px 18px; border-radius: 12px; overflow: hidden; }
+    .card .grid-2, .card .grid-3 { grid-template-columns: 1fr !important; }
+
+    /* Grids → stack */
+    .grid-2, .grid-3 { grid-template-columns: 1fr !important; }
+    [style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+    [style*="display:grid"] { grid-template-columns: 1fr !important; }
+    [style*="display: grid"] { grid-template-columns: 1fr !important; }
+    [style*="display:flex"][style*="gap"] { flex-wrap: wrap !important; }
+
+    /* Tables — scroll */
+    .data-table { min-width: 0; font-size: 12px; }
+    .data-table th, .data-table td { padding: 8px 10px; word-break: break-word; }
+
+    /* Section titles */
+    .section-title { font-size: 18px; }
+
+    /* Stat cards */
+    .stat-value { font-size: 22px; }
+
+    /* Funnel */
+    .funnel-step { padding: 10px 14px; gap: 10px; }
+
+    /* Steps */
+    .step-item { gap: 14px; }
+    .step-circle { width: 34px; height: 34px; font-size: 13px; }
+
+    /* Rule items */
+    .rule-item { word-break: break-word; gap: 10px; padding: 12px 0; }
+    .rule-num { width: 24px; height: 24px; font-size: 11px; }
+    .rule-text { font-size: 13px; min-width: 0; }
+    .rule-text { word-break: break-word; }
+
+    /* Highlight box */
+    .highlight-box { padding: 18px 20px; border-radius: 10px; word-break: break-word; }
+
+    /* Tool pages */
+    .tool-wrap { padding: 20px 16px 48px; }
+    .tool-tabs-row { gap: 4px; }
+    .tool-tab { padding: 6px 12px; font-size: 11px; }
+    .tool-cnt { padding: 20px 18px; }
+
+    /* Script pages (sw) */
     .sw-app { flex-direction: column; height: auto; }
     .sw-nav { width: 100%; min-width: 0; flex-direction: row; flex-wrap: wrap; padding: 8px; }
     .sw-nav-logo { display: none; }
@@ -362,13 +448,33 @@
     .sw-main { height: 500px; }
     .sw .cheat-grid, .sw .ups-row, .sw .pain-grid { grid-template-columns: 1fr; }
     .sw-wrap { padding: 16px; }
+
+    /* KEV bubbles */
+    .kv-wrap .bub { max-width: 92%; }
+
+    /* Inline images */
+    img { max-width: 100% !important; height: auto !important; }
+  }
+
+  /* ============ SMALL MOBILE ============ */
+  @media (max-width: 400px) {
+    .page-header { padding: 58px 14px 22px; }
+    .page-title { font-size: 19px; }
+    .content { padding: 14px 12px 40px; }
+    .card { padding: 16px 14px; }
+    .section-title { font-size: 16px; }
+    .tool-wrap { padding: 14px 12px 40px; }
   }
 </style>
 </head>
 <body>
 <div class="app">
+  <!-- HAMBURGER BUTTON (mobile) -->
+  <button class="hamburger" onclick="toggleSidebar()" aria-label="Меню">☰</button>
+  <!-- SIDEBAR OVERLAY (mobile) -->
+  <div class="sidebar-overlay" onclick="closeSidebar()"></div>
   <!-- SIDEBAR -->
-  <aside class="sidebar">
+  <aside class="sidebar" id="sidebar">
     <div class="sidebar-logo">
       <div class="logo-tag">⚡ Стоматология</div>
       <div class="logo-title">Mirai Dent<br>Портал менеджеров</div>
@@ -511,6 +617,7 @@
         <!-- ВОРОНКА 1: ПЕРВИЧНЫЕ ПРОДАЖИ -->
         <div class="section-title">🔄 1. Воронка: Первичные продажи</div>
         <div class="card">
+        <div style="overflow-x:auto">
           <table class="data-table">
             <thead><tr><th>№</th><th>Этап</th><th>Цвет</th></tr></thead>
             <tbody>
@@ -530,6 +637,7 @@
               <tr><td>14</td><td>Закрыто и не реализовано</td><td><span style="color:#aaa">серый</span></td></tr>
             </tbody>
           </table>
+        </div>
         </div>
 
         <!-- 1.1 -->
@@ -679,6 +787,7 @@
         <!-- ВОРОНКА 2: КУРАТОР СОПРОВОЖДЕНИЕ -->
         <div class="section-title" style="margin-top:36px">🔄 2. Воронка: Куратор сопровождение</div>
         <div class="card">
+        <div style="overflow-x:auto">
           <table class="data-table">
             <thead><tr><th>№</th><th>Этап</th><th>Цвет</th></tr></thead>
             <tbody>
@@ -696,6 +805,7 @@
               <tr><td>12</td><td>Закрыто и не реализовано</td><td><span style="color:#aaa">серый</span></td></tr>
             </tbody>
           </table>
+        </div>
         </div>
 
         <!-- 2.1 -->
@@ -723,6 +833,7 @@
         <!-- ПАМЯТКА -->
         <div class="section-title" style="margin-top:36px">🚫 Памятка: что нельзя делать</div>
         <div class="card">
+        <div style="overflow-x:auto">
           <table class="data-table">
             <thead><tr><th>Нельзя</th><th>Почему</th></tr></thead>
             <tbody>
@@ -736,6 +847,7 @@
               <tr><td>Ставить галочку «Статус» в оплатах до реального поступления</td><td>Засчитается как уже полученная оплата</td></tr>
             </tbody>
           </table>
+        </div>
         </div>
 
       </div>
@@ -1294,6 +1406,7 @@
         <!-- 11. Почему пломбы выпадают -->
         <div class="section-title" style="margin-top:28px">💊 11. Почему пломбы выпадают — и как этого не допустить</div>
         <div class="card">
+        <div style="overflow-x:auto">
           <table class="data-table">
             <thead><tr><th>Условие</th><th>Почему важно</th></tr></thead>
             <tbody>
@@ -1303,12 +1416,14 @@
               <tr><td><strong>Финальная полировка до блеска</strong></td><td>Без полировки поверхность шероховатая → налёт → клей разрушается → пломба 2 года, не 7</td></tr>
             </tbody>
           </table>
+        </div>
           <div class="alert info" style="margin-top:12px"><div class="alert-icon">⏱️</div><div><strong>Срок качественной пломбы: 5–7 лет.</strong> Через 5–7 лет меняем профилактически (материал «стареет», уменьшается в объёме — риск кариеса под пломбой).</div></div>
         </div>
 
         <!-- 12. Зачем сохранять зубы -->
         <div class="section-title" style="margin-top:28px">🦷 12. Зачем сохранять свои зубы — аргументы</div>
         <div class="card">
+        <div style="overflow-x:auto">
           <table class="data-table">
             <thead><tr><th>Свой зуб</th><th>Имплант</th></tr></thead>
             <tbody>
@@ -1318,12 +1433,14 @@
               <tr><td>Не требует пиления соседних зубов</td><td>Иногда требует подготовки</td></tr>
             </tbody>
           </table>
+        </div>
           <div class="alert info" style="margin-top:12px"><div class="alert-icon">💬</div><div>«Свой зуб — лучший имплант. Если есть хоть малейшая возможность сохранить — сохраняем.»</div></div>
         </div>
 
         <!-- 13. Почему пациенты не лечатся -->
         <div class="section-title" style="margin-top:28px">🗣️ 13. Почему пациенты не лечатся — и как работать с каждым</div>
         <div class="card">
+        <div style="overflow-x:auto">
           <table class="data-table">
             <thead><tr><th>Причина</th><th>Как реагировать</th></tr></thead>
             <tbody>
@@ -1334,6 +1451,7 @@
               <tr><td><strong>Непонимание</strong></td><td>Не говорить «кариес» и «пульпит» — говорить «маленькая проблема, которая станет большой», «червячок добрался до нерва»</td></tr>
             </tbody>
           </table>
+        </div>
         </div>
 
         <!-- Ключевые фразы -->
@@ -1456,6 +1574,7 @@
         <!-- 4. Приживление -->
         <div class="section-title" style="margin-top:28px">⏳ 4. Процесс приживления импланта</div>
         <div class="card">
+        <div style="overflow-x:auto">
           <table class="data-table">
             <thead><tr><th>Период</th><th>Что происходит</th></tr></thead>
             <tbody>
@@ -1466,6 +1585,7 @@
               <tr><td><strong>3–6 месяцев</strong></td><td>Полная остеоинтеграция. Можно нагружать постоянной коронкой</td></tr>
             </tbody>
           </table>
+        </div>
           <div class="alert info" style="margin-top:12px"><div class="alert-icon">💬</div><div>Аналогия для пациента: «Как кость срастается после перелома через мозоль — так и имплант врастает в кость».</div></div>
         </div>
 
@@ -1626,6 +1746,7 @@
         <!-- 13. Бренды имплантов -->
         <div class="section-title" style="margin-top:28px">🏆 13. Бренды имплантов</div>
         <div class="card">
+        <div style="overflow-x:auto">
           <table class="data-table">
             <thead><tr><th>Бренд</th><th>Особенность</th></tr></thead>
             <tbody>
@@ -1634,6 +1755,7 @@
               <tr><td><strong>Стандартный протокол</strong></td><td>Любой имплант хорошей фирмы при соблюдении протокола и гигиены — служит десятки лет</td></tr>
             </tbody>
           </table>
+        </div>
         </div>
 
         <!-- Ключевые тезисы -->
@@ -1678,6 +1800,7 @@
         <!-- 2. Мифы -->
         <div class="section-title">🦷 2. Мифы о молочных зубах — и правда</div>
         <div class="card">
+        <div style="overflow-x:auto">
           <table class="data-table">
             <thead><tr><th>Что говорят родители</th><th>Как объяснять</th></tr></thead>
             <tbody>
@@ -1688,6 +1811,7 @@
               <tr><td>«Зубы детей не болят»</td><td>У детей нервы болят <strong>так же, как у взрослых</strong></td></tr>
             </tbody>
           </table>
+        </div>
         </div>
 
         <!-- 3. Опасность кариеса -->
@@ -1789,6 +1913,7 @@
         <!-- 7. Осмотры -->
         <div class="section-title" style="margin-top:28px">📅 7. Осмотры и контроль</div>
         <div class="card">
+        <div style="overflow-x:auto">
           <table class="data-table">
             <thead><tr><th>Ситуация</th><th>Частота</th></tr></thead>
             <tbody>
@@ -1798,6 +1923,7 @@
               <tr><td>Есть коронки</td><td>Контроль состояния при каждом визите</td></tr>
             </tbody>
           </table>
+        </div>
           <div class="alert info" style="margin-top:12px"><div class="alert-icon">💬</div><div>«Приводите пациентов на осмотр. Большинство родителей не приходят сами — ваша задача их приглашать. Это не просто продажи, это реальный контроль здоровья зуба после нашей работы.»</div></div>
         </div>
 
@@ -1865,6 +1991,7 @@
         <!-- 12. Направления -->
         <div class="section-title" style="margin-top:28px">🏥 12. Кого направляем в другие учреждения</div>
         <div class="card">
+        <div style="overflow-x:auto">
           <table class="data-table">
             <thead><tr><th>Ситуация</th><th>Куда направляем</th></tr></thead>
             <tbody>
@@ -1876,6 +2003,7 @@
               <tr><td>Плохие анализы перед севораном</td><td>К педиатру, затем пересдача анализов (срок: 10 дней)</td></tr>
             </tbody>
           </table>
+        </div>
         </div>
 
         <!-- 13. Важно для менеджеров -->
@@ -1893,6 +2021,7 @@
         </div>
         <div class="card">
           <div class="card-title"><div class="card-icon">💬</div>Ключевые фразы для работы с родителями</div>
+        <div style="overflow-x:auto">
           <table class="data-table">
             <thead><tr><th>Ситуация</th><th>Что говорить</th></tr></thead>
             <tbody>
@@ -1903,6 +2032,7 @@
               <tr><td>После севорана — как ухаживать</td><td>«Ребёнок будет вялым — это нормально. Можно дать ибупрофен однократно. Через 3 месяца — обязательно на осмотр»</td></tr>
             </tbody>
           </table>
+        </div>
         </div>
 
       </div>
@@ -1933,6 +2063,7 @@
 
         <div class="section-title" style="margin-top:36px">🗒 Быстрая шпаргалка: кто и что</div>
         <div class="card">
+        <div style="overflow-x:auto">
           <table class="data-table">
             <thead><tr><th>Ситуация</th><th>Что делать</th></tr></thead>
             <tbody>
@@ -1944,6 +2075,7 @@
               <tr><td>Возврат средств пациенту</td><td>Фиксировать в «Расход» в CRM</td></tr>
             </tbody>
           </table>
+        </div>
         </div>
       </div>
     </div>
@@ -2317,6 +2449,17 @@ function showPage(name, el) {
   document.getElementById('page-' + name).classList.add('active');
   el.classList.add('active');
   document.querySelector('.main').scrollTop = 0;
+  closeSidebar();
+}
+
+/* Hamburger sidebar toggle */
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.querySelector('.sidebar-overlay').classList.toggle('show');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.querySelector('.sidebar-overlay').classList.remove('show');
 }
 
 // ===== SCRIPT WIDGET =====
