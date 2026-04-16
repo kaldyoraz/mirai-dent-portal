@@ -2202,33 +2202,37 @@
       </div>
       <div class="content">
 
-        <!-- Седация -->
-        <div class="section-title">💉 Анализы для седации</div>
-        <div class="card">
-          <ul class="rule-list">
-            <li class="rule-item"><div class="rule-num" style="background:var(--teal)">1</div><div class="rule-text">Общий анализ крови</div></li>
-            <li class="rule-item"><div class="rule-num" style="background:var(--teal)">2</div><div class="rule-text">Биохимические показатели: общий белок, креатинин, мочевина, билирубин</div></li>
-            <li class="rule-item"><div class="rule-num" style="background:var(--teal)">3</div><div class="rule-text">Коагулограмма: протромбиновый индекс, фибриноген</div></li>
-            <li class="rule-item"><div class="rule-num" style="background:var(--teal)">4</div><div class="rule-text">Анализ на гепатит В</div></li>
-            <li class="rule-item"><div class="rule-num" style="background:var(--teal)">5</div><div class="rule-text">ЭКГ или при невозможности (маленький возраст например) — УЗИ сердца</div></li>
-            <li class="rule-item"><div class="rule-num" style="background:var(--teal)">6</div><div class="rule-text">Осмотр педиатра. При наличии сопутствующего заболевания — осмотр соответствующего специалиста</div></li>
-          </ul>
-        </div>
-
-        <!-- Имплантация -->
-        <div class="section-title" style="margin-top:32px">🦷 Анализы для имплантации</div>
-        <div class="card">
-          <ul class="rule-list">
-            <li class="rule-item"><div class="rule-num" style="background:var(--teal)">1</div><div class="rule-text">ОАК</div></li>
-            <li class="rule-item"><div class="rule-num" style="background:var(--teal)">2</div><div class="rule-text">Коагулограмма</div></li>
-            <li class="rule-item"><div class="rule-num" style="background:var(--teal)">3</div><div class="rule-text">Разв. биохимия крови (АЛТ, АСТ, Общий белок, Креатинин, Мочевина, Мочевая кислота, Билирубин, ЩФ, Холестерин общий)</div></li>
-            <li class="rule-item"><div class="rule-num" style="background:var(--teal)">4</div><div class="rule-text">Кальций</div></li>
-            <li class="rule-item"><div class="rule-num" style="background:var(--teal)">5</div><div class="rule-text">Витамин Д</div></li>
-            <li class="rule-item"><div class="rule-num" style="background:var(--teal)">6</div><div class="rule-text">Глюкоза крови</div></li>
-            <li class="rule-item"><div class="rule-num" style="background:var(--teal)">7</div><div class="rule-text">Микрореакция</div></li>
-            <li class="rule-item"><div class="rule-num" style="background:var(--teal)">8</div><div class="rule-text">Маркеры геп. В и С</div></li>
-            <li class="rule-item"><div class="rule-num" style="background:var(--teal)">9</div><div class="rule-text">ВИЧ</div></li>
-          </ul>
+        <!-- Седация + Имплантация в 2 колонки -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+          <div>
+            <div class="section-title">💉 Анализы для седации</div>
+            <div class="card">
+              <ul class="rule-list">
+                <li class="rule-item"><div class="rule-num" style="background:var(--teal)">1</div><div class="rule-text">Общий анализ крови</div></li>
+                <li class="rule-item"><div class="rule-num" style="background:var(--teal)">2</div><div class="rule-text">Биохимические показатели: общий белок, креатинин, мочевина, билирубин</div></li>
+                <li class="rule-item"><div class="rule-num" style="background:var(--teal)">3</div><div class="rule-text">Коагулограмма: протромбиновый индекс, фибриноген</div></li>
+                <li class="rule-item"><div class="rule-num" style="background:var(--teal)">4</div><div class="rule-text">Анализ на гепатит В</div></li>
+                <li class="rule-item"><div class="rule-num" style="background:var(--teal)">5</div><div class="rule-text">ЭКГ или при невозможности (маленький возраст) — УЗИ сердца</div></li>
+                <li class="rule-item"><div class="rule-num" style="background:var(--teal)">6</div><div class="rule-text">Осмотр педиатра. При сопутствующем заболевании — осмотр специалиста</div></li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div class="section-title">🦷 Анализы для имплантации</div>
+            <div class="card">
+              <ul class="rule-list">
+                <li class="rule-item"><div class="rule-num" style="background:var(--teal)">1</div><div class="rule-text">ОАК</div></li>
+                <li class="rule-item"><div class="rule-num" style="background:var(--teal)">2</div><div class="rule-text">Коагулограмма</div></li>
+                <li class="rule-item"><div class="rule-num" style="background:var(--teal)">3</div><div class="rule-text">Разв. биохимия крови (АЛТ, АСТ, Общий белок, Креатинин, Мочевина, Мочевая кислота, Билирубин, ЩФ, Холестерин общий)</div></li>
+                <li class="rule-item"><div class="rule-num" style="background:var(--teal)">4</div><div class="rule-text">Кальций</div></li>
+                <li class="rule-item"><div class="rule-num" style="background:var(--teal)">5</div><div class="rule-text">Витамин Д</div></li>
+                <li class="rule-item"><div class="rule-num" style="background:var(--teal)">6</div><div class="rule-text">Глюкоза крови</div></li>
+                <li class="rule-item"><div class="rule-num" style="background:var(--teal)">7</div><div class="rule-text">Микрореакция</div></li>
+                <li class="rule-item"><div class="rule-num" style="background:var(--teal)">8</div><div class="rule-text">Маркеры геп. В и С</div></li>
+                <li class="rule-item"><div class="rule-num" style="background:var(--teal)">9</div><div class="rule-text">ВИЧ</div></li>
+              </ul>
+            </div>
+          </div>
         </div>
 
         <!-- Аллергопробы -->
