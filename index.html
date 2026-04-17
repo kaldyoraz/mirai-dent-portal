@@ -545,6 +545,13 @@
           <div class="nav-sub">Молочные зубы, севоран</div>
         </div>
       </div>
+      <div class="nav-item" onclick="showPage('restoration', this)">
+        <div class="nav-icon">🎨</div>
+        <div>
+          <div class="nav-label">Реставрация и ортопедия</div>
+          <div class="nav-sub">Виниры, All-on-4/6, протезы</div>
+        </div>
+      </div>
       <div class="nav-item" onclick="showPage('analyses', this)">
         <div class="nav-icon">🧪</div>
         <div>
@@ -2176,6 +2183,260 @@
         <img src="data:image/png;base64,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" alt="Итоговая версия MicroSIP" style="max-width:100%;border-radius:8px;margin-top:10px;border:1px solid var(--border)">
       </div>
 
+    </div>
+
+    <!-- ============ PAGE: RESTORATION & ORTHO ============ -->
+    <div class="page" id="page-restoration">
+      <div class="page-header">
+        <h1 class="page-title">Обучение по реставрации и ортопедии</h1>
+        <div class="page-desc">Художественная реставрация, виниры, All-on-4/6, функциональные протезы — специализация доктора Ержана Ныгметовича</div>
+        <div class="page-speaker" style="display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:6px 12px;background:var(--teal-light);border-radius:999px;font-size:13px;color:var(--navy);"><span style="opacity:0.7;">Спикер:</span><strong>Ержан Ныгметович</strong></div>
+      </div>
+      <div class="content">
+
+        <!-- Видео -->
+        <div class="card">
+          <h2 class="section-title">🎥 Видео-лекция</h2>
+          <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;margin-top:12px;">
+            <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/TaiIne7HmQU?si=-BNoe15ZjkbT74MI" title="Обучение по реставрации и ортопедии" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <!-- 1. Специализация -->
+        <div class="card">
+          <h2 class="section-title">1. Специализация доктора</h2>
+          <p>Ержан Ныгметович работает в следующих направлениях:</p>
+          <ul class="rule-list">
+            <li class="rule-item"><strong>Имплантация протоколами All-on</strong> — All-on-4, All-on-6 (полные несъёмные конструкции на 4 или 6 имплантах)</li>
+            <li class="rule-item"><strong>Циркониевые коронки</strong> — одиночные и мостовидные конструкции</li>
+            <li class="rule-item"><strong>Художественная реставрация</strong> — восстановление формы и эстетики передних зубов композитом</li>
+            <li class="rule-item"><strong>Виниры</strong> — керамические и композитные</li>
+            <li class="rule-item"><strong>Съёмные и частично-съёмные протезы</strong> — функциональные PSD, бюгельные CSD</li>
+          </ul>
+        </div>
+
+        <!-- 2. Художественная реставрация -->
+        <div class="card">
+          <h2 class="section-title">2. Художественная реставрация</h2>
+          <p><strong>Что это:</strong> прямая реставрация зубов композитным материалом в одно посещение. Доктор воссоздаёт форму, цвет и прозрачность зуба слой за слоем.</p>
+          <p style="margin-top:12px"><strong>Когда применяется:</strong></p>
+          <ul class="rule-list">
+            <li class="rule-item">Сколы передних зубов</li>
+            <li class="rule-item">Щели между зубами (диастемы, тремы)</li>
+            <li class="rule-item">Изменение формы зуба</li>
+            <li class="rule-item">Маскировка пятен и дисколоритов</li>
+          </ul>
+          <p style="margin-top:14px"><strong>Два варианта:</strong></p>
+          <div style="overflow-x:auto">
+            <table class="data-table">
+              <thead><tr><th>Вариант</th><th>Описание</th><th>Срок службы</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Прямая реставрация</strong></td><td>В кресле за одно посещение, композитом</td><td>3–5 лет</td></tr>
+                <tr><td><strong>Композитные виниры</strong></td><td>Тонкие накладки, тоже прямым методом</td><td>3–5 лет</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="alert" style="background:var(--info-light);border-left:4px solid var(--info);padding:12px 16px;border-radius:8px;margin-top:12px">
+            ℹ️ <strong>Противопоказания:</strong> бруксизм (скрежет зубами), глубокий прикус с перегрузкой передних зубов, плохая гигиена.
+          </div>
+        </div>
+
+        <!-- 3. Виниры: керамика vs композит -->
+        <div class="card">
+          <h2 class="section-title">3. Виниры: керамика vs композит</h2>
+          <div style="overflow-x:auto">
+            <table class="data-table">
+              <thead><tr><th>Параметр</th><th>Керамические виниры</th><th>Композитные виниры</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Изготовление</strong></td><td>В лаборатории, 2–3 визита</td><td>В кресле за 1 визит</td></tr>
+                <tr><td><strong>Срок службы</strong></td><td>10–15 лет и больше</td><td>3–5 лет</td></tr>
+                <tr><td><strong>Эстетика</strong></td><td>Максимальная, не темнеют</td><td>Хорошая, со временем темнеют</td></tr>
+                <tr><td><strong>Препарирование</strong></td><td>Минимальное (0.3–0.5 мм)</td><td>Почти без препарирования</td></tr>
+                <tr><td><strong>Цена</strong></td><td>Выше</td><td>Ниже</td></tr>
+                <tr><td><strong>Ремонт</strong></td><td>Только замена</td><td>Можно подполировать, починить</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="highlight-box" style="margin-top:14px">
+            <span class="highlight-icon">💡</span>
+            <strong>Для пациента:</strong> «Керамика — как качественный заводской кафель: красиво, долго, дорого. Композит — как ручная роспись: быстрее и дешевле, но обновлять нужно чаще.»
+          </div>
+        </div>
+
+        <!-- 4. Этапы изготовления керамического винира/коронки -->
+        <div class="card">
+          <h2 class="section-title">4. Этапы изготовления керамического винира / коронки</h2>
+          <ol class="rule-list">
+            <li class="rule-item"><strong>Консультация и диагностика</strong> — осмотр, снимки, обсуждение ожиданий</li>
+            <li class="rule-item"><strong>Wax-up</strong> — техник моделирует желаемый результат из воска на гипсовой модели</li>
+            <li class="rule-item"><strong>Mock-up</strong> — примерка: будущая форма зубов переносится во рту пациента из временного композита. Пациент видит результат ДО препарирования</li>
+            <li class="rule-item"><strong>Препарирование</strong> — минимальное снятие эмали (0.3–0.7 мм)</li>
+            <li class="rule-item"><strong>Снятие слепков / сканирование</strong> — аналоговое или цифровое</li>
+            <li class="rule-item"><strong>Временные конструкции</strong> — пациент ходит с временными, пока лаборатория делает постоянные</li>
+            <li class="rule-item"><strong>Примерка</strong> — проверка цвета, формы, прилегания</li>
+            <li class="rule-item"><strong>Фиксация</strong> — адгезивная цементировка постоянных виниров/коронок</li>
+          </ol>
+        </div>
+
+        <!-- 5. Выбор цвета -->
+        <div class="card">
+          <h2 class="section-title">5. Выбор цвета</h2>
+          <p>Цвет подбирается <strong>до препарирования</strong>, пока зубы ещё не пересохли. Используется шкала VITA или 3D-Master.</p>
+          <ul class="rule-list">
+            <li class="rule-item">Учитывается цвет соседних зубов, возраст пациента, желаемый результат</li>
+            <li class="rule-item">На примерке цвет оценивается при дневном свете</li>
+            <li class="rule-item">Пациент может прийти с близким человеком — чужое мнение помогает</li>
+          </ul>
+        </div>
+
+        <!-- 6. Сложные эстетические случаи -->
+        <div class="card">
+          <h2 class="section-title">6. Сложные эстетические случаи</h2>
+          <p>Когда нужна командная работа ортопеда + ортодонта + хирурга:</p>
+          <ul class="rule-list">
+            <li class="rule-item"><strong>Gummy smile</strong> — «дёсенная улыбка», избыточно видна десна</li>
+            <li class="rule-item"><strong>Скученность + эстетика</strong> — сначала ортодонтия, потом виниры</li>
+            <li class="rule-item"><strong>Потеря высоты прикуса</strong> — восстановление вертикального размера перед реставрацией</li>
+            <li class="rule-item"><strong>Травматическая потеря зуба в зоне улыбки</strong> — имплантация + коронка из циркония</li>
+          </ul>
+        </div>
+
+        <!-- 7. Материалы: цирконий vs МК vs МПК -->
+        <div class="card">
+          <h2 class="section-title">7. Материалы коронок и мостов</h2>
+          <div style="overflow-x:auto">
+            <table class="data-table">
+              <thead><tr><th>Материал</th><th>Плюсы</th><th>Минусы</th><th>Где применять</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Цирконий</strong></td><td>Прочный, эстетичный, биосовместимый</td><td>Дороже</td><td>Везде, особенно передние зубы и длинные мосты</td></tr>
+                <tr><td><strong>Металлокерамика</strong></td><td>Прочная, проверенная</td><td>Тёмный край у десны со временем, не биоинертная</td><td>Жевательные зубы при ограниченном бюджете</td></tr>
+                <tr><td><strong>Металлокомпозит</strong></td><td>Недорого, быстрее изготовить</td><td>Темнеет, истирается, короткий срок службы</td><td>Временные конструкции или бюджетные случаи</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 8. All-on-4 / All-on-6 -->
+        <div class="card">
+          <h2 class="section-title">8. Протокол All-on-4 / All-on-6</h2>
+          <p><strong>Суть:</strong> когда у пациента нет своих зубов (или они не сохраняемы) — ставятся 4 или 6 имплантов на одной челюсти, и на них фиксируется <strong>несъёмная</strong> конструкция всей челюсти.</p>
+          <p style="margin-top:12px"><strong>Протокол:</strong></p>
+          <ol class="rule-list">
+            <li class="rule-item">КТ + планирование, изготовление хирургического шаблона</li>
+            <li class="rule-item">Удаление оставшихся зубов (если есть) + установка имплантов в одно посещение</li>
+            <li class="rule-item">Сразу — <strong>временная несъёмная конструкция</strong> на титановой балке (пациент уходит с зубами в тот же день)</li>
+            <li class="rule-item">Приживление 3–6 месяцев</li>
+            <li class="rule-item">Постоянная конструкция из циркония на титановой балке</li>
+          </ol>
+          <div class="alert" style="background:var(--warning-light, #FFF7E6);border-left:4px solid #F59E0B;padding:12px 16px;border-radius:8px;margin-top:12px">
+            💰 <strong>Важно по оплате:</strong> All-on — это комплексная работа хирурга, ортопеда, лаборатории. Принимается <strong>предоплата</strong> для старта работы и заказа компонентов.
+          </div>
+          <div class="highlight-box" style="margin-top:12px">
+            <span class="highlight-icon">💡</span>
+            <strong>Для пациента:</strong> «All-on — это не отдельный зуб, а целая новая челюсть на имплантах. Вы уходите с зубами в день операции и живёте с ними полгода, пока делаем постоянную конструкцию.»
+          </div>
+        </div>
+
+        <!-- 9. Функциональный съёмный протез (PSD) -->
+        <div class="card">
+          <h2 class="section-title">9. Функциональный полный съёмный протез (PSD)</h2>
+          <p>Когда пациент не может/не хочет делать All-on — делается функциональный полный съёмный протез по особой методике. <strong>5 визитов:</strong></p>
+          <ol class="rule-list">
+            <li class="rule-item"><strong>Визит 1:</strong> первичный слепок, диагностика</li>
+            <li class="rule-item"><strong>Визит 2:</strong> индивидуальная ложка, функциональный слепок с учётом движений щёк/языка</li>
+            <li class="rule-item"><strong>Визит 3:</strong> определение прикуса, высоты, центральной окклюзии</li>
+            <li class="rule-item"><strong>Визит 4:</strong> примерка зубов в воске — пациент видит и проверяет, как будет выглядеть</li>
+            <li class="rule-item"><strong>Визит 5:</strong> сдача готового протеза, коррекция</li>
+          </ol>
+          <div class="highlight-box" style="margin-top:12px">
+            <span class="highlight-icon">⚙️</span>
+            <strong>Отличие от обычного:</strong> функциональный протез лучше держится, не натирает, учитывает индивидуальную анатомию — но требует больше визитов.
+          </div>
+        </div>
+
+        <!-- 10. Частично-съёмный и бюгель -->
+        <div class="card">
+          <h2 class="section-title">10. Частично-съёмный протез и бюгель (CSD)</h2>
+          <p>Когда часть зубов ещё сохранена — применяется частично-съёмная конструкция:</p>
+          <ul class="rule-list">
+            <li class="rule-item"><strong>Пластинчатый</strong> — на пластмассовой основе, крючки-кламмеры. Бюджетно, но массивно</li>
+            <li class="rule-item"><strong>Нейлоновый</strong> — гибкий, эстетичный, без металлических крючков</li>
+            <li class="rule-item"><strong>Бюгельный</strong> — на литом металлическом каркасе. Тонкий, прочный, надёжный</li>
+          </ul>
+          <p style="margin-top:12px"><strong>Типы бюгелей:</strong></p>
+          <ul class="rule-list">
+            <li class="rule-item"><strong>Кламмерный</strong> — на металлических крючках (видны при улыбке)</li>
+            <li class="rule-item"><strong>На аттачменах (замковый)</strong> — крепление скрыто внутри коронок на опорных зубах</li>
+            <li class="rule-item"><strong>Телескопический</strong> — двойная коронка: одна фиксируется на зубе, вторая на протезе</li>
+          </ul>
+        </div>
+
+        <!-- 11. Таблица показаний -->
+        <div class="card">
+          <h2 class="section-title">11. Что когда применять</h2>
+          <div style="overflow-x:auto">
+            <table class="data-table">
+              <thead><tr><th>Ситуация</th><th>Оптимальное решение</th></tr></thead>
+              <tbody>
+                <tr><td>Скол переднего зуба</td><td>Художественная реставрация</td></tr>
+                <tr><td>Изменение формы/цвета передних зубов</td><td>Керамические виниры (если бюджет позволяет)</td></tr>
+                <tr><td>Бюджетные виниры на 3–5 лет</td><td>Композитные виниры</td></tr>
+                <tr><td>Зуб разрушен > 50%</td><td>Коронка (цирконий)</td></tr>
+                <tr><td>Нет 1–2 соседних зубов</td><td>Имплант + коронка ИЛИ мост</td></tr>
+                <tr><td>Нет многих зубов, есть часть</td><td>Бюгельный протез</td></tr>
+                <tr><td>Нет всех зубов на челюсти</td><td>All-on-4/6 или функциональный PSD</td></tr>
+                <tr><td>Gummy smile + эстетика</td><td>Командная работа ортопед + ортодонт + хирург</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 12. Скрипты для менеджера -->
+        <div class="card">
+          <h2 class="section-title">12. Скрипты консультации для менеджера</h2>
+
+          <p><strong>Пациент: «Сколько стоят виниры?»</strong></p>
+          <div class="highlight-box" style="margin-top:8px">
+            <span class="highlight-icon">💬</span>
+            «Виниры бывают двух типов: керамические — служат 10–15 лет, самая высокая эстетика; композитные — делаются за 1 визит, служат 3–5 лет. Точную стоимость назовёт доктор на бесплатной консультации после осмотра — она зависит от количества зубов и состояния эмали. Записать вас?»
+          </div>
+
+          <p style="margin-top:14px"><strong>Пациент: «У меня нет почти всех зубов, что делать?»</strong></p>
+          <div class="highlight-box" style="margin-top:8px">
+            <span class="highlight-icon">💬</span>
+            «У нас есть два подхода. Первый — All-on-4 или All-on-6: ставим 4 или 6 имплантов и фиксируем несъёмные зубы в день операции. Второй — функциональный съёмный протез по особой методике за 5 визитов. Доктор Ержан Ныгметович специализируется на обоих направлениях — приглашаем на бесплатную консультацию.»
+          </div>
+
+          <p style="margin-top:14px"><strong>Пациент: «Что такое All-on и почему так дорого?»</strong></p>
+          <div class="highlight-box" style="margin-top:8px">
+            <span class="highlight-icon">💬</span>
+            «All-on — это полная реконструкция всей челюсти: 4–6 имплантов + титановая балка + циркониевые зубы. Вы уходите с зубами в день операции. В стоимость входит работа хирурга и ортопеда, импланты, балка, временная и постоянная конструкция. Для старта работы нужна предоплата — доктор расскажет все условия на консультации.»
+          </div>
+
+          <p style="margin-top:14px"><strong>Пациент: «У меня скол переднего зуба»</strong></p>
+          <div class="highlight-box" style="margin-top:8px">
+            <span class="highlight-icon">💬</span>
+            «В большинстве случаев это решается художественной реставрацией за 1 визит — доктор воссоздаёт форму и цвет зуба композитом. Запишу вас на осмотр?»
+          </div>
+        </div>
+
+        <!-- Глоссарий -->
+        <div class="card" style="border:2px solid var(--teal)">
+          <h2 class="section-title">📖 Ключевые термины</h2>
+          <ul class="rule-list">
+            <li class="rule-item"><strong>Wax-up</strong> — восковое моделирование будущего результата на гипсовой модели (в лаборатории)</li>
+            <li class="rule-item"><strong>Mock-up</strong> — примерка wax-up во рту пациента композитом, до препарирования</li>
+            <li class="rule-item"><strong>All-on-4/6</strong> — протокол полного протезирования челюсти на 4 или 6 имплантах с немедленной нагрузкой</li>
+            <li class="rule-item"><strong>Титановая балка</strong> — каркас, соединяющий импланты, на который крепится коронковая часть</li>
+            <li class="rule-item"><strong>PSD</strong> — Partial/Full Denture, полный съёмный протез (функциональный)</li>
+            <li class="rule-item"><strong>CSD</strong> — частично-съёмный протез (бюгель, пластинчатый, нейлоновый)</li>
+            <li class="rule-item"><strong>Аттачмен</strong> — скрытое замковое крепление бюгеля на опорных коронках</li>
+            <li class="rule-item"><strong>Циркониевый диоксид</strong> — современный керамический материал для коронок, биосовместимый и прочный</li>
+            <li class="rule-item"><strong>Адгезивная фиксация</strong> — приклеивание виниров/вкладок специальными композитными цементами</li>
+          </ul>
+        </div>
+
+      </div>
     </div>
 
     <!-- ============ PAGE: ANALYSES ============ -->
